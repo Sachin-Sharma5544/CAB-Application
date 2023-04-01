@@ -24,12 +24,11 @@ const RideDetails = () => {
     return (
         <Box
             className="Journey-Info"
-            border={"5px solid black"}
+            border={"1px solid transparent"}
             backgroundImage="url('https://lh3.googleusercontent.com/M9dRt3sJK8ukzk28KMD0xOvuQVuaqRh5yT8fmVgJ9pkas2ZVgs7JXeCWQex6zuWnxWyrWgXrmkdIMm3CrE0dLSKr0LAcV_1Gecut1mxt')"
             backgroundRepeat={"no-repeat"}
-            backgroundSize={"100%"}
-            backgroundPosition={"initial"}
-            backgroundClip={"content-box"}
+            backgroundSize={"cover"}
+            backgroundPosition={"bottom"}
         >
             <Box
                 boxShadow={"5px 7px 10px rgba(50,50,50,0.3)"}
