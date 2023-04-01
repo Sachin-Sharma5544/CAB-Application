@@ -1,8 +1,15 @@
+import { ChakraProvider } from "@chakra-ui/react";
+import Navbar from "./components/Header/Navbar";
+import Home from "./pages/Home/Home";
+
 function App() {
     return (
-        <div className="App">
-            <div>the app component</div>
-        </div>
+        <ChakraProvider>
+            <div className="App">
+                <Navbar />
+                <Home></Home>
+            </div>
+        </ChakraProvider>
     );
 }
 
