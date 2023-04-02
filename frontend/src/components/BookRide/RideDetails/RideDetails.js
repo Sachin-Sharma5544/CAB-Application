@@ -10,6 +10,7 @@ import {
     Flex,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import GoogleMaps from "../Google Maps/GoogleMaps";
 
 const RideDetails = () => {
     const map = true;
@@ -43,7 +44,7 @@ const RideDetails = () => {
             backgroundRepeat={"no-repeat"}
             backgroundSize={"cover"}
             backgroundPosition={"bottom"}
-            backgroundColor={"rgba(0,0,0,0.3)"}
+            // backgroundColor={"rgba(0,0,0,0.3)"}
         >
             <Box {...obj}>
                 <Box padding={"0px 10px"}>
@@ -115,8 +116,9 @@ const RideDetails = () => {
                     border="5px solid white"
                     top={200}
                     left={750}
+                    height="500px"
                 >
-                    I am box
+                    <GoogleMaps></GoogleMaps>
                 </Box>
             )}
         </Box>

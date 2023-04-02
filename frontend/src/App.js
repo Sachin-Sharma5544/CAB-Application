@@ -5,6 +5,8 @@ import BoxContainer from "./box containers/BoxContainer";
 import RideForm from "./components/BookRide/Ride Form/RideForm";
 import ButtonElement from "./Element components/Buttons/ButtonElement";
 
+import GoogleMaps from "./components/BookRide/Google Maps/GoogleMaps";
+
 function App() {
     const styleObj = {
         border: "1px solid transparent",
@@ -28,29 +30,34 @@ function App() {
         position: "relative",
         zIndex: "1",
     };
+
+    console.log(process.env.REACT_APP_API_KEY);
     return (
-        // <ChakraProvider>
-        //     <div className="App">
-        //         <Navbar />
-        //         <Home></Home>
-        //     </div>
-        // </ChakraProvider>
         <ChakraProvider>
             <div className="App">
-                <BoxContainer styles={styleObj} name="Sachin">
-                    <BoxContainer styles={newStyleObj}>
-                        <Heading textAlign={"center"} margin={"20px 10px"}>
-                            Smart Ride Details
-                        </Heading>
-                        <RideForm></RideForm>
-                        <RideForm></RideForm>
-                        <ButtonElement margin={"0px auto"}>
-                            Submit
-                        </ButtonElement>
-                    </BoxContainer>
-                </BoxContainer>
+                <Navbar />
+                <Home></Home>
+                {/* <div className="GM">
+                    <GoogleMaps />
+                </div> */}
             </div>
         </ChakraProvider>
+        // <ChakraProvider>
+        //     <div className="App">
+        //         <BoxContainer styles={styleObj} name="Sachin">
+        //             <BoxContainer styles={newStyleObj}>
+        //                 <Heading textAlign={"center"} margin={"20px 10px"}>
+        //                     Smart Ride Details
+        //                 </Heading>
+        //                 <RideForm></RideForm>
+        //                 <RideForm></RideForm>
+        //                 <ButtonElement margin={"0px auto"}>
+        //                     Submit
+        //                 </ButtonElement>
+        //             </BoxContainer>
+        //         </BoxContainer>
+        //     </div>
+        // </ChakraProvider>
     );
 }
 
