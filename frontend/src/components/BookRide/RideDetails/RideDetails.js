@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 
 const RideDetails = () => {
+    const map = true;
     const [pickup, setPickup] = useState("");
     const [drop, setDrop] = useState("");
     const [rideType, setRideType] = useState("");
@@ -20,6 +21,7 @@ const RideDetails = () => {
         console.log("you clicked book ride button");
         console.log(pickup, drop, rideType);
     };
+
     const obj = {
         boxShadow: "5px 7px 10px rgba(50,50,50,0.3)",
         padding: "50px 0px",
@@ -27,9 +29,10 @@ const RideDetails = () => {
         borderColor: "rgba(0,0,0,0.1)",
         border: "1px",
         maxW: "700px",
-        margin: "200px auto",
+        margin: "200px 20px",
         backgroundColor: "rgba(255,255,255,1)",
         position: "relative",
+        zIndex: "1",
     };
 
     return (
@@ -104,6 +107,18 @@ const RideDetails = () => {
                     </Flex>
                 </Box>
             </Box>
+            {map && (
+                <Box
+                    color={"white"}
+                    position={"absolute"}
+                    width="700px"
+                    border="5px solid white"
+                    top={200}
+                    left={750}
+                >
+                    I am box
+                </Box>
+            )}
         </Box>
     );
 };

@@ -9,6 +9,7 @@ const Navbar = () => {
             minW={"650px"}
             position="fixed"
             width="100%"
+            zIndex={2}
         >
             <Flex>
                 <Center>
