@@ -20,6 +20,17 @@ const RideDetails = () => {
         console.log("you clicked book ride button");
         console.log(pickup, drop, rideType);
     };
+    const obj = {
+        boxShadow: "5px 7px 10px rgba(50,50,50,0.3)",
+        padding: "50px 0px",
+        borderRadius: "10px",
+        borderColor: "rgba(0,0,0,0.1)",
+        border: "1px",
+        maxW: "700px",
+        margin: "200px auto",
+        backgroundColor: "rgba(255,255,255,1)",
+        position: "relative",
+    };
 
     return (
         <Box
@@ -29,18 +40,9 @@ const RideDetails = () => {
             backgroundRepeat={"no-repeat"}
             backgroundSize={"cover"}
             backgroundPosition={"bottom"}
+            backgroundColor={"rgba(0,0,0,0.3)"}
         >
-            <Box
-                boxShadow={"5px 7px 10px rgba(50,50,50,0.3)"}
-                padding={"50px 0px"}
-                borderRadius={"10px"}
-                borderColor={"rgba(0,0,0,0.1)"}
-                border={"1px"}
-                maxW={"700px"}
-                margin={"200px auto"}
-                backgroundColor={"rgba(255,255,255,1)"}
-                position="relative"
-            >
+            <Box {...obj}>
                 <Box padding={"0px 10px"}>
                     <Heading textAlign={"center"} margin={"20px 10px"}>
                         Smart Ride Details

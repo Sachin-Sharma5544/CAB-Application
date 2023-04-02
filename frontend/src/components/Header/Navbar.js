@@ -2,7 +2,14 @@ import { Box, Spacer, Flex, Link, Center } from "@chakra-ui/react";
 
 const Navbar = () => {
     return (
-        <Flex className="Navbar" bg={"#000"} color={"#fff"} minW={"650px"}>
+        <Flex
+            className="Navbar"
+            bg={"#000"}
+            color={"#fff"}
+            minW={"650px"}
+            position="fixed"
+            width="100%"
+        >
             <Flex>
                 <Center>
                     <Box p="4" fontSize={"xx-large"}>
