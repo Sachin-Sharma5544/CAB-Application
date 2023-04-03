@@ -1,5 +1,5 @@
 import { Box, Spacer, Flex, Link, Center } from "@chakra-ui/react";
-
+import "./Navbar.css";
 const Navbar = () => {
     return (
         <Flex
@@ -13,15 +13,23 @@ const Navbar = () => {
         >
             <Flex>
                 <Center>
-                    <Box p="4" fontSize={"xx-large"}>
-                        DriveSmart
-                    </Box>
+                    <Link className="Brand" p="4" fontSize={"xx-large"}>
+                        RideSmart
+                    </Link>
                     <Box p="4">
                         <Link
                             onClick={() => console.log("Book a ride")}
                             fontSize={"xl"}
                         >
                             Book Ride
+                        </Link>
+                    </Box>
+                    <Box p="4">
+                        <Link
+                            onClick={() => console.log("Book a ride")}
+                            fontSize={"xl"}
+                        >
+                            Your Rides
                         </Link>
                     </Box>
                     <Box p="4">

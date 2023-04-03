@@ -1,7 +1,7 @@
 import { SkeletonText } from "@chakra-ui/react";
-import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
+import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 
-const GoogleMaps = () => {
+const GoogleMaps = (props) => {
     const API_KEY = "AIzaSyAFxO1iELVcqdg6oCVom3ockUbt5QZySDQ";
     const { isLoaded } = useJsApiLoader({ googleMapsApiKey: API_KEY });
 
@@ -20,8 +20,11 @@ const GoogleMaps = () => {
         <GoogleMap
             center={cen}
             mapContainerStyle={{ width: "100%", height: "100%" }}
-            zoom={15}
-        ></GoogleMap>
+            zoom={17}
+            onLoad={(map) => props.setMap(map)}
+        >
+            <Marker position={cen}></Marker>
+        </GoogleMap>
     );
 };
 

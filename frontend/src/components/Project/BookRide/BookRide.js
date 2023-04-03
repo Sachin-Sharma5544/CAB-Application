@@ -3,8 +3,16 @@ import BoxContainer from "../../HOC/BoxContainer";
 import { Heading, Text } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
 import GoogleMaps from "./Google Maps/GoogleMaps";
+import { useState } from "react";
 
 const BookRide = (props) => {
+    const [map, setMap] = useState(null);
+
+    const handleRecenter = () => {
+        console.log("handleRecenter clicked");
+        map.panTo({ lat: 28.6659158, lng: 77.1488977 });
+    };
+
     return (
         <BoxContainer className="RideInfo__Wrapper">
             <BoxContainer className="RideInfo__Card">
@@ -12,11 +20,11 @@ const BookRide = (props) => {
                     <Heading className="RideInfo__Header">
                         Smart Ride Details
                     </Heading>
-                    <RideForm></RideForm>
+                    <RideForm handleClick={handleRecenter}></RideForm>
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer className="RideInfo__Map">
-                <GoogleMaps></GoogleMaps>
+                <GoogleMaps setMap={setMap}></GoogleMaps>
             </BoxContainer>
         </BoxContainer>
     );

@@ -4,7 +4,7 @@ import DropdownElement from "../../../Reusable/Dropdowns/DropdownElement";
 import ButtonElement from "../../../Reusable/Buttons/ButtonElement";
 import BoxContainer from "../../../HOC/BoxContainer";
 
-const RideForm = () => {
+const RideForm = (props) => {
     const bookRideFields = [
         { name: "Drop", type: "text", placeholder: "Drop location" },
         { name: "Pickup", type: "text", placeholder: "Pickup location" },
@@ -16,7 +16,7 @@ const RideForm = () => {
 
     return (
         <Aux>
-            {bookRideFields.map((field) => (
+            {bookRideFields.map((field, index) => (
                 <InputFieldGroups
                     name={field.name}
                     type={field.type}
@@ -31,6 +31,9 @@ const RideForm = () => {
             <BoxContainer className="RideInfo__Search">
                 <ButtonElement>Search</ButtonElement>
             </BoxContainer>
+            <ButtonElement handleClick={props.handleClick}>
+                Re-center
+            </ButtonElement>
         </Aux>
     );
 };
