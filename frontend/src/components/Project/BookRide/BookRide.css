@@ -32,3 +32,15 @@
     display: flex;
     justify-content: center;
 }
+
+.RideInfo__Map {
+    position: absolute;
+    top:200px;
+    left:850px;
+    border: 3px solid blue;
+    max-width: 700px;
+    width: 700px;
+    height: 465px;
+    box-shadow: 5px 7px 10px rgba(50,50,50,0.3);
+    border: 1px solid rgba(0,0,0,0.1);
+}

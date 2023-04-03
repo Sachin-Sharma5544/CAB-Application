@@ -1,7 +1,8 @@
 import "./BookRide.css";
 import BoxContainer from "../../HOC/BoxContainer";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
+import GoogleMaps from "./Google Maps/GoogleMaps";
 
 const BookRide = (props) => {
     return (
@@ -13,6 +14,9 @@ const BookRide = (props) => {
                     </Heading>
                     <RideForm></RideForm>
                 </BoxContainer>
+            </BoxContainer>
+            <BoxContainer className="RideInfo__Map">
+                <GoogleMaps></GoogleMaps>
             </BoxContainer>
         </BoxContainer>
     );
