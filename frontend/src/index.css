@@ -27,4 +27,11 @@ code {
   height: 500px;
 }
 
+.Wrapper {
+  height: 200px;
+  background-color: green;
+}
 
+/* .RideInfo__Wrapper {
+  border:1px solid black
+} */

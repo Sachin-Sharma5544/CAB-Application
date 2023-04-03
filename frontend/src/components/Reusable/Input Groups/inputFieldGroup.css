@@ -1,0 +1,13 @@
+.RideInfo__InputGroup {
+    padding:20px 0px;
+    max-width:100%;
+}
+
+.RideInfo__InputGroupLeftAddOn {
+    padding-right:10px;
+    font-size:1.1rem;
+}
+
+.RideInfo__Input {
+    font-size:1.1rem;
+}

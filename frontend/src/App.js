@@ -1,11 +1,11 @@
-import { ChakraProvider, Heading } from "@chakra-ui/react";
-import Navbar from "./components/Header/Navbar";
+import { ChakraProvider, Heading, Box } from "@chakra-ui/react";
+import Navbar from "./components/Project/Header/Navbar";
 import Home from "./pages/Home/Home";
-import BoxContainer from "./box containers/BoxContainer";
-import RideForm from "./components/BookRide/Ride Form/RideForm";
-import ButtonElement from "./Element components/Buttons/ButtonElement";
 
-import GoogleMaps from "./components/BookRide/Google Maps/GoogleMaps";
+import RideForm from "./components/Project/BookRide/Ride Form/RideForm";
+import ButtonElement from "./components/Reusable/Buttons/ButtonElement";
+import GoogleMaps from "./components/Project/BookRide/Google Maps/GoogleMaps";
+import BookRidePage from "./pages/Book Ride/BookRidePage";
 
 function App() {
     const styleObj = {
@@ -35,30 +35,29 @@ function App() {
     return (
         <ChakraProvider>
             <div className="App">
-                <Navbar />
-                <Home></Home>
-                {/* <div className="GM">
-                    <GoogleMaps />
-                </div> */}
+                <BookRidePage></BookRidePage>
+
+                {/* <Box className="Wrapper"></Box> */}
             </div>
         </ChakraProvider>
-        // <ChakraProvider>
-        //     <div className="App">
-        //         <BoxContainer styles={styleObj} name="Sachin">
-        //             <BoxContainer styles={newStyleObj}>
-        //                 <Heading textAlign={"center"} margin={"20px 10px"}>
-        //                     Smart Ride Details
-        //                 </Heading>
-        //                 <RideForm></RideForm>
-        //                 <RideForm></RideForm>
-        //                 <ButtonElement margin={"0px auto"}>
-        //                     Submit
-        //                 </ButtonElement>
-        //             </BoxContainer>
-        //         </BoxContainer>
-        //     </div>
-        // </ChakraProvider>
     );
 }
 
 export default App;
+
+// <ChakraProvider>
+//     <div className="App">
+//         <BoxContainer styles={styleObj} name="Sachin">
+//             <BoxContainer styles={newStyleObj}>
+//                 <Heading textAlign={"center"} margin={"20px 10px"}>
+//                     Smart Ride Details
+//                 </Heading>
+//                 <RideForm></RideForm>
+//                 <RideForm></RideForm>
+//                 <ButtonElement margin={"0px auto"}>
+//                     Submit
+//                 </ButtonElement>
+//             </BoxContainer>
+//         </BoxContainer>
+//     </div>
+// </ChakraProvider>

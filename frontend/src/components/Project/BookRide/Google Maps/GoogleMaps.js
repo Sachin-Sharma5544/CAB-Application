@@ -9,7 +9,13 @@ const GoogleMaps = () => {
         return <SkeletonText></SkeletonText>;
     }
 
-    const cen = { lat: 28.6139, lng: 77.209 };
+    const success = (pos) => {
+        console.log(pos, "jj");
+    };
+    const cuttPos = navigator.geolocation.getCurrentPosition(success);
+    console.log(cuttPos, "aa");
+
+    const cen = { lat: 28.6659158, lng: 77.1488977 };
     return (
         <GoogleMap
             center={cen}
