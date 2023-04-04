@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
-import MapContextProvider from "../../context/LocationContext";
+import MapContextProvider from "../../context/PickupLocationContext";
 
 export const TestGoogle = () => {
     const [location, setLocation] = useState("");

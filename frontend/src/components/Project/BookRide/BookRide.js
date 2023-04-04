@@ -7,18 +7,14 @@ import { useState } from "react";
 
 const BookRide = (props) => {
     const [map, setMap] = useState(null);
-    const [autocomplete, setAutoComplete] = useState(false);
 
-    if (map) {
-        setAutoComplete(true);
-    }
     const handleRecenter = () => {
         console.log("handleRecenter clicked");
         map.panTo({ lat: 28.6659158, lng: 77.1488977 });
     };
 
     const handleSearchClick = () => {
-        console.log(autocomplete, "cc");
+        // console.log(autocomplete, "cc");
     };
 
     return (
@@ -30,16 +26,12 @@ const BookRide = (props) => {
                     </Heading>
                     <RideForm
                         handleClick={handleRecenter}
-                        Autocomplete={autocomplete}
                         handleSearchClick={handleSearchClick}
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer className="RideInfo__Map">
-                <GoogleMaps
-                    setMap={setMap}
-                    setAutoComplete={setAutoComplete}
-                ></GoogleMaps>
+                <GoogleMaps setMap={setMap}></GoogleMaps>
             </BoxContainer>
         </BoxContainer>
     );

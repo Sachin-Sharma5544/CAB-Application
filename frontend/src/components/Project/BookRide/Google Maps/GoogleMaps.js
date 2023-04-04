@@ -4,10 +4,8 @@ import {
     GoogleMap,
     Marker,
     LoadScript,
-    Autocomplete,
 } from "@react-google-maps/api";
 import Aux from "../../../HOC/Aux";
-import { useEffect, useState } from "react";
 
 const GoogleMaps = (props) => {
     // const { isLoaded } = useJsApiLoader({
