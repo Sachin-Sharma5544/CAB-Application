@@ -25,11 +25,14 @@ const RideForm = (props) => {
                     key={Math.ceil(
                         Math.random() * 8100000 * Math.random() * 910000
                     )}
+                    autocomplete={props.Autocomplete}
                 />
             ))}
             <DropdownElement placeholder="Ride Type"></DropdownElement>
             <BoxContainer className="RideInfo__Search">
-                <ButtonElement>Search</ButtonElement>
+                <ButtonElement handleClick={props.handleSearchClick}>
+                    Search
+                </ButtonElement>
             </BoxContainer>
             <ButtonElement handleClick={props.handleClick}>
                 Re-center

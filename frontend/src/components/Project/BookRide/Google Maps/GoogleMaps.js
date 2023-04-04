@@ -1,30 +1,48 @@
 import { SkeletonText } from "@chakra-ui/react";
-import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
+import {
+    useJsApiLoader,
+    GoogleMap,
+    Marker,
+    LoadScript,
+    Autocomplete,
+} from "@react-google-maps/api";
+import Aux from "../../../HOC/Aux";
+import { useEffect, useState } from "react";
 
 const GoogleMaps = (props) => {
-    const API_KEY = "AIzaSyAFxO1iELVcqdg6oCVom3ockUbt5QZySDQ";
-    const { isLoaded } = useJsApiLoader({ googleMapsApiKey: API_KEY });
+    // const { isLoaded } = useJsApiLoader({
+    //     googleMapsApiKey: process.env.REACT_APP_API_KEY,
+    //     libraries: [process.env.REACT_APP_LIBRARY],
+    // });
 
-    if (!isLoaded) {
-        return <SkeletonText></SkeletonText>;
-    }
-
-    const success = (pos) => {
-        console.log(pos, "jj");
-    };
-    const cuttPos = navigator.geolocation.getCurrentPosition(success);
-    console.log(cuttPos, "aa");
-
+    // if (!isLoaded) {
+    //     return <SkeletonText></SkeletonText>;
+    // }
     const cen = { lat: 28.6659158, lng: 77.1488977 };
+    // const success = (pos) => {
+    //     console.log(pos, "jj");
+    // };
+    // const cuttPos = navigator.geolocation.getCurrentPosition(success);
+    // console.log(cuttPos, "aa");
+
     return (
-        <GoogleMap
-            center={cen}
-            mapContainerStyle={{ width: "100%", height: "100%" }}
-            zoom={17}
-            onLoad={(map) => props.setMap(map)}
-        >
-            <Marker position={cen}></Marker>
-        </GoogleMap>
+        <Aux>
+            <LoadScript
+                googleMapsApiKey={process.env.REACT_APP_API_KEY}
+                libraries={[process.env.REACT_APP_LIBRARY]}
+            >
+                <GoogleMap
+                    center={cen}
+                    mapContainerStyle={{ width: "100%", height: "100%" }}
+                    zoom={17}
+                    onLoad={(map) => {
+                        props.setMap(map);
+                    }}
+                >
+                    <Marker position={cen}></Marker>
+                </GoogleMap>
+            </LoadScript>
+        </Aux>
     );
 };
 
