@@ -27,7 +27,7 @@ const GoogleMaps = (props) => {
         <Aux>
             <LoadScript
                 googleMapsApiKey={process.env.REACT_APP_API_KEY}
-                libraries={[process.env.REACT_APP_LIBRARY]}
+                // libraries={[process.env.REACT_APP_LIBRARY]}
             >
                 <GoogleMap
                     center={cen}
