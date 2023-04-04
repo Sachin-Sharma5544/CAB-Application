@@ -15,6 +15,7 @@ const InputFieldGroups = (props) => {
                     type={props.type}
                     placeholder={props.placeholder}
                     onChange={props.changed}
+                    value={props.value}
                 />
             </InputGroup>
         </VStack>
