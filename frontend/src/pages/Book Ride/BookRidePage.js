@@ -1,4 +1,4 @@
-import BookRide from "../../components/Project/BookRide/BookRide";
+import BookRide from "../../components/Containers/BookRide/BookRide";
 const BookRidePage = (props) => {
     return <BookRide></BookRide>;
 };

@@ -1,8 +1,8 @@
-import InputFieldGroups from "../../../Reusable/Input Groups/InputFieldGroups";
-import Aux from "../../../HOC/Aux";
-import DropdownElement from "../../../Reusable/Dropdowns/DropdownElement";
-import ButtonElement from "../../../Reusable/Buttons/ButtonElement";
-import BoxContainer from "../../../HOC/BoxContainer";
+import InputFieldGroups from "../../../Utility/Input Groups/InputFieldGroups";
+import Aux from "../../../Hoc/Aux";
+import DropdownElement from "../../../Utility/Dropdowns/DropdownElement";
+import ButtonElement from "../../../Utility/Buttons/ButtonElement";
+import BoxContainer from "../../../Hoc/BoxContainer";
 import { useDropContext } from "../../../../hooks/useDropContext";
 import { usePickupContext } from "../../../../hooks/usePickupContext";
 import { useState } from "react";

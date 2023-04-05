@@ -1,10 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react";
 
 import BookRidePage from "./pages/Book Ride/BookRidePage";
-import Navbar from "./components/Project/Header/Navbar";
+import Navbar from "./components/Containers/Header/Navbar";
 import { useDropContext } from "./hooks/useDropContext";
 import { usePickupContext } from "./hooks/usePickupContext";
-// import { TestGoogle } from "./pages/Home/TestGoogle";
 
 function App() {
     const { dropLocation } = useDropContext();
