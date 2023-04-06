@@ -47,6 +47,8 @@ const RideForm = (props) => {
                     key={index}
                     ipvalue={field.value}
                 />
+                //Math.Random key was causing the issue continuous typing issue
+                //its fixed.
             ))}
             <DropdownElement placeholder="Ride Type"></DropdownElement>
             <BoxContainer className="RideInfo__Search">
