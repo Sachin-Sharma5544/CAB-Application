@@ -52,3 +52,7 @@
 .RideInfo__InputGroup > div:nth-child(2) {
     width: 100%;
 }
+
+.RideInfo__CardContainer > div:nth-child(2) div.RideInfo__InputGroupLeftAddOn {
+    padding-right: 28px;
+}
