@@ -20,8 +20,8 @@ const InputFieldGroups = (props) => {
                             className="RideInfo__Input"
                             type={props.type}
                             placeholder={props.placeholder}
-                            onChange={props.changed}
-                            value={props.value}
+                            onChange={props.Changed}
+                            value={props.ipvalue}
                         />
                     </Autocomplete>
                 </InputGroup>

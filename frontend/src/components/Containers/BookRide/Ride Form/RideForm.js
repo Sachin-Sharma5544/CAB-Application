@@ -8,41 +8,29 @@ import { usePickupContext } from "../../../../hooks/usePickupContext";
 import { useState } from "react";
 
 const RideForm = (props) => {
-    const bookRideFields = [
-        { name: "Drop", type: "text", placeholder: "Drop location" },
-        { name: "Pickup", type: "text", placeholder: "Pickup location" },
-    ];
+    const [bookRideFields, setBookRideFields] = useState([
+        { name: "Drop", type: "text", placeholder: "Drop location", value: "" },
+        {
+            name: "Pickup",
+            type: "text",
+            placeholder: "Pickup location",
+            value: "",
+        },
+        // {
+        //     name: "Ridetype",
+        //     type: "select",
+        //     placeholder: "Ride Type",
+        //     value: "",
+        // },
+    ]);
 
-    const [pickLoc, setPickLoc] = useState("");
-    const [dropLoc, setDropLoc] = useState("");
-
-    const { pickupLocation, dispatch: dispatchP } = usePickupContext();
-    const { dropLocation, dispatch: dispatchD } = useDropContext();
+    // const { pickupLocation, dispatch: dispatchP } = usePickupContext();
+    // const { dropLocation, dispatch: dispatchD } = useDropContext();
 
     const changedHandler = (e, index) => {
-        console.log("you updated field", e.target.value);
-        console.log(index);
-        if (index === 1) {
-            setPickLoc(e.target.value);
-            dispatchP({ type: "SET_PICKUP", payload: e.target.value });
-        }
-
-        if (index === 0) {
-            setDropLoc(e.target.value);
-            dispatchD({ type: "SET_DROP", payload: e.target.value });
-        }
-    };
-
-    const valueInputGroup = (index) => {
-        let val;
-        if (index === 1) {
-            val = pickLoc;
-        }
-
-        if (index === 0) {
-            val = dropLoc;
-        }
-        return val;
+        const newFormValues = [...bookRideFields];
+        newFormValues[index].value = e.target.value;
+        setBookRideFields(newFormValues);
     };
 
     return (
@@ -52,11 +40,12 @@ const RideForm = (props) => {
                     name={field.name}
                     type={field.type}
                     placeholder={field.placeholder}
-                    changed={(e) => changedHandler(e, index)}
-                    key={Math.ceil(
-                        Math.random() * 8100000 * Math.random() * 910000
-                    )}
-                    value={valueInputGroup(index)}
+                    Changed={(e) => changedHandler(e, index)}
+                    // key={Math.ceil(
+                    //     Math.random() * 8100000 * Math.random() * 910000
+                    // )}
+                    key={index}
+                    ipvalue={field.value}
                 />
             ))}
             <DropdownElement placeholder="Ride Type"></DropdownElement>
@@ -65,9 +54,6 @@ const RideForm = (props) => {
                     Search
                 </ButtonElement>
             </BoxContainer>
-            <ButtonElement handleClick={props.handleClick}>
-                Re-center
-            </ButtonElement>
         </Aux>
     );
 };
