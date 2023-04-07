@@ -7,22 +7,24 @@ import { useDropContext } from "../../../../hooks/useDropContext";
 import { usePickupContext } from "../../../../hooks/usePickupContext";
 import { useRef, useState } from "react";
 
+const bookRideInitialState = [
+    { name: "Drop", type: "text", placeholder: "Drop location", value: "" },
+    {
+        name: "Pickup",
+        type: "text",
+        placeholder: "Pickup location",
+        value: "",
+    },
+    // {
+    //     name: "Ridetype",
+    //     type: "select",
+    //     placeholder: "Ride Type",
+    //     value: "",
+    // },
+];
+
 const RideForm = (props) => {
-    const [bookRideFields, setBookRideFields] = useState([
-        { name: "Drop", type: "text", placeholder: "Drop location", value: "" },
-        {
-            name: "Pickup",
-            type: "text",
-            placeholder: "Pickup location",
-            value: "",
-        },
-        // {
-        //     name: "Ridetype",
-        //     type: "select",
-        //     placeholder: "Ride Type",
-        //     value: "",
-        // },
-    ]);
+    const [bookRideFields, setBookRideFields] = useState(bookRideInitialState);
 
     const rideRefs = useRef(["dropRef", "pickupRef"]);
 
@@ -78,18 +80,11 @@ const RideForm = (props) => {
             ))}
             <DropdownElement placeholder="Ride Type"></DropdownElement>
             <BoxContainer className="RideInfo__Search">
-                <ButtonElement
-                    handleClick={() =>
-                        props.handleSearchClick(
-                            bookRideFields[0].value,
-                            bookRideFields[1].value,
-                            rideRefs.current[0].value,
-                            rideRefs.current[1].value
-                        )
-                    }
-                >
-                    Search
+                <ButtonElement>Search Cabs</ButtonElement>
+                <ButtonElement handleClick={props.handleRecenter}>
+                    Re-Center
                 </ButtonElement>
+                <ButtonElement>Book Ride</ButtonElement>
             </BoxContainer>
         </Aux>
     );

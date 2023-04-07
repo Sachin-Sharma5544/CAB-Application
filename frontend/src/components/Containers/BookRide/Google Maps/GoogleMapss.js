@@ -10,7 +10,14 @@ const GoogleMaps = (props) => {
     const isLoaded = useLoadGoogleMaps();
 
     if (!isLoaded) {
-        return <CircularProgress isIndeterminate color="green.300" />;
+        return (
+            <CircularProgress
+                className="Map__ProgressBar"
+                isIndeterminate
+                color="green.300"
+            />
+            // <SkeletonText />
+        );
     }
 
     return (

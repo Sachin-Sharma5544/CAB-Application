@@ -4,13 +4,19 @@ import { Heading } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
 import GoogleMaps from "./Google Maps/GoogleMapss";
 import { useState } from "react";
+import useCurrentLocation from "../../../hooks/useCurrentLocation";
 
 const BookRide = (props) => {
+    //Hooks import
+    const { currPos } = useCurrentLocation();
+
+    //State
     const [map, setMap] = useState(null);
 
+    //Handler Methods
     const handleRecenter = () => {
         console.log("handleRecenter clicked");
-        map.panTo({ lat: 28.6659158, lng: 77.1488977 });
+        map.panTo(currPos);
     };
 
     const handleSearchClick = (source, destination, dropRef, pickupref) => {
@@ -29,7 +35,7 @@ const BookRide = (props) => {
                         Smart Ride Details
                     </Heading>
                     <RideForm
-                        handleClick={handleRecenter}
+                        handleRecenter={handleRecenter}
                         handleSearchClick={handleSearchClick}
                     ></RideForm>
                 </BoxContainer>
