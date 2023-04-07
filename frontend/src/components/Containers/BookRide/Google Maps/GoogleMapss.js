@@ -1,21 +1,13 @@
 import { SkeletonText, CircularProgress } from "@chakra-ui/react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap } from "@react-google-maps/api";
 import Aux from "../../../Hoc/Aux";
 import useLoadGoogleMaps from "../../../../hooks/useLoadGoogleMaps";
-import { useEffect, useState } from "react";
+import useCurrentLocation from "../../../../hooks/useCurrentLocation";
+import GoogleMapMarker from "./map marker/GoogleMapMarker";
 
 const GoogleMaps = (props) => {
-    const [currPos, setCurrPos] = useState(null);
-
+    const { currPos } = useCurrentLocation();
     const isLoaded = useLoadGoogleMaps();
-    useEffect(() => {
-        const success = (pos) => {
-            console.log(pos);
-            console.log(pos.coords.latitude, pos.coords.longitude, "jj");
-            setCurrPos({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        };
-        navigator.geolocation.getCurrentPosition(success);
-    }, [setCurrPos]);
 
     if (!isLoaded) {
         return <CircularProgress isIndeterminate color="green.300" />;
@@ -31,7 +23,7 @@ const GoogleMaps = (props) => {
                     props.setMap(map);
                 }}
             >
-                <Marker position={currPos}></Marker>
+                <GoogleMapMarker pos={currPos}></GoogleMapMarker>
             </GoogleMap>
         </Aux>
     );

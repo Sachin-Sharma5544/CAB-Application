@@ -2,7 +2,7 @@ import "./BookRide.css";
 import BoxContainer from "../../Hoc/BoxContainer";
 import { Heading } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
-import GoogleMaps from "./Google Maps/GoogleMaps";
+import GoogleMaps from "./Google Maps/GoogleMapss";
 import { useState } from "react";
 
 const BookRide = (props) => {
@@ -13,8 +13,12 @@ const BookRide = (props) => {
         map.panTo({ lat: 28.6659158, lng: 77.1488977 });
     };
 
-    const handleSearchClick = () => {
+    const handleSearchClick = (source, destination, dropRef, pickupref) => {
         // console.log(autocomplete, "cc");
+
+        console.log(source, destination);
+        console.log(dropRef);
+        console.log(pickupref);
     };
 
     return (

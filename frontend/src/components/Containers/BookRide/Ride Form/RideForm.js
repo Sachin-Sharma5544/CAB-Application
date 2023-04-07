@@ -5,7 +5,7 @@ import ButtonElement from "../../../Utility/Buttons/ButtonElement";
 import BoxContainer from "../../../Hoc/BoxContainer";
 import { useDropContext } from "../../../../hooks/useDropContext";
 import { usePickupContext } from "../../../../hooks/usePickupContext";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const RideForm = (props) => {
     const [bookRideFields, setBookRideFields] = useState([
@@ -24,13 +24,43 @@ const RideForm = (props) => {
         // },
     ]);
 
+    const rideRefs = useRef(["dropRef", "pickupRef"]);
+
+    const [directionsResponse, setDirectionsResponse] = useState(null);
+    const [distance, setDistance] = useState(null);
+    const [duration, setDuration] = useState(null);
+
     // const { pickupLocation, dispatch: dispatchP } = usePickupContext();
     // const { dropLocation, dispatch: dispatchD } = useDropContext();
+
+    const calculateRoute = async () => {
+        if (
+            rideRefs.current[0].value === "" ||
+            rideRefs.current[1].value === ""
+        ) {
+            return;
+        }
+
+        const directions = new window.google.maps.DirectionsService();
+        console.log(directions);
+        const results = await directions.route({
+            origin: rideRefs.current[0].value,
+            destination: rideRefs.current[1].value,
+            travelMode: window.google.maps.TravelMode.DRIVING,
+        });
+
+        setDirectionsResponse(results);
+        setDistance(results.routes[0].legs[0].distance.text);
+        setDuration(results.routes[0].legs[0].duration.text);
+
+        console.log(distance, duration);
+    };
 
     const changedHandler = (e, index) => {
         const newFormValues = [...bookRideFields];
         newFormValues[index].value = e.target.value;
         setBookRideFields(newFormValues);
+        calculateRoute();
     };
 
     return (
@@ -41,18 +71,23 @@ const RideForm = (props) => {
                     type={field.type}
                     placeholder={field.placeholder}
                     Changed={(e) => changedHandler(e, index)}
-                    // key={Math.ceil(
-                    //     Math.random() * 8100000 * Math.random() * 910000
-                    // )}
                     key={index}
                     ipvalue={field.value}
+                    refr={(el) => (rideRefs.current[index] = el)}
                 />
-                //Math.Random key was causing the issue continuous typing issue
-                //its fixed.
             ))}
             <DropdownElement placeholder="Ride Type"></DropdownElement>
             <BoxContainer className="RideInfo__Search">
-                <ButtonElement handleClick={props.handleSearchClick}>
+                <ButtonElement
+                    handleClick={() =>
+                        props.handleSearchClick(
+                            bookRideFields[0].value,
+                            bookRideFields[1].value,
+                            rideRefs.current[0].value,
+                            rideRefs.current[1].value
+                        )
+                    }
+                >
                     Search
                 </ButtonElement>
             </BoxContainer>
