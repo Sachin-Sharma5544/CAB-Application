@@ -3,28 +3,73 @@ import BoxContainer from "../../Hoc/BoxContainer";
 import { Heading } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
 import GoogleMaps from "./Google Maps/GoogleMapss";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import useCurrentLocation from "../../../hooks/useCurrentLocation";
+
+const bookRideInitialState = [
+    { name: "Drop", type: "text", placeholder: "Drop location", value: "" },
+    {
+        name: "Pickup",
+        type: "text",
+        placeholder: "Pickup location",
+        value: "",
+    },
+    // {
+    //     name: "Ridetype",
+    //     type: "select",
+    //     placeholder: "Ride Type",
+    //     value: "",
+    // },
+];
 
 const BookRide = (props) => {
     //Hooks import
     const { currPos } = useCurrentLocation();
+    const [bookRideFields, setBookRideFields] = useState(bookRideInitialState);
 
     //State
     const [map, setMap] = useState(null);
+    const [autocomplete, setAutocomplete] = useState(null);
 
-    //Handler Methods
+    const [directionsResponse, setDirectionsResponse] = useState(null);
+    const [distance, setDistance] = useState(null);
+    const [duration, setDuration] = useState(null);
+
+    const rideRefs = useRef(["dropRef", "pickupRef"]);
+
+    /* Handler Methods */
+
+    //Calculate Route
+    const calculateRoute = async () => {};
+
+    //Re-Center map to current location
     const handleRecenter = () => {
-        console.log("handleRecenter clicked");
         map.panTo(currPos);
     };
 
-    const handleSearchClick = (source, destination, dropRef, pickupref) => {
-        // console.log(autocomplete, "cc");
+    const autocompletePlaceChangedHandler = (e, id) => {
+        console.log("autocompletePlaceChangedHandler clicked" + id, e);
+        console.log(setAutocomplete);
+    };
+
+    //Source and Destination change handler
+    const changedHandler = (e, index) => {
+        const newFormValues = [...bookRideFields];
+        newFormValues[index].value = e.target.value;
+        setBookRideFields(newFormValues);
+        // calculateRoute();
+    };
+
+    const handleSearchClick = () => {
+        const source = bookRideFields[0].value;
+        const destination = bookRideFields[1].value;
 
         console.log(source, destination);
-        console.log(dropRef);
-        console.log(pickupref);
+    };
+
+    const handleBookRide = () => {
+        console.log("Book ride button clicked");
+        console.log(autocomplete);
     };
 
     return (
@@ -37,6 +82,10 @@ const BookRide = (props) => {
                     <RideForm
                         handleRecenter={handleRecenter}
                         handleSearchClick={handleSearchClick}
+                        bookRideFields={bookRideFields}
+                        changedHandler={changedHandler}
+                        handleBookRide={handleBookRide}
+                        setAutocomplete={setAutocomplete}
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>

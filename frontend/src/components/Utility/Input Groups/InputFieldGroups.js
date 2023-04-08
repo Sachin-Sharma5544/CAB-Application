@@ -5,9 +5,8 @@ import { Autocomplete } from "@react-google-maps/api";
 import { useState } from "react";
 
 const InputFieldGroups = (props) => {
+    const { setAutocomplete } = props;
     const mapLoaded = useLoadGoogleMaps();
-
-    const [autoCompVal, setAutoCompVal] = useState(null);
 
     return (
         <VStack spacing={4}>
@@ -18,7 +17,9 @@ const InputFieldGroups = (props) => {
                         children={props.name}
                     />
 
-                    <Autocomplete>
+                    <Autocomplete
+                        onLoad={(autocomplete) => setAutocomplete(autocomplete)}
+                    >
                         <Input
                             className="RideInfo__Input"
                             type={props.type}
