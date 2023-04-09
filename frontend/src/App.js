@@ -9,6 +9,8 @@ function App() {
     const { dropLocation } = useDropContext();
     const { pickupLocation } = usePickupContext();
 
+    console.log(dropLocation);
+
     return (
         <ChakraProvider>
             <div className="App">

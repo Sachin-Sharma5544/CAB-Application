@@ -5,9 +5,23 @@ export const DropLocationContext = createContext();
 export const dropLocationReducer = (state, action) => {
     switch (action.type) {
         case "SET_DROP":
-            return { dropLocation: action.payload };
+            return {
+                dropLocation: action.payload.value,
+                lat: action.payload.lat,
+                lng: action.payload.lng,
+            };
         case "UPDATE_DROP":
-            return { dropLocation: action.payload };
+            return {
+                dropLocation: action.payload.value,
+                lat: action.payload.lat,
+                lng: action.payload.lng,
+            };
+        case "CLEAR_DROP":
+            return {
+                dropLocation: "",
+                lat: "",
+                lng: "",
+            };
         default:
             return state;
     }

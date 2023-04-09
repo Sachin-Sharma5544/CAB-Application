@@ -9,6 +9,13 @@ const GoogleMapMarker = (props) => {
         return;
     }
 
-    return <Marker position={props.pos}></Marker>;
+    return (
+        <Marker
+            position={props.pos}
+            options={{
+                clickable: true,
+            }}
+        ></Marker>
+    );
 };
 export default GoogleMapMarker;

@@ -5,12 +5,16 @@ import RideForm from "./Ride Form/RideForm";
 import GoogleMaps from "./Google Maps/GoogleMapss";
 import { useState } from "react";
 import useCurrentLocation from "../../../hooks/useCurrentLocation";
+import { useDropContext } from "../../../hooks/useDropContext";
+import { usePickupContext } from "../../../hooks/usePickupContext";
 
 const pickupState = {
     name: "Pickup",
     type: "text",
     placeholder: "Pickup location",
     value: "",
+    lat: null,
+    lng: null,
 };
 
 const dropState = {
@@ -18,11 +22,17 @@ const dropState = {
     type: "text",
     placeholder: "Drop location",
     value: "",
+    lat: null,
+    lng: null,
 };
 
 const BookRide = (props) => {
     //Hooks import
     const { currPos } = useCurrentLocation();
+
+    //Context
+    const { dispatch: dropDispatch } = useDropContext();
+    const { dispatch: pickDispatch } = usePickupContext();
 
     //State
     const [map, setMap] = useState(null);
@@ -30,11 +40,10 @@ const BookRide = (props) => {
     const [dropLocation, setDropLocation] = useState(dropState);
     const [pickupLocationAuto, setPickupLocationAuto] = useState("");
     const [dropLocationAuto, setDropLocationAuto] = useState("");
-    const [displayMap, setDisplayMap] = useState(false);
 
-    // const [directionsResponse, setDirectionsResponse] = useState(null);
-    // const [distance, setDistance] = useState(null);
-    // const [duration, setDuration] = useState(null);
+    const [directionsResponse, setDirectionsResponse] = useState(null);
+    const [distance, setDistance] = useState(null);
+    const [duration, setDuration] = useState(null);
 
     /* Handler Methods */
 
@@ -48,6 +57,11 @@ const BookRide = (props) => {
 
     // Pickup  change handler
     const pickupLocationChangeHandler = (e) => {
+        if (e.target.value === "") {
+            pickDispatch({
+                type: "CLEAR_PICKUP",
+            });
+        }
         const updatedPickupLocation = { ...pickupLocation };
         updatedPickupLocation.value = e.target.value;
         setPickupLocation(updatedPickupLocation);
@@ -55,6 +69,11 @@ const BookRide = (props) => {
 
     // Destination change handler
     const dropLocationChangeHandler = (e) => {
+        if (e.target.value === "") {
+            dropDispatch({
+                type: "CLEAR_DROP",
+            });
+        }
         const updatedDropLocation = { ...dropLocation };
         updatedDropLocation.value = e.target.value;
         setDropLocation(updatedDropLocation);
@@ -68,9 +87,17 @@ const BookRide = (props) => {
                 throw Error("Drop location coordinates are not valid");
             const selectedPlace = dropLocationAuto.getPlace();
             updatedDropLocation.value = selectedPlace.formatted_address;
-            console.log(selectedPlace);
-            console.log(selectedPlace.geometry.location.lat());
+            updatedDropLocation.lat = selectedPlace.geometry.location.lat();
+            updatedDropLocation.lng = selectedPlace.geometry.location.lng();
             setDropLocation(updatedDropLocation);
+            dropDispatch({
+                type: "SET_DROP",
+                payload: {
+                    value: updatedDropLocation.value,
+                    lat: updatedDropLocation.lat,
+                    lng: updatedDropLocation.lng,
+                },
+            });
         } catch (error) {
             console.log(error.message);
         }
@@ -83,7 +110,18 @@ const BookRide = (props) => {
                 throw Error("Pickup location coordinates are not valid");
             const selectedPlace = pickupLocationAuto.getPlace();
             updatedPickupLocation.value = selectedPlace.formatted_address;
+            updatedPickupLocation.lat = selectedPlace.geometry.location.lat();
+            updatedPickupLocation.lng = selectedPlace.geometry.location.lng();
             setPickupLocation(updatedPickupLocation);
+            console.log(updatedPickupLocation);
+            pickDispatch({
+                type: "SET_PICKUP",
+                payload: {
+                    value: updatedPickupLocation.value,
+                    lat: updatedPickupLocation.lat,
+                    lng: updatedPickupLocation.lng,
+                },
+            });
         } catch (error) {
             console.log(error.message);
         }
