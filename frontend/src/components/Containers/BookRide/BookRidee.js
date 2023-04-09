@@ -6,40 +6,34 @@ import GoogleMaps from "./Google Maps/GoogleMapss";
 import { useState, useRef } from "react";
 import useCurrentLocation from "../../../hooks/useCurrentLocation";
 
-// const bookRideInitialState = [
-//     { name: "Drop", type: "text", placeholder: "Drop location", value: "" },
-//     {
-//         name: "Pickup",
-//         type: "text",
-//         placeholder: "Pickup location",
-//         value: "",
-//     },
-//     // {
-//     //     name: "Ridetype",
-//     //     type: "select",
-//     //     placeholder: "Ride Type",
-//     //     value: "",
-//     // },
-// ];
+const pickupState = {
+    name: "Pickup",
+    type: "text",
+    placeholder: "Pickup location",
+    value: "",
+};
+
+const dropState = {
+    name: "Drop",
+    type: "text",
+    placeholder: "Drop location",
+    value: "",
+};
 
 const BookRide = (props) => {
     //Hooks import
     const { currPos } = useCurrentLocation();
-    // const [bookRideFields, setBookRideFields] = useState(bookRideInitialState);
 
     //State
     const [map, setMap] = useState(null);
-    // const [autocomplete, setAutocomplete] = useState(null);
-    const [pickupLocation, setPickupLocation] = useState("");
-    const [dropLocation, setDropLocation] = useState("");
+    const [pickupLocation, setPickupLocation] = useState(pickupState);
+    const [dropLocation, setDropLocation] = useState(dropState);
     const [pickupLocationAuto, setPickupLocationAuto] = useState("");
     const [dropLocationAuto, setDropLocationAuto] = useState("");
 
-    const [directionsResponse, setDirectionsResponse] = useState(null);
-    const [distance, setDistance] = useState(null);
-    const [duration, setDuration] = useState(null);
-
-    // const autocomplete1 = window.autocomplete;
+    // const [directionsResponse, setDirectionsResponse] = useState(null);
+    // const [distance, setDistance] = useState(null);
+    // const [duration, setDuration] = useState(null);
 
     /* Handler Methods */
 
@@ -51,25 +45,46 @@ const BookRide = (props) => {
         map.panTo(currPos);
     };
 
-    //will be triggered when autocomplete suggestion is implemented
-    // const placeChangedHandler = (id) => {
-    //     const newBookRideFields = [...bookRideFields];
-    //     const selectedPlace = autocomplete1.getPlace();
-    //     console.log(autocomplete1);
-    //     console.log(selectedPlace);
-    // };
+    // Pickup  change handler
+    const pickupLocationChangeHandler = (e) => {
+        const updatedPickupLocation = { ...pickupLocation };
+        updatedPickupLocation.value = e.target.value;
+        setPickupLocation(updatedPickupLocation);
+    };
 
-    //Source and Destination change handler
-    // const changedHandler = (e, index) => {
-    //     const newFormValues = [...bookRideFields];
-    //     newFormValues[index].value = e.target.value;
-    //     setBookRideFields(newFormValues);
+    // Destination change handler
+    const dropLocationChangeHandler = (e) => {
+        const updatedDropLocation = { ...dropLocation };
+        updatedDropLocation.value = e.target.value;
+        setDropLocation(updatedDropLocation);
+    };
 
-    //     console.log(index);
-    //     // calculateRoute();
-    // };
+    const dropPlaceChangedHandler = () => {
+        const updatedDropLocation = { ...dropLocation };
 
-    const pickupLocationChangeHandler = (e) => {};
+        try {
+            if (!dropLocationAuto)
+                throw Error("Drop location coordinates are not valid");
+            const selectedPlace = dropLocationAuto.getPlace();
+            updatedDropLocation.value = selectedPlace.formatted_address;
+            setDropLocation(updatedDropLocation);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const pickupPlaceChangedHandler = () => {
+        const updatedPickupLocation = { ...pickupLocation };
+        try {
+            if (!pickupLocationAuto)
+                throw Error("Pickup location coordinates are not valid");
+            const selectedPlace = pickupLocationAuto.getPlace();
+            updatedPickupLocation.value = selectedPlace.formatted_address;
+            setPickupLocation(updatedPickupLocation);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     const handleSearchClick = () => {
         // const source = bookRideFields[0].value;
@@ -79,7 +94,6 @@ const BookRide = (props) => {
 
     const handleBookRide = () => {
         console.log("Book ride button clicked");
-        // console.log(autocomplete);
     };
 
     return (
@@ -90,20 +104,19 @@ const BookRide = (props) => {
                         Smart Ride Details
                     </Heading>
                     <RideForm
+                        pickupLocation={pickupLocation}
+                        dropLocation={dropLocation}
                         handleRecenter={handleRecenter}
                         handleSearchClick={handleSearchClick}
                         pickupLocationChangeHandler={
                             pickupLocationChangeHandler
                         }
+                        dropLocationChangeHandler={dropLocationChangeHandler}
                         handleBookRide={handleBookRide}
-                        pickupLocation={pickupLocation}
-                        dropLocation={dropLocation}
                         setPickupLocationAuto={setPickupLocationAuto}
                         setDropLocationAuto={setDropLocationAuto}
-                        // bookRideFields={bookRideFields}
-                        // changedHandler={changedHandler}
-                        // setAutocomplete={setAutocomplete}
-                        // placeChangedHandler={placeChangedHandler}
+                        dropPlaceChangedHandler={dropPlaceChangedHandler}
+                        pickupPlaceChangedHandler={pickupPlaceChangedHandler}
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>

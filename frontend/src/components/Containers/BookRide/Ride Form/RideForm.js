@@ -18,45 +18,35 @@ providing the suggestion and not the first input.
 
 const RideForm = (props) => {
     const {
-        bookRideFields,
-        changedHandler,
-        dropLocationChangeHandler,
-        pickupLocationChangeHandler,
-        handleSearchClick,
+        pickupLocation,
+        dropLocation,
         handleRecenter,
+        handleSearchClick,
+        pickupLocationChangeHandler,
+        dropLocationChangeHandler,
         handleBookRide,
-        setAutocomplete,
-        placeChangedHandler,
+        setPickupLocationAuto,
+        setDropLocationAuto,
+        dropPlaceChangedHandler,
+        pickupPlaceChangedHandler,
     } = props;
 
     return (
         <Aux>
-            {/* {bookRideFields.map((field, index) => (
-                <InputFieldGroups
-                    field={field}
-                    Changed={(e) => changedHandler(e, index)}
-                    key={index}
-                    setAutocomplete={setAutocomplete}
-                    placeChangedHandler={() => placeChangedHandler(index)}
-                />
-            ))} */}
-
             {/* Drop Location Input field */}
             <InputFieldGroups
-                field={bookRideFields[0]}
+                field={dropLocation}
                 Changed={dropLocationChangeHandler}
-                key={bookRideFields[0].id}
-                setAutocomplete={setAutocomplete}
-                placeChangedHandler={placeChangedHandler}
+                setAutocomplete={setDropLocationAuto}
+                placeChangedHandler={dropPlaceChangedHandler}
             />
             {/* Pickup Location Input field */}
 
             <InputFieldGroups
-                field={bookRideFields[1]}
+                field={pickupLocation}
                 Changed={pickupLocationChangeHandler}
-                key={bookRideFields[1].id}
-                setAutocomplete={setAutocomplete}
-                placeChangedHandler={placeChangedHandler}
+                setAutocomplete={setPickupLocationAuto}
+                placeChangedHandler={pickupPlaceChangedHandler}
             />
             <DropdownElement placeholder="Ride Type"></DropdownElement>
             <BoxContainer className="RideInfo__Search">

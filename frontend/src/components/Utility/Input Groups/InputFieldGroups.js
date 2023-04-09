@@ -18,8 +18,7 @@ const InputFieldGroups = (props) => {
                     />
                     <Autocomplete
                         onLoad={(autocomplete) => {
-                            // setAutocomplete(autocomplete);
-                            return (window.autocomplete = autocomplete);
+                            setAutocomplete(autocomplete);
                         }}
                         onPlaceChanged={placeChangedHandler}
                     >
