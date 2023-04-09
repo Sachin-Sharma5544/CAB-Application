@@ -20,6 +20,8 @@ const RideForm = (props) => {
     const {
         bookRideFields,
         changedHandler,
+        dropLocationChangeHandler,
+        pickupLocationChangeHandler,
         handleSearchClick,
         handleRecenter,
         handleBookRide,
@@ -29,7 +31,7 @@ const RideForm = (props) => {
 
     return (
         <Aux>
-            {bookRideFields.map((field, index) => (
+            {/* {bookRideFields.map((field, index) => (
                 <InputFieldGroups
                     field={field}
                     Changed={(e) => changedHandler(e, index)}
@@ -37,7 +39,25 @@ const RideForm = (props) => {
                     setAutocomplete={setAutocomplete}
                     placeChangedHandler={() => placeChangedHandler(index)}
                 />
-            ))}
+            ))} */}
+
+            {/* Drop Location Input field */}
+            <InputFieldGroups
+                field={bookRideFields[0]}
+                Changed={dropLocationChangeHandler}
+                key={bookRideFields[0].id}
+                setAutocomplete={setAutocomplete}
+                placeChangedHandler={placeChangedHandler}
+            />
+            {/* Pickup Location Input field */}
+
+            <InputFieldGroups
+                field={bookRideFields[1]}
+                Changed={pickupLocationChangeHandler}
+                key={bookRideFields[1].id}
+                setAutocomplete={setAutocomplete}
+                placeChangedHandler={placeChangedHandler}
+            />
             <DropdownElement placeholder="Ride Type"></DropdownElement>
             <BoxContainer className="RideInfo__Search">
                 <ButtonElement handleClick={handleSearchClick}>
