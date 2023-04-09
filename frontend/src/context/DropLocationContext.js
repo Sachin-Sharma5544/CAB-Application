@@ -16,6 +16,8 @@ export const dropLocationReducer = (state, action) => {
 export const DropLocationContextProvider = (props) => {
     const [state, dispatch] = useReducer(dropLocationReducer, {
         dropLocation: null,
+        lat: null,
+        lng: null,
     });
     return (
         <DropLocationContext.Provider value={{ ...state, dispatch }}>

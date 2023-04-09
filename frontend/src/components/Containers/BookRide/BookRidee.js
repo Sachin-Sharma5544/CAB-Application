@@ -3,7 +3,7 @@ import BoxContainer from "../../Hoc/BoxContainer";
 import { Heading } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
 import GoogleMaps from "./Google Maps/GoogleMapss";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import useCurrentLocation from "../../../hooks/useCurrentLocation";
 
 const pickupState = {
@@ -30,6 +30,7 @@ const BookRide = (props) => {
     const [dropLocation, setDropLocation] = useState(dropState);
     const [pickupLocationAuto, setPickupLocationAuto] = useState("");
     const [dropLocationAuto, setDropLocationAuto] = useState("");
+    const [displayMap, setDisplayMap] = useState(false);
 
     // const [directionsResponse, setDirectionsResponse] = useState(null);
     // const [distance, setDistance] = useState(null);
@@ -67,6 +68,8 @@ const BookRide = (props) => {
                 throw Error("Drop location coordinates are not valid");
             const selectedPlace = dropLocationAuto.getPlace();
             updatedDropLocation.value = selectedPlace.formatted_address;
+            console.log(selectedPlace);
+            console.log(selectedPlace.geometry.location.lat());
             setDropLocation(updatedDropLocation);
         } catch (error) {
             console.log(error.message);
@@ -120,9 +123,11 @@ const BookRide = (props) => {
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>
-            <BoxContainer className="RideInfo__Map">
-                <GoogleMaps setMap={setMap}></GoogleMaps>
-            </BoxContainer>
+            {(pickupLocation.value || dropLocation.value) && (
+                <BoxContainer className="RideInfo__Map">
+                    <GoogleMaps setMap={setMap}></GoogleMaps>
+                </BoxContainer>
+            )}
         </BoxContainer>
     );
 };

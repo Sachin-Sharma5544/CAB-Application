@@ -16,6 +16,8 @@ export const pickupLocationReducer = (state, action) => {
 export const PickuoLocationContextProvider = (props) => {
     const [state, dispatch] = useReducer(pickupLocationReducer, {
         pickupLocation: null,
+        lat: null,
+        lng: null,
     });
 
     return (

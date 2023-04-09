@@ -2,7 +2,6 @@ import { InputGroup, InputLeftAddon, Input, VStack } from "@chakra-ui/react";
 import "./inputFieldGroup.css";
 import useLoadGoogleMaps from "../../../hooks/useLoadGoogleMaps";
 import { Autocomplete } from "@react-google-maps/api";
-import { useState } from "react";
 
 const InputFieldGroups = (props) => {
     const { setAutocomplete, placeChangedHandler, field } = props;
