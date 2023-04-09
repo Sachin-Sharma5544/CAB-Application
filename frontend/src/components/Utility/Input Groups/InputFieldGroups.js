@@ -5,7 +5,7 @@ import { Autocomplete } from "@react-google-maps/api";
 import { useState } from "react";
 
 const InputFieldGroups = (props) => {
-    const { setAutocomplete } = props;
+    const { setAutocomplete, placeChangedHandler, field } = props;
     const mapLoaded = useLoadGoogleMaps();
 
     return (
@@ -14,19 +14,21 @@ const InputFieldGroups = (props) => {
                 <InputGroup className="RideInfo__InputGroup">
                     <InputLeftAddon
                         className="RideInfo__InputGroupLeftAddOn"
-                        children={props.name}
+                        children={field.name}
                     />
-
                     <Autocomplete
-                        onLoad={(autocomplete) => setAutocomplete(autocomplete)}
+                        onLoad={(autocomplete) => {
+                            // setAutocomplete(autocomplete);
+                            return (window.autocomplete = autocomplete);
+                        }}
+                        onPlaceChanged={placeChangedHandler}
                     >
                         <Input
                             className="RideInfo__Input"
-                            type={props.type}
-                            placeholder={props.placeholder}
+                            type={field.type}
+                            placeholder={field.placeholder}
                             onChange={props.Changed}
-                            value={props.ipvalue}
-                            ref={props.refr}
+                            value={field.value}
                         />
                     </Autocomplete>
                 </InputGroup>

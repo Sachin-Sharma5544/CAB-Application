@@ -15,21 +15,18 @@ const RideForm = (props) => {
         handleRecenter,
         handleBookRide,
         setAutocomplete,
+        placeChangedHandler,
     } = props;
-    const rideRefs = useRef(["dropRef", "pickupRef"]);
 
     return (
         <Aux>
             {bookRideFields.map((field, index) => (
                 <InputFieldGroups
-                    name={field.name}
-                    type={field.type}
-                    placeholder={field.placeholder}
+                    field={field}
                     Changed={(e) => changedHandler(e, index)}
                     key={index}
-                    ipvalue={field.value}
-                    refr={(el) => (rideRefs.current[index] = el)}
-                    setAutocomplete={() => setAutocomplete()}
+                    setAutocomplete={setAutocomplete}
+                    placeChangedHandler={() => placeChangedHandler(index)}
                 />
             ))}
             <DropdownElement placeholder="Ride Type"></DropdownElement>

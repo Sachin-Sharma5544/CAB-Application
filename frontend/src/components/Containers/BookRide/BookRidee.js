@@ -35,7 +35,7 @@ const BookRide = (props) => {
     const [distance, setDistance] = useState(null);
     const [duration, setDuration] = useState(null);
 
-    const rideRefs = useRef(["dropRef", "pickupRef"]);
+    const autocomplete1 = window.autocomplete;
 
     /* Handler Methods */
 
@@ -47,9 +47,12 @@ const BookRide = (props) => {
         map.panTo(currPos);
     };
 
-    const autocompletePlaceChangedHandler = (e, id) => {
-        console.log("autocompletePlaceChangedHandler clicked" + id, e);
-        console.log(setAutocomplete);
+    //will be triggered when autocomplete suggestion is implemented
+    const placeChangedHandler = (id) => {
+        const newBookRideFields = [...bookRideFields];
+        const selectedPlace = autocomplete1.getPlace();
+        console.log(autocomplete1);
+        console.log(selectedPlace);
     };
 
     //Source and Destination change handler
@@ -57,6 +60,8 @@ const BookRide = (props) => {
         const newFormValues = [...bookRideFields];
         newFormValues[index].value = e.target.value;
         setBookRideFields(newFormValues);
+
+        console.log(index);
         // calculateRoute();
     };
 
@@ -86,6 +91,7 @@ const BookRide = (props) => {
                         changedHandler={changedHandler}
                         handleBookRide={handleBookRide}
                         setAutocomplete={setAutocomplete}
+                        placeChangedHandler={placeChangedHandler}
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>
