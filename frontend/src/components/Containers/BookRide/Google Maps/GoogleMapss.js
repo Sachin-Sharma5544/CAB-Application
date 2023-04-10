@@ -1,37 +1,18 @@
-import { SkeletonText, CircularProgress } from "@chakra-ui/react";
+import { CircularProgress } from "@chakra-ui/react";
 import { GoogleMap } from "@react-google-maps/api";
 import Aux from "../../../Hoc/Aux";
 import useLoadGoogleMaps from "../../../../hooks/useLoadGoogleMaps";
 import useCurrentLocation from "../../../../hooks/useCurrentLocation";
 import GoogleMapMarker from "./map marker/GoogleMapMarker";
-import { useDropContext } from "../../../../hooks/useDropContext";
-import { usePickupContext } from "../../../../hooks/usePickupContext";
-import { useEffect, useState } from "react";
+import usePickupLocation from "../../../../hooks/usePickupLocation";
+import useDropLocation from "../../../../hooks/useDropLocation";
 
 const GoogleMaps = (props) => {
     const { currPos } = useCurrentLocation();
     const isLoaded = useLoadGoogleMaps();
-    const { pickupLocation, lat: pickLat, lng: pickLng } = usePickupContext();
-    const { dropLocation, lat: dropLat, lng: dropLng } = useDropContext();
 
-    const [pickMarkerDisplay, setPickMarkerDisplay] = useState(false);
-    const [dropMarkerDisplay, setDropMarkerDisplay] = useState(false);
-
-    useEffect(() => {
-        if (pickLat !== null && pickLng !== null && pickupLocation) {
-            setPickMarkerDisplay(true);
-        } else {
-            setPickMarkerDisplay(false);
-        }
-
-        if (dropLat !== null && dropLng !== null && dropLocation) {
-            setDropMarkerDisplay(true);
-        } else {
-            setDropMarkerDisplay(false);
-        }
-    }, [pickupLocation, dropLocation]);
-
-    console.log(pickLat, "gm pick");
+    const { pickupLocation, pickupPosition } = usePickupLocation();
+    const { dropLocation, dropPosition } = useDropLocation();
 
     if (!isLoaded) {
         return (
@@ -40,7 +21,6 @@ const GoogleMaps = (props) => {
                 isIndeterminate
                 color="green.300"
             />
-            // <SkeletonText />
         );
     }
 
@@ -54,15 +34,17 @@ const GoogleMaps = (props) => {
                     props.setMap(map);
                 }}
             >
-                {pickMarkerDisplay && (
+                {pickupLocation && (
                     <GoogleMapMarker
-                        pos={{ lat: pickLat, lng: pickLng }}
+                        pos={pickupPosition}
+                        markerLabel="P"
                     ></GoogleMapMarker>
                 )}
 
-                {dropMarkerDisplay && (
+                {dropLocation && (
                     <GoogleMapMarker
-                        pos={{ lat: dropLat, lng: dropLng }}
+                        pos={dropPosition}
+                        markerLabel="D"
                     ></GoogleMapMarker>
                 )}
             </GoogleMap>

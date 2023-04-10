@@ -15,6 +15,7 @@ const GoogleMapMarker = (props) => {
             options={{
                 clickable: true,
             }}
+            label={props.markerLabel}
         ></Marker>
     );
 };
