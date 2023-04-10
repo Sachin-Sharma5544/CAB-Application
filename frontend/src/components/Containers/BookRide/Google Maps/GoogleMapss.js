@@ -8,18 +8,38 @@ import { useDropContext } from "../../../../hooks/useDropContext";
 import { usePickupContext } from "../../../../hooks/usePickupContext";
 import { useEffect, useState } from "react";
 
+const marker = [
+    { id: 1, dropPoint: "", position: { lat: null, lng: null } },
+    { id: 2, pickupPoint: "", position: { lat: null, lng: null } },
+];
+
 const GoogleMaps = (props) => {
     const { currPos } = useCurrentLocation();
     const isLoaded = useLoadGoogleMaps();
-    const { lat: pickLat, lng: pickLng } = useDropContext();
-    const { lat: dropLat, lng: dropLng } = usePickupContext();
+    const { dropLocation, lat: pickLat, lng: pickLng } = useDropContext();
+    const { pickupLocation, lat: dropLat, lng: dropLng } = usePickupContext();
 
-    const [pickCoord, setPickCoord] = useState({ lat: pickLat, lng: pickLng });
+    const [mapMarker, setMapMarker] = useState(marker);
+
     useEffect(() => {
-        setPickCoord({ lat: pickLat, lng: pickLng });
-    }, [pickLat, pickLng]);
+        if (pickLat !== null && pickLng !== null) {
+            const newMarker = [...mapMarker];
+            newMarker[1].pickupPoint = pickupLocation;
+            newMarker[1].position.lat = pickLat;
+            newMarker[1].position.lng = pickLng;
+            setMapMarker(newMarker);
+        }
 
-    console.log(pickLat);
+        if (dropLat !== null && dropLng !== null) {
+            const newMarker = [...mapMarker];
+            newMarker[0].dropPoint = dropLocation;
+            newMarker[0].position.lat = dropLat;
+            newMarker[0].position.lng = dropLng;
+            setMapMarker(newMarker);
+        }
+    }, [pickupLocation, dropLocation]);
+
+    console.log(pickLat, "gm pick");
 
     if (!isLoaded) {
         return (
@@ -42,10 +62,13 @@ const GoogleMaps = (props) => {
                     props.setMap(map);
                 }}
             >
-                <GoogleMapMarker pos={pickCoord}></GoogleMapMarker>
-                <GoogleMapMarker
-                    pos={{ lat: dropLat, lng: dropLng }}
-                ></GoogleMapMarker>
+                {marker[0].dropPoint && (
+                    <GoogleMapMarker pos={marker[0].position}></GoogleMapMarker>
+                )}
+
+                {marker[1].pickupPoint && (
+                    <GoogleMapMarker pos={marker[1].position}></GoogleMapMarker>
+                )}
             </GoogleMap>
         </Aux>
     );

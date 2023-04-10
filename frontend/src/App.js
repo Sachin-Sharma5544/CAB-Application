@@ -6,10 +6,10 @@ import { useDropContext } from "./hooks/useDropContext";
 import { usePickupContext } from "./hooks/usePickupContext";
 
 function App() {
-    const { dropLocation } = useDropContext();
-    const { pickupLocation } = usePickupContext();
+    const { dropLocation, lat: dropLat, lng: dropLng } = useDropContext();
+    const { pickupLocation, lat: pickLat, lng: pickLng } = usePickupContext();
 
-    console.log(dropLocation);
+    console.log(dropLocation, dropLat, dropLng);
 
     return (
         <ChakraProvider>
@@ -18,7 +18,9 @@ function App() {
                 <BookRidePage></BookRidePage>
                 {/* <TestGoogle></TestGoogle> */}
             </div>
-            <p>Pickup Location: {pickupLocation} - App.js file</p>
+            {dropLocation && (
+                <p>Pickup Location: {pickupLocation} - App.js file</p>
+            )}
             <p>Drop Location: {dropLocation} - App.js file</p>
         </ChakraProvider>
     );
