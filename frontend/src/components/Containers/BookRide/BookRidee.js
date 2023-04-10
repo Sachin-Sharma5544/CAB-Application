@@ -41,14 +41,9 @@ const BookRide = (props) => {
     const [pickupLocationAuto, setPickupLocationAuto] = useState("");
     const [dropLocationAuto, setDropLocationAuto] = useState("");
 
-    const [directionsResponse, setDirectionsResponse] = useState(null);
-    const [distance, setDistance] = useState(null);
-    const [duration, setDuration] = useState(null);
-
     /* Handler Methods */
 
     //Calculate Route
-    const calculateRoute = async () => {};
 
     //Re-Center map to current location
     const handleRecenter = () => {

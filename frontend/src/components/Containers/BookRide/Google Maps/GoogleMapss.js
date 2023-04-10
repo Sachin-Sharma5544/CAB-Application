@@ -1,11 +1,12 @@
 import { CircularProgress } from "@chakra-ui/react";
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import Aux from "../../../Hoc/Aux";
 import useLoadGoogleMaps from "../../../../hooks/useLoadGoogleMaps";
 import useCurrentLocation from "../../../../hooks/useCurrentLocation";
 import GoogleMapMarker from "./map marker/GoogleMapMarker";
 import usePickupLocation from "../../../../hooks/usePickupLocation";
 import useDropLocation from "../../../../hooks/useDropLocation";
+import useCalculateRoute from "../../../../hooks/useCalculateRoute";
 
 const GoogleMaps = (props) => {
     const { currPos } = useCurrentLocation();
@@ -13,6 +14,10 @@ const GoogleMaps = (props) => {
 
     const { pickupLocation, pickupPosition } = usePickupLocation();
     const { dropLocation, dropPosition } = useDropLocation();
+    const { directionsResponse } = useCalculateRoute(
+        pickupLocation,
+        dropLocation
+    );
 
     if (!isLoaded) {
         return (
@@ -35,17 +40,13 @@ const GoogleMaps = (props) => {
                 }}
             >
                 {pickupLocation && (
-                    <GoogleMapMarker
-                        pos={pickupPosition}
-                        markerLabel="P"
-                    ></GoogleMapMarker>
+                    <GoogleMapMarker pos={pickupPosition}></GoogleMapMarker>
                 )}
-
                 {dropLocation && (
-                    <GoogleMapMarker
-                        pos={dropPosition}
-                        markerLabel="D"
-                    ></GoogleMapMarker>
+                    <GoogleMapMarker pos={dropPosition}></GoogleMapMarker>
+                )}
+                {directionsResponse && (
+                    <DirectionsRenderer directions={directionsResponse} />
                 )}
             </GoogleMap>
         </Aux>
