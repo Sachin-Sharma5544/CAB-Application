@@ -8,34 +8,26 @@ import { useDropContext } from "../../../../hooks/useDropContext";
 import { usePickupContext } from "../../../../hooks/usePickupContext";
 import { useEffect, useState } from "react";
 
-const marker = [
-    { id: 1, dropPoint: "", position: { lat: null, lng: null } },
-    { id: 2, pickupPoint: "", position: { lat: null, lng: null } },
-];
-
 const GoogleMaps = (props) => {
     const { currPos } = useCurrentLocation();
     const isLoaded = useLoadGoogleMaps();
-    const { dropLocation, lat: pickLat, lng: pickLng } = useDropContext();
-    const { pickupLocation, lat: dropLat, lng: dropLng } = usePickupContext();
+    const { pickupLocation, lat: pickLat, lng: pickLng } = usePickupContext();
+    const { dropLocation, lat: dropLat, lng: dropLng } = useDropContext();
 
-    const [mapMarker, setMapMarker] = useState(marker);
+    const [pickMarkerDisplay, setPickMarkerDisplay] = useState(false);
+    const [dropMarkerDisplay, setDropMarkerDisplay] = useState(false);
 
     useEffect(() => {
-        if (pickLat !== null && pickLng !== null) {
-            const newMarker = [...mapMarker];
-            newMarker[1].pickupPoint = pickupLocation;
-            newMarker[1].position.lat = pickLat;
-            newMarker[1].position.lng = pickLng;
-            setMapMarker(newMarker);
+        if (pickLat !== null && pickLng !== null && pickupLocation) {
+            setPickMarkerDisplay(true);
+        } else {
+            setPickMarkerDisplay(false);
         }
 
-        if (dropLat !== null && dropLng !== null) {
-            const newMarker = [...mapMarker];
-            newMarker[0].dropPoint = dropLocation;
-            newMarker[0].position.lat = dropLat;
-            newMarker[0].position.lng = dropLng;
-            setMapMarker(newMarker);
+        if (dropLat !== null && dropLng !== null && dropLocation) {
+            setDropMarkerDisplay(true);
+        } else {
+            setDropMarkerDisplay(false);
         }
     }, [pickupLocation, dropLocation]);
 
@@ -62,12 +54,16 @@ const GoogleMaps = (props) => {
                     props.setMap(map);
                 }}
             >
-                {marker[0].dropPoint && (
-                    <GoogleMapMarker pos={marker[0].position}></GoogleMapMarker>
+                {pickMarkerDisplay && (
+                    <GoogleMapMarker
+                        pos={{ lat: pickLat, lng: pickLng }}
+                    ></GoogleMapMarker>
                 )}
 
-                {marker[1].pickupPoint && (
-                    <GoogleMapMarker pos={marker[1].position}></GoogleMapMarker>
+                {dropMarkerDisplay && (
+                    <GoogleMapMarker
+                        pos={{ lat: dropLat, lng: dropLng }}
+                    ></GoogleMapMarker>
                 )}
             </GoogleMap>
         </Aux>
