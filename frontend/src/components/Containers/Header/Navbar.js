@@ -1,7 +1,14 @@
-import { Box, Spacer, Flex, Link, Center } from "@chakra-ui/react";
+import {
+    Box,
+    Spacer,
+    Flex,
+    Link as ChakraLink,
+    Center,
+} from "@chakra-ui/react";
 import "./Navbar.css";
 import { useState } from "react";
 import ModalComponent from "../../Utility/Modal/ModalComponent";
+import { Link as RouterLink } from "react-router-dom";
 
 const Navbar = () => {
     const [showModal, setShowmodal] = useState(false);
@@ -27,32 +34,44 @@ const Navbar = () => {
             >
                 <Flex>
                     <Center>
-                        <Link className="Brand" p="4" fontSize={"xx-large"}>
+                        <ChakraLink
+                            className="Brand"
+                            p="4"
+                            fontSize={"xx-large"}
+                            as={RouterLink}
+                            to="/"
+                        >
                             RideSmart
-                        </Link>
+                        </ChakraLink>
                         <Box p="4">
-                            <Link
+                            <ChakraLink
                                 onClick={() => console.log("Book a ride")}
                                 fontSize={"xl"}
+                                as={RouterLink}
+                                to="/bookride"
                             >
                                 Book Ride
-                            </Link>
+                            </ChakraLink>
                         </Box>
                         <Box p="4">
-                            <Link
+                            <ChakraLink
                                 onClick={() => console.log("Book a ride")}
                                 fontSize={"xl"}
+                                as={RouterLink}
+                                to="/your-rides"
                             >
                                 Your Rides
-                            </Link>
+                            </ChakraLink>
                         </Box>
                         <Box p="4">
-                            <Link
+                            <ChakraLink
                                 onClick={() => console.log("Drive with us")}
                                 fontSize={"xl"}
+                                as={RouterLink}
+                                to="/drive-with-us"
                             >
                                 Drive with us
-                            </Link>
+                            </ChakraLink>
                         </Box>
                     </Center>
                 </Flex>
@@ -60,17 +79,23 @@ const Navbar = () => {
                 <Flex>
                     <Center>
                         <Box p="4">
-                            <Link onClick={displayModal} fontSize={"xl"}>
+                            <ChakraLink
+                                onClick={displayModal}
+                                fontSize={"xl"}
+                                as={RouterLink}
+                            >
                                 Login
-                            </Link>
+                            </ChakraLink>
                         </Box>
                         <Box p="4">
-                            <Link
+                            <ChakraLink
                                 onClick={() => console.log("Book a ride")}
                                 fontSize={"xl"}
+                                as={RouterLink}
+                                to="/drive-with-us"
                             >
                                 Sign Up
-                            </Link>
+                            </ChakraLink>
                         </Box>
                     </Center>
                 </Flex>

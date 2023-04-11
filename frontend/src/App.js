@@ -4,20 +4,23 @@ import BookRidePage from "./pages/Book Ride/BookRidePage";
 import Navbar from "./components/Containers/Header/Navbar";
 import { useDropContext } from "./hooks/useDropContext";
 import { usePickupContext } from "./hooks/usePickupContext";
-import LoginPage from "./pages/Login/LoginPage";
+import CustomerLoginPage from "./pages/Login/CustomerLoginPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-    const { dropLocation, lat: dropLat, lng: dropLng } = useDropContext();
-    const { pickupLocation, lat: pickLat, lng: pickLng } = usePickupContext();
-
-    console.log(dropLocation, dropLat, dropLng);
-
     return (
         <ChakraProvider>
             <div className="App">
-                <Navbar />
-                <BookRidePage></BookRidePage>
-                <LoginPage />
+                <BrowserRouter>
+                    <Navbar />
+                    <Routes>
+                        <Route path="/bookride" element={<BookRidePage />} />
+                        <Route
+                            path="/customer/login"
+                            element={<CustomerLoginPage />}
+                        />
+                    </Routes>
+                </BrowserRouter>
             </div>
         </ChakraProvider>
     );

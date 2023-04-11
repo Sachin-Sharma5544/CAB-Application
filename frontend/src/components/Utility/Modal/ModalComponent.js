@@ -6,26 +6,54 @@ import {
     ModalContent,
     ModalHeader,
     ModalFooter,
-    Link,
     ModalCloseButton,
+    ModalBody,
+    Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 function ModalComponent(props) {
     return (
         <>
-            {/* <Link onClick={props.onOpen}>Login</Link> */}
-
-            <Modal isOpen={props.onOpen} onClose={props.onClose}>
+            <Modal
+                isOpen={props.onOpen}
+                onClose={props.onClose}
+                className="myLoginModal"
+            >
                 <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
+                <ModalContent className="myLoginModal">
+                    <ModalHeader>Like to Login as </ModalHeader>
                     <ModalCloseButton />
+                    <ModalBody>
+                        <Text>
+                            If you are looking for a ride, request you to please
+                            login as customer.
+                        </Text>
+                        <Text>
+                            In case you are our Driving Partner, request you to
+                            please login as driver
+                        </Text>
+                    </ModalBody>
 
                     <ModalFooter>
-                        <Link colorScheme="blue" mr={3} onClick={props.onClose}>
-                            Close
-                        </Link>
-                        <Link variant="ghost">Secondary Action</Link>
+                        <Button
+                            colorScheme="blue"
+                            onClick={props.onClose}
+                            mr={135}
+                            as={Link}
+                            to="/customer/login"
+                        >
+                            Customer
+                        </Button>
+                        <Button
+                            colorScheme="blue"
+                            onClick={props.onClose}
+                            mr={10}
+                            as={Link}
+                            to="/driver/login"
+                        >
+                            Driver
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
