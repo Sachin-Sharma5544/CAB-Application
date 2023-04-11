@@ -2,8 +2,8 @@ import CustomerLoginForm from "../../components/Containers/Authetication/Custome
 
 import React from "react";
 
-const LoginPage = () => {
+const CustomerLoginPage = () => {
     return <CustomerLoginForm />;
 };
 
-export default LoginPage;
+export default CustomerLoginPage;

@@ -6,6 +6,7 @@ import { useDropContext } from "./hooks/useDropContext";
 import { usePickupContext } from "./hooks/usePickupContext";
 import CustomerLoginPage from "./pages/Login/CustomerLoginPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DriverLoginPage from "./pages/Login/DriverLoginPage";
 
 function App() {
     return (
@@ -18,6 +19,10 @@ function App() {
                         <Route
                             path="/customer/login"
                             element={<CustomerLoginPage />}
+                        />
+                        <Route
+                            path="/driver/login"
+                            element={<DriverLoginPage />}
                         />
                     </Routes>
                 </BrowserRouter>
