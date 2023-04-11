@@ -4,6 +4,7 @@ import BookRidePage from "./pages/Book Ride/BookRidePage";
 import Navbar from "./components/Containers/Header/Navbar";
 import { useDropContext } from "./hooks/useDropContext";
 import { usePickupContext } from "./hooks/usePickupContext";
+import LoginPage from "./pages/Login/LoginPage";
 
 function App() {
     const { dropLocation, lat: dropLat, lng: dropLng } = useDropContext();
@@ -16,6 +17,7 @@ function App() {
             <div className="App">
                 <Navbar />
                 <BookRidePage></BookRidePage>
+                <LoginPage />
             </div>
         </ChakraProvider>
     );

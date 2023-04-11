@@ -137,7 +137,7 @@ const BookRide = (props) => {
             <BoxContainer className="RideInfo__Card">
                 <BoxContainer className="RideInfo__CardContainer">
                     <Heading className="RideInfo__Header">
-                        Smart Ride Details
+                        Request for a ride now
                     </Heading>
                     <RideForm
                         pickupLocation={pickupLocation}
