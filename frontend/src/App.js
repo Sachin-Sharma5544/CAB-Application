@@ -16,12 +16,7 @@ function App() {
             <div className="App">
                 <Navbar />
                 <BookRidePage></BookRidePage>
-                {/* <TestGoogle></TestGoogle> */}
             </div>
-            {dropLocation && (
-                <p>Pickup Location: {pickupLocation} - App.js file</p>
-            )}
-            <p>Drop Location: {dropLocation} - App.js file</p>
         </ChakraProvider>
     );
 }
