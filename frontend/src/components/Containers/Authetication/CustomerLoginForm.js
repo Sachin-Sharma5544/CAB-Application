@@ -27,6 +27,8 @@ const CustomerLoginForm = () => {
                     <FormHelperText>
                         We'll never share your email.
                     </FormHelperText>
+                    <p></p>
+
                     <FormLabel>Password</FormLabel>
                     <Input
                         type="password"
@@ -34,7 +36,7 @@ const CustomerLoginForm = () => {
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <p>{email}</p>
+                    <p></p>
                     <Button>LOGIN</Button>
                 </FormControl>
             </div>

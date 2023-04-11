@@ -4,12 +4,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-    },
+const customerSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -21,7 +16,7 @@ const userSchema = new Schema({
     },
 });
 
-userSchema.statics.signup = async function (email, password) {
+customerSchema.statics.signup = async function (email, password) {
     if (!email || !password) {
         throw Error("Please fill in all the fields");
     }
@@ -45,7 +40,7 @@ userSchema.statics.signup = async function (email, password) {
     return user;
 };
 
-userSchema.statics.login = async function (email, password) {
+customerSchema.statics.login = async function (email, password) {
     if (!email || !password) {
         throw Error("Please fill in all the fields");
     }
@@ -63,4 +58,4 @@ userSchema.statics.login = async function (email, password) {
     return user;
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Customer", customerSchema);
