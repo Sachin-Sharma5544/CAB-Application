@@ -1,6 +1,7 @@
 .RideInfo__Wrapper {
     border:1px solid black;
-    background-image:url('https://lh3.googleusercontent.com/M9dRt3sJK8ukzk28KMD0xOvuQVuaqRh5yT8fmVgJ9pkas2ZVgs7JXeCWQex6zuWnxWyrWgXrmkdIMm3CrE0dLSKr0LAcV_1Gecut1mxt');
+    /* background-image:url('https://lh3.googleusercontent.com/M9dRt3sJK8ukzk28KMD0xOvuQVuaqRh5yT8fmVgJ9pkas2ZVgs7JXeCWQex6zuWnxWyrWgXrmkdIMm3CrE0dLSKr0LAcV_1Gecut1mxt'); */
+    background-image: url('../../../assets/images/Ride\ booking\ background.jpg');
     background-repeat:no-repeat;
     background-size:cover;
     background-position:bottom;
