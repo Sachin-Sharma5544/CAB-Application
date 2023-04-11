@@ -14,10 +14,14 @@ const GoogleMaps = (props) => {
 
     const { pickupLocation, pickupPosition } = usePickupLocation();
     const { dropLocation, dropPosition } = useDropLocation();
-    const { directionsResponse } = useCalculateRoute(
+    let { directionsResponse } = useCalculateRoute(
         pickupLocation,
         dropLocation
     );
+
+    if (pickupLocation === "" || dropLocation === "") {
+        directionsResponse = null;
+    }
 
     if (!isLoaded) {
         return (
