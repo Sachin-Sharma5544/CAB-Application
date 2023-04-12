@@ -7,36 +7,41 @@ import {
     Input,
     Button,
 } from "@chakra-ui/react";
+import LoginFormComponent from "../../Utility/Forms/Login Form/LoginFormComponent";
 
 const DriverLoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const emailChangeHandler = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const passwordChangeHandler = (e) => {
+        setPassword(e.target.value);
+    };
+
+    //this is working
+    const loginBtnClickHandler = () => {
+        console.log("Login button clicked");
+        console.log(email, password);
+    };
+
     return (
         <div className="driverLoginForm">
             <div className="authForm">
-                <h1>Driver Login form</h1>;
-                <FormControl>
-                    <FormLabel>Email address</FormLabel>
-                    <Input
-                        type="email"
-                        value={email}
-                        id="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <FormHelperText>
-                        We'll never share your email.
-                    </FormHelperText>
-                    <p></p>
-                    <FormLabel>Password</FormLabel>
-                    <Input
-                        type="password"
-                        value={password}
-                        id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <p></p>
-                    <Button>LOGIN</Button>
-                </FormControl>
+                <h1>Driver Login form</h1>
+                <LoginFormComponent
+                    emailValue={email}
+                    passwordValue={password}
+                    mailChanhged={emailChangeHandler}
+                    passwordChanged={passwordChangeHandler}
+                    emailType="email"
+                    idEmail="email"
+                    idPassword="password"
+                    passwordType="password"
+                    loginClicked={loginBtnClickHandler}
+                ></LoginFormComponent>
             </div>
         </div>
     );

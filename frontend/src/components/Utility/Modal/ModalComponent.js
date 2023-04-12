@@ -22,35 +22,33 @@ function ModalComponent(props) {
             >
                 <ModalOverlay />
                 <ModalContent className="myLoginModal">
-                    <ModalHeader>Like to Login as </ModalHeader>
+                    <ModalHeader>{props.modalHeader} </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Text>
-                            If you are looking for a ride, request you to please
-                            login as customer.
-                        </Text>
-                        <Text>
-                            In case you are our Driving Partner, request you to
-                            please login as driver
-                        </Text>
+                        <Text>{props.modalText1}</Text>
+                        <Text>{props.modalText2}</Text>
                     </ModalBody>
 
                     <ModalFooter>
                         <Button
                             colorScheme="blue"
-                            onClick={props.onClose}
+                            onClick={() => {
+                                props.onClose();
+                            }}
                             mr={135}
                             as={Link}
-                            to="/customer/login"
+                            to={props.path1}
                         >
                             Customer
                         </Button>
                         <Button
                             colorScheme="blue"
-                            onClick={props.onClose}
+                            onClick={() => {
+                                props.onClose();
+                            }}
                             mr={10}
                             as={Link}
-                            to="/driver/login"
+                            to={props.path2}
                         >
                             Driver
                         </Button>

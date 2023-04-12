@@ -1,44 +1,40 @@
 import { useState } from "react";
 import "./Authentication.css";
-import {
-    FormControl,
-    FormLabel,
-    FormHelperText,
-    Input,
-    Button,
-} from "@chakra-ui/react";
+import LoginFormComponent from "../../Utility/Forms/Login Form/LoginFormComponent";
 
 const CustomerLoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const emailChangeHandler = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const passwordChangeHandler = (e) => {
+        setPassword(e.target.value);
+    };
+
+    // this part is working now
+    const loginBtnClickHandler = () => {
+        console.log("Login button clicked");
+        console.log(email, password);
+    };
+
     return (
         <div className="customerLoginForm">
             <div className="authForm">
                 <h1>Customer Login form</h1>
-                <FormControl>
-                    <FormLabel>Email address</FormLabel>
-                    <Input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <FormHelperText>
-                        We'll never share your email.
-                    </FormHelperText>
-                    <p></p>
-
-                    <FormLabel>Password</FormLabel>
-                    <Input
-                        type="password"
-                        value={password}
-                        id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <p></p>
-                    <Button>LOGIN</Button>
-                </FormControl>
+                <LoginFormComponent
+                    emailValue={email}
+                    passwordValue={password}
+                    mailChanhged={emailChangeHandler}
+                    passwordChanged={passwordChangeHandler}
+                    emailType="email"
+                    idEmail="email"
+                    idPassword="password"
+                    passwordType="password"
+                    loginClicked={loginBtnClickHandler}
+                ></LoginFormComponent>
             </div>
         </div>
     );

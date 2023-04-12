@@ -10,16 +10,16 @@ import { useState } from "react";
 import ModalComponent from "../../Utility/Modal/ModalComponent";
 import { Link as RouterLink } from "react-router-dom";
 
-const Navbar = () => {
-    const [showModal, setShowmodal] = useState(false);
+const Navbar = (props) => {
+    // const [showModal, setShowmodal] = useState(false);
 
-    const displayModal = () => {
-        setShowmodal(true);
-    };
+    // const displayModal = () => {
+    //     setShowmodal(true);
+    // };
 
-    const closeModal = () => {
-        setShowmodal(false);
-    };
+    // const closeModal = () => {
+    //     setShowmodal(false);
+    // };
 
     return (
         <>
@@ -80,7 +80,10 @@ const Navbar = () => {
                     <Center>
                         <Box p="4">
                             <ChakraLink
-                                onClick={displayModal}
+                                onClick={() => {
+                                    props.displayModal();
+                                    props.setModalType("Login");
+                                }}
                                 fontSize={"xl"}
                                 as={RouterLink}
                             >
@@ -89,10 +92,12 @@ const Navbar = () => {
                         </Box>
                         <Box p="4">
                             <ChakraLink
-                                onClick={() => console.log("Book a ride")}
+                                onClick={() => {
+                                    props.displayModal();
+                                    props.setModalType("Signup");
+                                }}
                                 fontSize={"xl"}
                                 as={RouterLink}
-                                to="/drive-with-us"
                             >
                                 Sign Up
                             </ChakraLink>
@@ -100,9 +105,9 @@ const Navbar = () => {
                     </Center>
                 </Flex>
             </Flex>
-            {showModal && (
+            {/* {showModal && (
                 <ModalComponent onOpen={showModal} onClose={closeModal} />
-            )}
+            )} */}
         </>
     );
 };
