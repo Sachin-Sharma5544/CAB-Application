@@ -7,8 +7,11 @@ exports.postCustomerLogin = async (req, res) => {
 exports.postCustomerSignup = async (req, res) => {
     const { email, password } = req.body;
     console.log(email, password);
-
-    const user = await Customer.signup(email, password);
-    console.log(user);
-    res.send({ msg: "Customer signup connection successful" });
+    try {
+        const user = await Customer.signup(email, password);
+        console.log(user);
+        res.send({ msg: "Customer signup connection successful" });
+    } catch (error) {
+        res.send({ error: error.message });
+    }
 };
