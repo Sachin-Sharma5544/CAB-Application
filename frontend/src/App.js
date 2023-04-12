@@ -1,14 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { useState } from "react";
-
 import BookRidePage from "./pages/Book Ride/BookRidePage";
-
-import { useDropContext } from "./hooks/useDropContext";
-import { usePickupContext } from "./hooks/usePickupContext";
 import CustomerLoginPage from "./pages/Login/CustomerLoginPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DriverLoginPage from "./pages/Login/DriverLoginPage";
 import HeaderAllPages from "./pages/All Pages Header/HeaderAllPages";
+import CustomerSignupPage from "./pages/Signup/CustomerSignupPage";
+import DriverSignupPage from "./pages/Signup/DriverSignupPage";
 
 function App() {
     return (
@@ -26,6 +23,18 @@ function App() {
                             path="/driver/login"
                             element={<DriverLoginPage />}
                         />
+                        <Route
+                            path="/driver/login"
+                            element={<DriverLoginPage />}
+                        />
+                        <Route
+                            path="/driver/signup"
+                            element={<DriverSignupPage />}
+                        ></Route>
+                        <Route
+                            path="/customer/signup"
+                            element={<CustomerSignupPage />}
+                        ></Route>
                     </Routes>
                 </BrowserRouter>
             </div>
