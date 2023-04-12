@@ -13,7 +13,7 @@ exports.postDriverLogin = async (req, res) => {
     try {
         const user = await Driver.login(email, password);
         const token = createToken(user._id);
-        res.status(200).send({ email, token });
+        res.status(200).send({ email, token, userType: "driver" });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
@@ -25,7 +25,7 @@ exports.postDriverSignup = async (req, res) => {
     try {
         const user = await Driver.signup(email, password);
         const token = createToken(user._id);
-        res.status(200).send({ email, token });
+        res.status(200).send({ email, token, userType: "driver" });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }

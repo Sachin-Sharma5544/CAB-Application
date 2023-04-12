@@ -13,7 +13,7 @@ exports.postCustomerLogin = async (req, res) => {
     try {
         const user = await Customer.login(email, password);
         const token = createToken(user._id);
-        res.status(200).send({ email, token });
+        res.status(200).send({ email, token, userType: "customer" });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
@@ -25,7 +25,7 @@ exports.postCustomerSignup = async (req, res) => {
     try {
         const user = await Customer.signup(email, password);
         const token = createToken(user._id);
-        res.status(200).send({ email, token });
+        res.status(200).send({ email, token, userType: "customer" });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
