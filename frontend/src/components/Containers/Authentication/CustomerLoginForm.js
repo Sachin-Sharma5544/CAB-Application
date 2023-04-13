@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "./Authentication.css";
 import LoginFormComponent from "../../Utility/Forms/Login Form/LoginFormComponent";
+import useCustomerLogin from "../../../hooks/utility hooks/Login/useCustomerLogin";
 
 const CustomerLoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { login, isLoading, error } = useCustomerLogin();
 
     const emailChangeHandler = (e) => {
         setEmail(e.target.value);
@@ -17,7 +19,7 @@ const CustomerLoginForm = () => {
     // this part is working now
     const loginBtnClickHandler = async () => {
         console.log("Login button clicked");
-        console.log(email, password);
+        await login(email, password);
     };
 
     return (

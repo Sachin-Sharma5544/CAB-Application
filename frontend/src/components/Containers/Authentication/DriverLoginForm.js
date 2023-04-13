@@ -8,10 +8,12 @@ import {
     Button,
 } from "@chakra-ui/react";
 import LoginFormComponent from "../../Utility/Forms/Login Form/LoginFormComponent";
+import useDriverLogin from "../../../hooks/utility hooks/Login/useDriverLogin";
 
 const DriverLoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { login, isLoading, error } = useDriverLogin();
 
     const emailChangeHandler = (e) => {
         setEmail(e.target.value);
@@ -22,9 +24,10 @@ const DriverLoginForm = () => {
     };
 
     //this is working
-    const loginBtnClickHandler = () => {
+    const loginBtnClickHandler = async () => {
         console.log("Login button clicked");
         console.log(email, password);
+        await login(email, password);
     };
 
     return (
