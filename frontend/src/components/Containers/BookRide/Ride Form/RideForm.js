@@ -3,8 +3,6 @@ import Aux from "../../../Hoc/Aux";
 import DropdownElement from "../../../Utility/Dropdowns/DropdownElement";
 import ButtonElement from "../../../Utility/Buttons/ButtonElement";
 import BoxContainer from "../../../Hoc/BoxContainer";
-import { useDropContext } from "../../../../hooks/useDropContext";
-import { usePickupContext } from "../../../../hooks/usePickupContext";
 
 /* 
 This component to be refactored or changed to call input fields seperately because when

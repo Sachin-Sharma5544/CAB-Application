@@ -1,12 +1,12 @@
 import { CircularProgress } from "@chakra-ui/react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import Aux from "../../../Hoc/Aux";
-import useLoadGoogleMaps from "../../../../hooks/useLoadGoogleMaps";
-import useCurrentLocation from "../../../../hooks/useCurrentLocation";
+import useLoadGoogleMaps from "../../../../hooks/utility hooks/Google Map/useLoadGoogleMaps";
+import useCurrentLocation from "../../../../hooks/utility hooks/Location/useCurrentLocation";
 import GoogleMapMarker from "./map marker/GoogleMapMarker";
-import usePickupLocation from "../../../../hooks/usePickupLocation";
-import useDropLocation from "../../../../hooks/useDropLocation";
-import useCalculateRoute from "../../../../hooks/useCalculateRoute";
+import usePickupLocation from "../../../../hooks/utility hooks/Location/usePickupLocation";
+import useDropLocation from "../../../../hooks/utility hooks/Location/useDropLocation";
+import useCalculateRoute from "../../../../hooks/utility hooks/Location/useCalculateRoute";
 
 const GoogleMaps = (props) => {
     const { currPos } = useCurrentLocation();

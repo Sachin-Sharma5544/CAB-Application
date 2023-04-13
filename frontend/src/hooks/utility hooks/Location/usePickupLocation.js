@@ -1,5 +1,5 @@
 import React from "react";
-import { usePickupContext } from "./usePickupContext";
+import { usePickupContext } from "../../context hooks/Location/usePickupContext";
 
 const usePickupLocation = () => {
     const { pickupLocation, lat, lng } = usePickupContext();

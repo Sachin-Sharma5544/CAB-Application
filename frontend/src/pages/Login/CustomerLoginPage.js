@@ -1,4 +1,4 @@
-import CustomerLoginForm from "../../components/Containers/Authetication/CustomerLoginForm";
+import CustomerLoginForm from "../../components/Containers/Authentication/CustomerLoginForm";
 
 import React from "react";
 

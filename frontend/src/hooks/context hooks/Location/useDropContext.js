@@ -1,4 +1,4 @@
-import { DropLocationContext } from "../context/DropLocationContext";
+import { DropLocationContext } from "../../../context/DropLocationContext";
 import { useContext } from "react";
 
 export const useDropContext = () => {

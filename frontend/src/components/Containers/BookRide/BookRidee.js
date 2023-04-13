@@ -4,9 +4,9 @@ import { Heading } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
 import GoogleMaps from "./Google Maps/GoogleMapss";
 import { useState } from "react";
-import useCurrentLocation from "../../../hooks/useCurrentLocation";
-import { useDropContext } from "../../../hooks/useDropContext";
-import { usePickupContext } from "../../../hooks/usePickupContext";
+import useCurrentLocation from "../../../hooks/utility hooks/Location/useCurrentLocation";
+import { useDropContext } from "../../../hooks/context hooks/Location/useDropContext";
+import { usePickupContext } from "../../../hooks/context hooks/Location/usePickupContext";
 
 const pickupState = {
     name: "Pickup",

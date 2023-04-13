@@ -1,4 +1,4 @@
-import DriverLoginForm from "../../components/Containers/Authetication/DriverLoginForm";
+import DriverLoginForm from "../../components/Containers/Authentication/DriverLoginForm";
 
 import React from "react";
 

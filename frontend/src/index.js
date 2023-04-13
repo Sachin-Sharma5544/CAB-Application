@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { DropLocationContextProvider } from "./context/DropLocationContext";
 import { PickuoLocationContextProvider } from "./context/PickupLocationContext";
-import { CustomerAuthContextProvider } from "./context/customerAuthContext";
+import { CustomerAuthContextProvider } from "./context/CustomerAuthContext";
 import { DriverAuthContextProvider } from "./context/DriverAuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -1,6 +1,6 @@
 import React from "react";
 import { Marker } from "@react-google-maps/api";
-import useLoadGoogleMaps from "../../../../../hooks/useLoadGoogleMaps";
+import useLoadGoogleMaps from "../../../../../hooks/utility hooks/Google Map/useLoadGoogleMaps";
 
 const GoogleMapMarker = (props) => {
     const isLoaded = useLoadGoogleMaps();

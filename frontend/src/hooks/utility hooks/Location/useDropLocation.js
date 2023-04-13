@@ -1,5 +1,5 @@
 import React from "react";
-import { useDropContext } from "./useDropContext";
+import { useDropContext } from "../../context hooks/Location/useDropContext";
 
 const useDropLocation = () => {
     const { dropLocation, lat, lng } = useDropContext();
