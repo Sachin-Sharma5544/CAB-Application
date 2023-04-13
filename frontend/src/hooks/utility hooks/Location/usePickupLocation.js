@@ -1,4 +1,3 @@
-import React from "react";
 import { usePickupContext } from "../../context hooks/Location/usePickupContext";
 
 const usePickupLocation = () => {

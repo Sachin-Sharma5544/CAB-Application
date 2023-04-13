@@ -15,7 +15,7 @@ const CustomerLoginForm = () => {
     };
 
     // this part is working now
-    const loginBtnClickHandler = () => {
+    const loginBtnClickHandler = async () => {
         console.log("Login button clicked");
         console.log(email, password);
     };
