@@ -10,14 +10,14 @@ import { DriverAuthContextProvider } from "./context/DriverAuthContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <DriverAuthContextProvider>
-            <CustomerAuthContextProvider>
+        <CustomerAuthContextProvider>
+            <DriverAuthContextProvider>
                 <PickuoLocationContextProvider>
                     <DropLocationContextProvider>
                         <App />
                     </DropLocationContextProvider>
                 </PickuoLocationContextProvider>
-            </CustomerAuthContextProvider>
-        </DriverAuthContextProvider>
+            </DriverAuthContextProvider>
+        </CustomerAuthContextProvider>
     </React.StrictMode>
 );
