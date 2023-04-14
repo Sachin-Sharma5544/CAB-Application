@@ -24,10 +24,6 @@ function App() {
                             element={<DriverLoginPage />}
                         />
                         <Route
-                            path="/driver/login"
-                            element={<DriverLoginPage />}
-                        />
-                        <Route
                             path="/driver/signup"
                             element={<DriverSignupPage />}
                         ></Route>

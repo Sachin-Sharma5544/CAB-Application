@@ -30,7 +30,9 @@ const SignupFormComponent = (props) => {
                     onChange={props.passwordChanged}
                 />
                 <p></p>
-                <Button onClick={props.loginClicked}>SIGN UP</Button>
+                <Button onClick={props.loginClicked} disabled={props.isLoading}>
+                    SIGN UP
+                </Button>
             </FormControl>
         </>
     );

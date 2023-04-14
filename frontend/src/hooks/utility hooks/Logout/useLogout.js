@@ -1,4 +1,3 @@
-import React from "react";
 import useCustomerAuthContext from "../../context hooks/Authentication/useCustomerAuthContext";
 import useDriverAuthContext from "../../context hooks/Authentication/useDriverAuthContext";
 

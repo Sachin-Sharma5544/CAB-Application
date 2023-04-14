@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import "./Authentication.css";
-import {
-    FormControl,
-    FormLabel,
-    FormHelperText,
-    Input,
-    Button,
-} from "@chakra-ui/react";
 import LoginFormComponent from "../../Utility/Forms/Login Form/LoginFormComponent";
 import useDriverLogin from "../../../hooks/utility hooks/Login/useDriverLogin";
 
@@ -44,7 +37,9 @@ const DriverLoginForm = () => {
                     idPassword="password"
                     passwordType="password"
                     loginClicked={loginBtnClickHandler}
+                    isLoading={isLoading}
                 ></LoginFormComponent>
+                {error && <h5 className="formError">{error}</h5>}
             </div>
         </div>
     );

@@ -4,12 +4,10 @@ import {
     Flex,
     Link as ChakraLink,
     Center,
+    Text,
 } from "@chakra-ui/react";
 import "./Navbar.css";
-import { useState } from "react";
-import ModalComponent from "../../Utility/Modal/ModalComponent";
 import { Link as RouterLink } from "react-router-dom";
-
 import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
 import useDriverAuthContext from "../../../hooks/context hooks/Authentication/useDriverAuthContext";
 import useLogout from "../../../hooks/utility hooks/Logout/useLogout";
@@ -95,6 +93,20 @@ const Navbar = (props) => {
                 <Spacer></Spacer>
                 <Flex>
                     <Center>
+                        {custUser && (
+                            <Box p="4">
+                                <Text fontSize={"xl"} as={RouterLink}>
+                                    {custUser.email}
+                                </Text>
+                            </Box>
+                        )}
+                        {drivUser && (
+                            <Box p="4">
+                                <Text fontSize={"xl"} as={RouterLink}>
+                                    {drivUser.email}
+                                </Text>
+                            </Box>
+                        )}
                         {(custUser || drivUser) && (
                             <Box p="4">
                                 <ChakraLink

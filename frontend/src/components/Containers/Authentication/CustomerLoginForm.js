@@ -36,7 +36,9 @@ const CustomerLoginForm = () => {
                     idPassword="password"
                     passwordType="password"
                     loginClicked={loginBtnClickHandler}
+                    isLoading={isLoading}
                 ></LoginFormComponent>
+                {error && <h5 className="formError">{error}</h5>}
             </div>
         </div>
     );
