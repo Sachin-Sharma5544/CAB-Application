@@ -10,16 +10,19 @@ import { useState } from "react";
 import ModalComponent from "../../Utility/Modal/ModalComponent";
 import { Link as RouterLink } from "react-router-dom";
 
+import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
+import useDriverAuthContext from "../../../hooks/context hooks/Authentication/useDriverAuthContext";
+import useLogout from "../../../hooks/utility hooks/Logout/useLogout";
+
 const Navbar = (props) => {
-    // const [showModal, setShowmodal] = useState(false);
+    const { user: custUser } = useCustomerAuthContext();
+    const { user: drivUser } = useDriverAuthContext();
+    const { logout } = useLogout();
 
-    // const displayModal = () => {
-    //     setShowmodal(true);
-    // };
-
-    // const closeModal = () => {
-    //     setShowmodal(false);
-    // };
+    const handleLogout = () => {
+        console.log("Logout button clicked");
+        logout();
+    };
 
     return (
         <>
@@ -53,16 +56,30 @@ const Navbar = (props) => {
                                 Book Ride
                             </ChakraLink>
                         </Box>
-                        <Box p="4">
-                            <ChakraLink
-                                onClick={() => console.log("Book a ride")}
-                                fontSize={"xl"}
-                                as={RouterLink}
-                                to="/ride/details"
-                            >
-                                Your Rides
-                            </ChakraLink>
-                        </Box>
+                        {custUser && custUser.userType === "customer" && (
+                            <Box p="4">
+                                <ChakraLink
+                                    onClick={() => console.log("Book a ride")}
+                                    fontSize={"xl"}
+                                    as={RouterLink}
+                                    to="/ride/details"
+                                >
+                                    Your Rides
+                                </ChakraLink>
+                            </Box>
+                        )}
+                        {drivUser && drivUser.userType === "driver" && (
+                            <Box p="4">
+                                <ChakraLink
+                                    onClick={() => console.log("Book a ride")}
+                                    fontSize={"xl"}
+                                    as={RouterLink}
+                                    to="/ride/details"
+                                >
+                                    Your Bookings
+                                </ChakraLink>
+                            </Box>
+                        )}
                         <Box p="4">
                             <ChakraLink
                                 onClick={() => console.log("Drive with us")}
@@ -78,36 +95,48 @@ const Navbar = (props) => {
                 <Spacer></Spacer>
                 <Flex>
                     <Center>
-                        <Box p="4">
-                            <ChakraLink
-                                onClick={() => {
-                                    props.displayModal();
-                                    props.setModalType("Login");
-                                }}
-                                fontSize={"xl"}
-                                as={RouterLink}
-                            >
-                                Login
-                            </ChakraLink>
-                        </Box>
-                        <Box p="4">
-                            <ChakraLink
-                                onClick={() => {
-                                    props.displayModal();
-                                    props.setModalType("Signup");
-                                }}
-                                fontSize={"xl"}
-                                as={RouterLink}
-                            >
-                                Sign Up
-                            </ChakraLink>
-                        </Box>
+                        {(custUser || drivUser) && (
+                            <Box p="4">
+                                <ChakraLink
+                                    onClick={handleLogout}
+                                    fontSize={"xl"}
+                                    as={RouterLink}
+                                >
+                                    Logout
+                                </ChakraLink>
+                            </Box>
+                        )}
+                        {!custUser && !drivUser && (
+                            <Box p="4">
+                                <ChakraLink
+                                    onClick={() => {
+                                        props.displayModal();
+                                        props.setModalType("Login");
+                                    }}
+                                    fontSize={"xl"}
+                                    as={RouterLink}
+                                >
+                                    Login
+                                </ChakraLink>
+                            </Box>
+                        )}
+                        {!custUser && !drivUser && (
+                            <Box p="4">
+                                <ChakraLink
+                                    onClick={() => {
+                                        props.displayModal();
+                                        props.setModalType("Signup");
+                                    }}
+                                    fontSize={"xl"}
+                                    as={RouterLink}
+                                >
+                                    Sign Up
+                                </ChakraLink>
+                            </Box>
+                        )}
                     </Center>
                 </Flex>
             </Flex>
-            {/* {showModal && (
-                <ModalComponent onOpen={showModal} onClose={closeModal} />
-            )} */}
         </>
     );
 };
