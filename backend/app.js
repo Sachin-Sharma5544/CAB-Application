@@ -22,7 +22,10 @@ app.use(cors());
 
 app.use("/customer", customerAuthRoute);
 app.use("/driver", driverAuthRoute);
+
+//This is used for testing booking model
 app.use("/rental-ride", rentalRideRoute);
+
 app.use("/car-ride", carRideRoute);
 app.use("/bike-ride", bikeRideRoute);
 

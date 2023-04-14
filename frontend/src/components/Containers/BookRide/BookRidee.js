@@ -128,8 +128,22 @@ const BookRide = (props) => {
         // console.log(source, destination);
     };
 
-    const handleBookRide = () => {
+    const handleBookRide = async () => {
         console.log("Book ride button clicked");
+        console.log(pickupLocation, dropLocation);
+
+        const response = await fetch("http://localhost:3501/rental-ride/", {
+            method: "POST",
+            body: JSON.stringify({
+                pickup: pickupLocation.value,
+                drop: dropLocation.value,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const json = await response.json();
     };
 
     return (
