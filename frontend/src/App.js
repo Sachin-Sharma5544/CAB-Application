@@ -1,23 +1,43 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import BookRidePage from "./pages/Book Ride/BookRidePage";
 import CustomerLoginPage from "./pages/Login/CustomerLoginPage";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import DriverLoginPage from "./pages/Login/DriverLoginPage";
 import HeaderAllPages from "./pages/All Pages Header/HeaderAllPages";
 import CustomerSignupPage from "./pages/Signup/CustomerSignupPage";
 import DriverSignupPage from "./pages/Signup/DriverSignupPage";
+import useCustomerAuthContext from "./hooks/context hooks/Authentication/useCustomerAuthContext";
+import useDriverAuthContext from "./hooks/context hooks/Authentication/useDriverAuthContext";
 
 function App() {
+    const { user: custUser } = useCustomerAuthContext();
+    const { user: drivUser } = useDriverAuthContext();
+
     return (
         <ChakraProvider>
             <div className="App">
                 <BrowserRouter>
                     <HeaderAllPages></HeaderAllPages>
                     <Routes>
-                        <Route path="/bookride" element={<BookRidePage />} />
+                        <Route
+                            path="/bookride"
+                            element={
+                                !custUser ? (
+                                    <Navigate to="/customer/login" />
+                                ) : (
+                                    <BookRidePage />
+                                )
+                            }
+                        />
                         <Route
                             path="/customer/login"
-                            element={<CustomerLoginPage />}
+                            element={
+                                !custUser ? (
+                                    <CustomerLoginPage />
+                                ) : (
+                                    <Navigate to="/bookride" />
+                                )
+                            }
                         />
                         <Route
                             path="/driver/login"
