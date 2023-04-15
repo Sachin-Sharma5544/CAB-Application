@@ -10,6 +10,7 @@ import useCustomerAuthContext from "./hooks/context hooks/Authentication/useCust
 import useDriverAuthContext from "./hooks/context hooks/Authentication/useDriverAuthContext";
 import VehiclePage from "./pages/Vehicle /VehiclePage";
 import AddVehiclePage from "./pages/Vehicle /AddVehiclePage";
+import Home from "./pages/Home/Home";
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
@@ -21,6 +22,7 @@ function App() {
                 <BrowserRouter>
                     <HeaderAllPages></HeaderAllPages>
                     <Routes>
+                        <Route path="/" element={<Home />} />
                         <Route
                             path="/bookride"
                             element={

@@ -1,0 +1,38 @@
+.HomeComponent {
+    padding-top: 80px;
+}
+
+.HomeContent__wrapper {
+    height: 700px;
+    background-image: url('../../../assets/images/pexels-nout-gons-378570.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: bottom;
+}
+
+.HomeContent__wrapper  h2 {
+    padding-top: 70px;
+    color: white;
+    margin-left: 20px;
+}
+
+.HomeContent__business {
+    height: 450px;
+    background-image: url('../../../assets/images/pexels-nicolas-poupart-2360562.jpg');
+    background-size:cover;
+    background-blend-mode: color;
+    background-position: center;
+    
+}
+
+.HomeContent__business h2{
+    padding-top: 10px;
+    color: white;
+    margin-left: 20px;
+}
+
+.HomeContent__business p{
+    color: rgb(0, 0, 0);
+    margin-left: 20px;
+    font-size: 1.5rem;
+}

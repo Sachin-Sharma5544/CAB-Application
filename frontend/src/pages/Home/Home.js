@@ -1,10 +1,10 @@
-import RideDetails from "../../components/Project/BookRide/RideDetails/RideDetails";
 import { Box } from "@chakra-ui/react";
+import HomeComponent from "../../components/Containers/Home/HomeComponent";
 
 const Home = () => {
     return (
         <Box className="Home">
-            <RideDetails></RideDetails>
+            <HomeComponent />
         </Box>
     );
 };
