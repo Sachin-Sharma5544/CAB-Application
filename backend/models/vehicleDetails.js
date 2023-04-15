@@ -24,4 +24,31 @@ const vehicleSchema = new Schema({
     },
 });
 
+vehicleSchema.statics.addVehicle = async function (
+    company,
+    type,
+    number,
+    regCerNum,
+    color
+) {
+    if (!company || !type || !number || !regCerNum || !color) {
+        throw Error("Please fill in all the fields");
+    }
+
+    const exists = await this.findOne({ vehicleNum: number });
+    if (exists) {
+        throw Error("Vehicle exists already");
+    }
+
+    const addedVeh = await this.create({
+        vehicleCompany: company,
+        vehicleType: type,
+        vehicleNum: number,
+        regCertNum: regCerNum,
+        vehicleColor: color,
+    });
+
+    return addedVeh;
+};
+
 module.exports = mongoose.model("Vehicle", vehicleSchema);

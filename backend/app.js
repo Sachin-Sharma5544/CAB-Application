@@ -11,6 +11,7 @@ const rentalRideRoute = require("./routes/rentalRideRoute");
 const carRideRoute = require("./routes/carRideRoute");
 const bikeRideRoute = require("./routes/bikeRideRoute");
 const driverAuthRoute = require("./routes/driverAuthRoute");
+const vehicleRoute = require("./routes/vehicleRoute");
 
 app.use((req, res, next) => {
     console.log(req.method, req.path);
@@ -28,6 +29,7 @@ app.use("/rental-ride", rentalRideRoute);
 
 app.use("/car-ride", carRideRoute);
 app.use("/bike-ride", bikeRideRoute);
+app.use("/vehicle", vehicleRoute);
 
 mongoose.connect(process.env.MONGO_DB_URL).then(() => {
     console.log("Database connected successfully");
