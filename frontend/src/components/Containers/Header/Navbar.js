@@ -44,16 +44,18 @@ const Navbar = (props) => {
                         >
                             RideSmart
                         </ChakraLink>
-                        <Box p="4">
-                            <ChakraLink
-                                onClick={() => console.log("Book a ride")}
-                                fontSize={"xl"}
-                                as={RouterLink}
-                                to="/bookride"
-                            >
-                                Book Ride
-                            </ChakraLink>
-                        </Box>
+                        {custUser && (
+                            <Box p="4">
+                                <ChakraLink
+                                    onClick={() => console.log("Book a ride")}
+                                    fontSize={"xl"}
+                                    as={RouterLink}
+                                    to="/bookride"
+                                >
+                                    Book Ride
+                                </ChakraLink>
+                            </Box>
+                        )}
                         {custUser && custUser.userType === "customer" && (
                             <Box p="4">
                                 <ChakraLink
@@ -75,6 +77,18 @@ const Navbar = (props) => {
                                     to="/ride/details"
                                 >
                                     Your Bookings
+                                </ChakraLink>
+                            </Box>
+                        )}
+                        {drivUser && drivUser.userType === "driver" && (
+                            <Box p="4">
+                                <ChakraLink
+                                    onClick={() => console.log("Book a ride")}
+                                    fontSize={"xl"}
+                                    as={RouterLink}
+                                    to="/driver/vehicle/details"
+                                >
+                                    Vehicle Details
                                 </ChakraLink>
                             </Box>
                         )}

@@ -8,6 +8,8 @@ import CustomerSignupPage from "./pages/Signup/CustomerSignupPage";
 import DriverSignupPage from "./pages/Signup/DriverSignupPage";
 import useCustomerAuthContext from "./hooks/context hooks/Authentication/useCustomerAuthContext";
 import useDriverAuthContext from "./hooks/context hooks/Authentication/useDriverAuthContext";
+import VehiclePage from "./pages/Vehicle /VehiclePage";
+import AddVehiclePage from "./pages/Vehicle /AddVehiclePage";
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
@@ -38,6 +40,16 @@ function App() {
                                     <Navigate to="/bookride" />
                                 )
                             }
+                        />
+
+                        <Route
+                            path="/driver/vehicle/details"
+                            element={<VehiclePage />}
+                        />
+
+                        <Route
+                            path="/driver/vehicle/new"
+                            element={<AddVehiclePage />}
                         />
                         <Route
                             path="/driver/login"

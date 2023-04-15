@@ -1,0 +1,13 @@
+.VehicleDetails {
+    padding-top: 100px;
+    margin: 0 50px;
+}
+
+.VehicleDetails h1, .AddNewVehicle h1{
+    padding-bottom: 30px;
+}
+
+.AddNewVehicle {
+    padding-top: 100px;
+    margin: 0 50px;
+}
