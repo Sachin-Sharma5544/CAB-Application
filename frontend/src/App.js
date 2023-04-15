@@ -11,6 +11,7 @@ import useDriverAuthContext from "./hooks/context hooks/Authentication/useDriver
 import VehiclePage from "./pages/Vehicle /VehiclePage";
 import AddVehiclePage from "./pages/Vehicle /AddVehiclePage";
 import Home from "./pages/Home/Home";
+import FooterPage from "./pages/Footer/FooterPage";
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
@@ -66,6 +67,7 @@ function App() {
                             element={<CustomerSignupPage />}
                         ></Route>
                     </Routes>
+                    <FooterPage></FooterPage>
                 </BrowserRouter>
             </div>
         </ChakraProvider>

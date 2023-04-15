@@ -1,8 +1,9 @@
 .authForm {
-    padding-top: 100px;
+    padding-top: 200px;
     width: 40%;
     margin: auto;
     /* background-color: white; */
+    height: 700px;
 }
 
 .formError {

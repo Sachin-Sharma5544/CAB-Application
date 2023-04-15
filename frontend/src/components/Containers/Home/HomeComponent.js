@@ -1,6 +1,5 @@
 import React from "react";
 import "./HomeComponent.css";
-import { Box, Heading, Text } from "@chakra-ui/react";
 import HomeContent from "./Content/HomeContent";
 import HomeBusiness from "./Business/HomeBusiness";
 import HomeRideType from "./Ride Type/HomeRideType";

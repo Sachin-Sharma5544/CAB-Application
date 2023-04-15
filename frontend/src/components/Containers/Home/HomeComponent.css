@@ -17,7 +17,7 @@
 }
 
 .HomeContent__business {
-    height: 450px;
+    height: 400px;
     background-image: url('../../../assets/images/pexels-nicolas-poupart-2360562.jpg');
     background-size:cover;
     background-blend-mode: color;
