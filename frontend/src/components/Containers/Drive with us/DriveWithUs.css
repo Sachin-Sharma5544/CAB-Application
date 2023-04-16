@@ -1,0 +1,49 @@
+.DriveWithUs {
+    padding-top: 80px;
+}
+
+/* Get Started  */
+
+.GetStarted__Wrapper {
+    background-color: black ;
+}
+
+.GetStarted__Container {
+    color: white;
+    margin: 0 60px;
+}
+
+.GetStarted__Image {
+    background-image: url('../../../assets/images/Drive\ with\ us\ 4.png');
+    height: 700px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.GetStarted__ItemLeft {
+    height: 100px;
+    margin: auto 0;
+}
+
+
+.GetStarted__ItemLeft h2 {
+    margin-top: 50px;
+    font-size: 6rem;
+}
+
+.GetStarted__ItemLeft p {
+    margin: 50px 0;
+    font-size: 1.5rem;
+}
+
+.GetStarted__ItemLeft button {
+    color: black;
+    margin-right: 20px;
+    padding: 25px 40px;
+    font-size: 1.3rem;
+}
+
+
+
+

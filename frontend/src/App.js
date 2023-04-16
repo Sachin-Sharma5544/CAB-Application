@@ -12,6 +12,7 @@ import VehiclePage from "./pages/Vehicle /VehiclePage";
 import AddVehiclePage from "./pages/Vehicle /AddVehiclePage";
 import Home from "./pages/Home/Home";
 import FooterPage from "./pages/Footer/FooterPage";
+import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
@@ -24,6 +25,10 @@ function App() {
                     <HeaderAllPages></HeaderAllPages>
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route
+                            path="/drive-with-us"
+                            element={<DriveWithUsPage />}
+                        />
                         <Route
                             path="/bookride"
                             element={
