@@ -44,6 +44,39 @@
     font-size: 1.3rem;
 }
 
+/* Drive with us Benefits */
+
+.DriveWithUsBenefits__Content {
+    margin: 75px 40px;
+}
+
+.DriveWithUsBenefits__Content h2{
+    font-size: 3.5rem;
+    padding-bottom: 70px;
+}
+
+.DriveWithUsBenefits__Content image{
+    margin: 0 40px;
+}
+
+.DriveWithUsBenefits__Content img{
+    width: 100%;
+    border-radius: 20px;
+}
+
+.DriveWithUsBenefits__Grid {
+    font-size: 2.5rem;
+}
+
+.DriveWithUsBenefits__Grid h2 {
+    padding-top: 25px;
+    font-size: 1.5rem;
+    padding-bottom: 15px;
+}
+.DriveWithUsBenefits__Grid p {
+    font-size: 1.4rem;
+}
+
 
 
 
