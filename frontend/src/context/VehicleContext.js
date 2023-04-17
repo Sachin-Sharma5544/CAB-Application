@@ -22,7 +22,9 @@ export const vehicleReducer = (state, action) => {
 export const VehicleContextProvider = (props) => {
     const [state, dispatch] = useReducer(vehicleReducer, { vehicle: null });
 
-    <VehicleContext.Provider value={{ ...state, dispatch }}>
-        {props.children}
-    </VehicleContext.Provider>;
+    return (
+        <VehicleContext.Provider value={{ ...state, dispatch }}>
+            {props.children}
+        </VehicleContext.Provider>
+    );
 };
