@@ -74,7 +74,7 @@ const Navbar = (props) => {
                                     onClick={() => console.log("Book a ride")}
                                     fontSize={"xl"}
                                     as={RouterLink}
-                                    to="/ride/details"
+                                    to="/booking/details"
                                 >
                                     Your Bookings
                                 </ChakraLink>
@@ -97,7 +97,7 @@ const Navbar = (props) => {
                                 onClick={() => console.log("Drive with us")}
                                 fontSize={"xl"}
                                 as={RouterLink}
-                                to="/drive-with-us"
+                                to="/drive"
                             >
                                 Drive with us
                             </ChakraLink>

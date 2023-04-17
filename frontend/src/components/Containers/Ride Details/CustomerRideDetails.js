@@ -2,18 +2,8 @@ import "./CustomerRideDetails.css";
 
 import React from "react";
 
-import {
-    SimpleGrid,
-    Card,
-    CardHeader,
-    Heading,
-    CardBody,
-    CardFooter,
-    Text,
-    Button,
-    Flex,
-} from "@chakra-ui/react";
-import RideCardComponent from "../../Utility/Card/Ride Card/RideCardComponent";
+import { SimpleGrid } from "@chakra-ui/react";
+import RideCardComponent from "../../Utility/Card/Customer Ride Card/RideCardComponent";
 
 const CustomerRideDetails = () => {
     return (

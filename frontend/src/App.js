@@ -14,6 +14,7 @@ import Home from "./pages/Home/Home";
 import FooterPage from "./pages/Footer/FooterPage";
 import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
 import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPage";
+import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetailsPage";
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
@@ -26,10 +27,7 @@ function App() {
                     <HeaderAllPages></HeaderAllPages>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route
-                            path="/drive-with-us"
-                            element={<DriveWithUsPage />}
-                        />
+                        <Route path="/drive" element={<DriveWithUsPage />} />
                         <Route path="/bookride" element={<BookRidePage />} />
                         <Route
                             path="/customer/login"
@@ -66,6 +64,10 @@ function App() {
                         <Route
                             path="/ride/details"
                             element={<CustomerRideDetailsPage />}
+                        ></Route>
+                        <Route
+                            path="/booking/details"
+                            element={<DriverBookingDetailsPage />}
                         ></Route>
                     </Routes>
                     <FooterPage></FooterPage>
