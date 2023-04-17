@@ -1,28 +1,31 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const vehicleSchema = new Schema({
-    vehicleCompany: {
-        type: String,
-        required: true,
+const vehicleSchema = new Schema(
+    {
+        vehicleCompany: {
+            type: String,
+            required: true,
+        },
+        vehicleType: {
+            type: String,
+            required: true,
+        },
+        vehicleNum: {
+            type: String,
+            required: true,
+        },
+        regCertNum: {
+            type: String,
+            required: true,
+        },
+        vehicleColor: {
+            type: String,
+            required: true,
+        },
     },
-    vehicleType: {
-        type: String,
-        required: true,
-    },
-    vehicleNum: {
-        type: String,
-        required: true,
-    },
-    regCertNum: {
-        type: String,
-        required: true,
-    },
-    vehicleColor: {
-        type: String,
-        required: true,
-    },
-});
+    { timestamps: true }
+);
 
 vehicleSchema.statics.addVehicle = async function (
     company,
@@ -32,6 +35,7 @@ vehicleSchema.statics.addVehicle = async function (
     color
 ) {
     if (!company || !type || !number || !regCerNum || !color) {
+        console.log(company, type, number, regCerNum, color);
         throw Error("Please fill in all the fields");
     }
 

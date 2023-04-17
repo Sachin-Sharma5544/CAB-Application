@@ -1,13 +1,13 @@
 const Vehicle = require("../models/vehicleDetails");
 
 exports.postVehicle = async (req, res, next) => {
-    const { company, type, number, regCerNum, color } = req.body;
+    const { company, vehType, number, rcNumber, color } = req.body;
     try {
         const addedVeh = await Vehicle.addVehicle(
             company,
-            type,
+            vehType,
             number,
-            regCerNum,
+            rcNumber,
             color
         );
         res.status(200).send({ addedVeh });

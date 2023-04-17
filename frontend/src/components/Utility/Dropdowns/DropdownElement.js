@@ -8,10 +8,10 @@ const DropdownElement = (props) => {
             padding={"20px 0px"}
             onChange={props.selectRidetypeHandler}
         >
-            <option value="car">Car</option>
-            <option value="bike">Bike</option>
-            <option value="rental">Rental</option>
-            <option value="auto">Auto</option>
+            <option value="Car">Car</option>
+            <option value="Bike">Bike</option>
+            <option value="Rental">Rental</option>
+            <option value="Auto">Auto</option>
         </Select>
     );
 };

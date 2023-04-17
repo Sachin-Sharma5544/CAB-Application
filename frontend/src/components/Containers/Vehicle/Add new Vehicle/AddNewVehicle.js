@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Flex } from "@chakra-ui/react";
 import AddVehicleForm from "../../../Utility/Forms/Add Vehicle/AddVehicleForm";
+import useAddVehicle from "../../../../hooks/utility hooks/Add Vehicle/useAddVehicle";
 
 const AddNewVehicle = () => {
     const [company, setCompany] = useState("");
@@ -10,8 +11,11 @@ const AddNewVehicle = () => {
     const [rcNumber, setRcNumber] = useState("");
     const [colour, setColour] = useState("");
 
-    const addVehicleHandler = () => {
+    const { addVehicle } = useAddVehicle();
+
+    const addVehicleHandler = async () => {
         console.log(company, vehicleType, number, rcNumber, colour);
+        await addVehicle(company, vehicleType, number, rcNumber, colour);
     };
 
     return (

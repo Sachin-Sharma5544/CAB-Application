@@ -10,6 +10,7 @@ exports.getRentalRide = async (req, res) => {
         distance: "",
         customer: "",
         rideCategory: "",
+        driver: "",
     });
     res.send({ msg: "rental ride route connection successful" });
 };
