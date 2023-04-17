@@ -1,20 +1,28 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 import {
     Table,
     Thead,
     Tbody,
     Tr,
     Th,
-    Td,
     TableContainer,
     Flex,
     Button,
-    Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import VehicleDetailRowComponent from "./Single Row/VehicleDetailSingleComponent";
+import useFetchVehicle from "../../../../hooks/utility hooks/Vehicle/useFetchVehicle";
+import useVehicleContext from "../../../../hooks/context hooks/Vehicle /useVehicleContext";
 
 const VehicleDetails = () => {
+    const { vehicle, dispatch } = useVehicleContext();
+    const { fetchVehicles } = useFetchVehicle();
+
+    useEffect(() => {
+        fetchVehicles();
+        console.log(vehicle);
+    }, []);
+
     return (
         <div className="VehicleDetails">
             <h1>Vehicle Details</h1>
@@ -32,31 +40,7 @@ const VehicleDetails = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>
-                                <Text>Hello</Text>
-                            </Td>
-
-                            <Td>
-                                <Text>Hello</Text>
-                            </Td>
-
-                            <Td>
-                                <Text>Hello</Text>
-                            </Td>
-
-                            <Td>
-                                <Text>Hello</Text>
-                            </Td>
-
-                            <Td>
-                                <Text>Hello</Text>
-                            </Td>
-
-                            <Td>
-                                <Button>Delete</Button>
-                            </Td>
-                        </Tr>
+                        <VehicleDetailRowComponent></VehicleDetailRowComponent>
                     </Tbody>
                 </Table>
             </TableContainer>

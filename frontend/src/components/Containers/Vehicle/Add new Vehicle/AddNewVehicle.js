@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Flex } from "@chakra-ui/react";
 import AddVehicleForm from "../../../Utility/Forms/Add Vehicle/AddVehicleForm";
-import useAddVehicle from "../../../../hooks/utility hooks/Add Vehicle/useAddVehicle";
+import useAddVehicle from "../../../../hooks/utility hooks/Vehicle/useAddVehicle";
 
 const AddNewVehicle = () => {
     const [company, setCompany] = useState("");
