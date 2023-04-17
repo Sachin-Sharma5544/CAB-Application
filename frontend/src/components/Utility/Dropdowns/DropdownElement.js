@@ -6,6 +6,7 @@ const DropdownElement = (props) => {
             placeholder={props.placeholder}
             fontSize={"1.1rem"}
             padding={"20px 0px"}
+            onChange={props.selectRidetypeHandler}
         >
             <option value="car">Car</option>
             <option value="bike">Bike</option>

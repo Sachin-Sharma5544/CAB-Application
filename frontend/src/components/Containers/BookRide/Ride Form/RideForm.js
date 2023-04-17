@@ -23,6 +23,7 @@ const RideForm = (props) => {
         setDropLocationAuto,
         dropPlaceChangedHandler,
         pickupPlaceChangedHandler,
+        selectRidetypeHandler,
     } = props;
 
     return (
@@ -42,7 +43,10 @@ const RideForm = (props) => {
                 setAutocomplete={setPickupLocationAuto}
                 placeChangedHandler={pickupPlaceChangedHandler}
             />
-            <DropdownElement placeholder="Ride Type"></DropdownElement>
+            <DropdownElement
+                placeholder="Ride Type"
+                selectRidetypeHandler={selectRidetypeHandler}
+            ></DropdownElement>
             <BoxContainer className="RideInfo__Search">
                 <ButtonElement handleClick={handleSearchClick}>
                     Search Cabs

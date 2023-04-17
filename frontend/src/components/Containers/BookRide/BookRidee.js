@@ -43,6 +43,7 @@ const BookRide = (props) => {
     const [dropLocation, setDropLocation] = useState(dropState);
     const [pickupLocationAuto, setPickupLocationAuto] = useState("");
     const [dropLocationAuto, setDropLocationAuto] = useState("");
+    const [rideType, setRideType] = useState("");
 
     // Navigate
     const navigate = useNavigate();
@@ -53,7 +54,14 @@ const BookRide = (props) => {
 
     //Re-Center map to current location
     const handleRecenter = () => {
-        map.panTo(currPos);
+        if (map) {
+            map.panTo(currPos);
+        }
+    };
+
+    //select rideType Handler
+    const selectRidetypeHandler = (e) => {
+        setRideType(e.target.value);
     };
 
     // Pickup  change handler
@@ -136,10 +144,15 @@ const BookRide = (props) => {
 
     const handleBookRide = async () => {
         console.log("Book ride button clicked");
-        console.log(pickupLocation, dropLocation);
+        console.log(pickupLocation, dropLocation, rideType);
+        if (!pickupLocation.value === "" || dropLocation.value === "") {
+            console.log("I am returning from here");
+            return;
+        }
 
         //This ensures user is logged in in order to book a ride
         if (!custUser) {
+            console.log("Customer user not logged in");
             return navigate("/customer/login");
         }
 
@@ -155,6 +168,7 @@ const BookRide = (props) => {
         });
 
         const json = await response.json();
+        console.log(json);
     };
 
     return (
@@ -178,6 +192,7 @@ const BookRide = (props) => {
                         setDropLocationAuto={setDropLocationAuto}
                         dropPlaceChangedHandler={dropPlaceChangedHandler}
                         pickupPlaceChangedHandler={pickupPlaceChangedHandler}
+                        selectRidetypeHandler={selectRidetypeHandler}
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>
