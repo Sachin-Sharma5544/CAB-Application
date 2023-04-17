@@ -13,6 +13,7 @@ import AddVehiclePage from "./pages/Vehicle /AddVehiclePage";
 import Home from "./pages/Home/Home";
 import FooterPage from "./pages/Footer/FooterPage";
 import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
+import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPage";
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
@@ -61,6 +62,10 @@ function App() {
                         <Route
                             path="/customer/signup"
                             element={<CustomerSignupPage />}
+                        ></Route>
+                        <Route
+                            path="/ride/details"
+                            element={<CustomerRideDetailsPage />}
                         ></Route>
                     </Routes>
                     <FooterPage></FooterPage>
