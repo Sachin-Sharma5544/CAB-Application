@@ -7,6 +7,8 @@ import { useState } from "react";
 import useCurrentLocation from "../../../hooks/utility hooks/Location/useCurrentLocation";
 import { useDropContext } from "../../../hooks/context hooks/Location/useDropContext";
 import { usePickupContext } from "../../../hooks/context hooks/Location/usePickupContext";
+import { useNavigate } from "react-router-dom";
+import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
 
 const pickupState = {
     name: "Pickup",
@@ -33,6 +35,7 @@ const BookRide = (props) => {
     //Context
     const { dispatch: dropDispatch } = useDropContext();
     const { dispatch: pickDispatch } = usePickupContext();
+    const { user: custUser } = useCustomerAuthContext();
 
     //State
     const [map, setMap] = useState(null);
@@ -40,6 +43,9 @@ const BookRide = (props) => {
     const [dropLocation, setDropLocation] = useState(dropState);
     const [pickupLocationAuto, setPickupLocationAuto] = useState("");
     const [dropLocationAuto, setDropLocationAuto] = useState("");
+
+    // Navigate
+    const navigate = useNavigate();
 
     /* Handler Methods */
 
@@ -131,6 +137,11 @@ const BookRide = (props) => {
     const handleBookRide = async () => {
         console.log("Book ride button clicked");
         console.log(pickupLocation, dropLocation);
+
+        //This ensures user is logged in in order to book a ride
+        if (!custUser) {
+            return navigate("/customer/login");
+        }
 
         const response = await fetch("http://localhost:3501/rental-ride/", {
             method: "POST",

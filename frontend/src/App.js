@@ -29,16 +29,7 @@ function App() {
                             path="/drive-with-us"
                             element={<DriveWithUsPage />}
                         />
-                        <Route
-                            path="/bookride"
-                            element={
-                                !custUser ? (
-                                    <Navigate to="/customer/login" />
-                                ) : (
-                                    <BookRidePage />
-                                )
-                            }
-                        />
+                        <Route path="/bookride" element={<BookRidePage />} />
                         <Route
                             path="/customer/login"
                             element={

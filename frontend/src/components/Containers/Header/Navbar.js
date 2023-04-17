@@ -44,18 +44,18 @@ const Navbar = (props) => {
                         >
                             RideSmart
                         </ChakraLink>
-                        {custUser && (
-                            <Box p="4">
-                                <ChakraLink
-                                    onClick={() => console.log("Book a ride")}
-                                    fontSize={"xl"}
-                                    as={RouterLink}
-                                    to="/bookride"
-                                >
-                                    Book Ride
-                                </ChakraLink>
-                            </Box>
-                        )}
+
+                        <Box p="4">
+                            <ChakraLink
+                                onClick={() => console.log("Book a ride")}
+                                fontSize={"xl"}
+                                as={RouterLink}
+                                to="/bookride"
+                            >
+                                Book Ride
+                            </ChakraLink>
+                        </Box>
+
                         {custUser && custUser.userType === "customer" && (
                             <Box p="4">
                                 <ChakraLink
