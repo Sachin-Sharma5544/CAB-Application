@@ -17,6 +17,7 @@ const useLoadGoogleMaps = () => {
         }
         if (isLoaded) {
             setMapIsLoaded(true);
+            console.log(process.env.REACT_APP_API_KEY);
         }
     }, [isLoaded]);
 

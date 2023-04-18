@@ -9,6 +9,7 @@ import { useDropContext } from "../../../hooks/context hooks/Location/useDropCon
 import { usePickupContext } from "../../../hooks/context hooks/Location/usePickupContext";
 import { useNavigate } from "react-router-dom";
 import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
+import useWhatsApp from "../../../hooks/utility hooks/Whatsapp/useWhatsApp";
 
 const pickupState = {
     name: "Pickup",
@@ -31,6 +32,7 @@ const dropState = {
 const BookRide = (props) => {
     //Hooks import
     const { currPos } = useCurrentLocation();
+    const { sendWhatsappMessage } = useWhatsApp();
 
     //Context
     const { dispatch: dropDispatch } = useDropContext();
@@ -140,6 +142,7 @@ const BookRide = (props) => {
         // const source = bookRideFields[0].value;
         // const destination = bookRideFields[1].value;
         // console.log(source, destination);
+        sendWhatsappMessage();
     };
 
     const handleBookRide = async () => {
