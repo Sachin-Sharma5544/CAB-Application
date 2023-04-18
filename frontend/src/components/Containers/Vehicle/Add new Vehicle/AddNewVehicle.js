@@ -19,7 +19,7 @@ const AddNewVehicle = () => {
     const addVehicleHandler = async () => {
         console.log(company, vehicleType, number, rcNumber, colour);
         await addVehicle(company, vehicleType, number, rcNumber, colour);
-        // navigate("/driver/vehicle/details");
+        navigate("/driver/vehicle/details");
     };
 
     return (

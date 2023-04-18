@@ -13,14 +13,21 @@ import { Link } from "react-router-dom";
 import VehicleDetailRowComponent from "./Single Row/VehicleDetailSingleComponent";
 import useFetchVehicle from "../../../../hooks/utility hooks/Vehicle/useFetchVehicle";
 import useVehicleContext from "../../../../hooks/context hooks/Vehicle /useVehicleContext";
+import useDeleteVehicle from "../../../../hooks/utility hooks/Vehicle/useDeleteVehicle";
 
 const VehicleDetails = () => {
     const { vehicle, dispatch } = useVehicleContext();
     const { error, isLoading } = useFetchVehicle(dispatch);
+    const { deleteVehicle } = useDeleteVehicle();
 
     useEffect(() => {
         console.log("Vehicle data has changed", vehicle);
     }, [vehicle]);
+
+    const deleteVehiclehandler = async (id) => {
+        console.log(id);
+        await deleteVehicle(id);
+    };
 
     return (
         <div className="VehicleDetails">
@@ -44,6 +51,7 @@ const VehicleDetails = () => {
                                 <VehicleDetailRowComponent
                                     key={veh._id}
                                     vehicle={veh}
+                                    deleteVehiclehandler={deleteVehiclehandler}
                                 ></VehicleDetailRowComponent>
                             ))}
                     </Tbody>

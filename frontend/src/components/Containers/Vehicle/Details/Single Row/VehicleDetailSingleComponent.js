@@ -25,7 +25,13 @@ const VehicleDetailRowComponent = (props) => {
             </Td>
 
             <Td>
-                <Button>Delete</Button>
+                <Button
+                    onClick={() =>
+                        props.deleteVehiclehandler(props.vehicle._id)
+                    }
+                >
+                    Delete
+                </Button>
             </Td>
         </Tr>
     );
