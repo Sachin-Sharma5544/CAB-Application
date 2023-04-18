@@ -16,12 +16,11 @@ import useVehicleContext from "../../../../hooks/context hooks/Vehicle /useVehic
 
 const VehicleDetails = () => {
     const { vehicle, dispatch } = useVehicleContext();
-    const { fetchVehicles } = useFetchVehicle();
+    const { error, isLoading } = useFetchVehicle(dispatch);
 
     useEffect(() => {
-        fetchVehicles();
-        console.log(vehicle);
-    }, []);
+        console.log("Vehicle data has changed", vehicle);
+    }, [vehicle]);
 
     return (
         <div className="VehicleDetails">
@@ -40,7 +39,13 @@ const VehicleDetails = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <VehicleDetailRowComponent></VehicleDetailRowComponent>
+                        {!isLoading &&
+                            vehicle.map((veh) => (
+                                <VehicleDetailRowComponent
+                                    key={veh._id}
+                                    vehicle={veh}
+                                ></VehicleDetailRowComponent>
+                            ))}
                     </Tbody>
                 </Table>
             </TableContainer>

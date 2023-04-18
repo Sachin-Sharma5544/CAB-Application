@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Flex } from "@chakra-ui/react";
 import AddVehicleForm from "../../../Utility/Forms/Add Vehicle/AddVehicleForm";
 import useAddVehicle from "../../../../hooks/utility hooks/Vehicle/useAddVehicle";
+import { useNavigate } from "react-router-dom";
 
 const AddNewVehicle = () => {
     const [company, setCompany] = useState("");
@@ -13,9 +14,12 @@ const AddNewVehicle = () => {
 
     const { addVehicle } = useAddVehicle();
 
+    const navigate = useNavigate();
+
     const addVehicleHandler = async () => {
         console.log(company, vehicleType, number, rcNumber, colour);
         await addVehicle(company, vehicleType, number, rcNumber, colour);
+        // navigate("/driver/vehicle/details");
     };
 
     return (

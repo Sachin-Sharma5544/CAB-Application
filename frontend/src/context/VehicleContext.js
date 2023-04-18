@@ -7,7 +7,7 @@ export const vehicleReducer = (state, action) => {
         case "SET_VEHICLE":
             return { vehicle: action.payload };
         case "ADD_VEHICLE":
-            return { vehicle: [...state, action.payload] };
+            return { vehicle: [...state.vehicle, action.payload] };
         case "DELETE_VEHICLE":
             return {
                 vehicle: state.vehicle.filter(

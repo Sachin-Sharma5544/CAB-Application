@@ -10,8 +10,6 @@ const useVehicleContext = () => {
         );
     }
 
-    console.log(context);
-
     return context;
 };
 
