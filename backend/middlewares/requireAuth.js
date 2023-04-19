@@ -2,8 +2,10 @@ const jwt = require("jsonwebtoken");
 const Customer = require("../models/customerModel");
 const Driver = require("../models/driverModel");
 
-exports.requireCustomerAuth = (req, res, next) => {
+exports.requireCustomerAuth = async (req, res, next) => {
     const { authorization } = req.headers;
+
+    console.log(authorization);
 
     if (!authorization) {
         return res
@@ -15,7 +17,7 @@ exports.requireCustomerAuth = (req, res, next) => {
 
     try {
         const { _id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        req.user = eq.user = Customer.findOne({ _id }).select("_id");
+        req.user = await Customer.findOne({ _id }).select("_id");
         next();
     } catch (error) {
         console.log(error);
@@ -23,8 +25,9 @@ exports.requireCustomerAuth = (req, res, next) => {
     }
 };
 
-exports.requireDriverAuth = (req, res, next) => {
+exports.requireDriverAuth = async (req, res, next) => {
     const { authorization } = req.headers;
+    console.log(authorization);
 
     if (!authorization) {
         return res
@@ -36,7 +39,8 @@ exports.requireDriverAuth = (req, res, next) => {
 
     try {
         const { _id } = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        req.user = Driver.findOne({ _id }).select("_id");
+        console.log(_id, "hahaha");
+        req.user = await Driver.findOne({ _id }).select("_id");
         next();
     } catch (error) {
         console.log(error);

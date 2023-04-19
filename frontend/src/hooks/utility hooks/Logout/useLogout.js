@@ -6,12 +6,12 @@ const useLogout = () => {
     const { user: drivUser, dispatch: drivDispatch } = useDriverAuthContext();
 
     const logout = () => {
-        localStorage.removeItem("RideSmart_User");
-
-        if (custUser.userType === "customer") {
+        if (custUser) {
             localStorage.removeItem("RideSmart_User");
             custDispatch({ type: "LOGOUT" });
-        } else if (drivUser.userType === "driver") {
+        }
+
+        if (drivUser) {
             localStorage.removeItem("RideSmart_User");
             drivDispatch({ type: "LOGOUT" });
         }

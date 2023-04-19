@@ -16,9 +16,9 @@ import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
 import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPage";
 import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetailsPage";
 
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
-const socket = io("http://localhost:3501");
+// const socket = io("http://localhost:3501");
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
@@ -46,7 +46,13 @@ function App() {
 
                         <Route
                             path="/driver/vehicle/details"
-                            element={<VehiclePage />}
+                            element={
+                                drivUser ? (
+                                    <VehiclePage />
+                                ) : (
+                                    <Navigate to="/driver/login" />
+                                )
+                            }
                         />
 
                         <Route
@@ -55,7 +61,13 @@ function App() {
                         />
                         <Route
                             path="/driver/login"
-                            element={<DriverLoginPage />}
+                            element={
+                                !drivUser ? (
+                                    <DriverLoginPage />
+                                ) : (
+                                    <Navigate to="/booking/details" />
+                                )
+                            }
                         />
                         <Route
                             path="/driver/signup"
@@ -71,19 +83,25 @@ function App() {
                         ></Route>
                         <Route
                             path="/booking/details"
-                            element={<DriverBookingDetailsPage />}
+                            element={
+                                drivUser ? (
+                                    <DriverBookingDetailsPage />
+                                ) : (
+                                    <Navigate to="/driver/login" />
+                                )
+                            }
                         ></Route>
                     </Routes>
-                    <FooterPage></FooterPage>
+                    {/* <FooterPage></FooterPage> */}
                 </BrowserRouter>
 
-                <button
+                {/* <button
                     onClick={() => {
                         socket.emit("Join_Room", 123);
                     }}
                 >
                     Emit Button
-                </button>
+                </button> */}
             </div>
         </ChakraProvider>
     );

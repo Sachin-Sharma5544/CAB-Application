@@ -2,6 +2,7 @@ const Driver = require("../models/driverModel");
 const jwt = require("jsonwebtoken");
 
 const createToken = (_id) => {
+    console.log(_id);
     return jwt.sign({ _id }, process.env.JWT_SECRET_KEY, {
         expiresIn: "3d",
     });
@@ -12,6 +13,7 @@ exports.postDriverLogin = async (req, res) => {
 
     try {
         const user = await Driver.login(email, password);
+
         const token = createToken(user._id);
         res.status(200).send({ email, token, userType: "driver" });
     } catch (error) {

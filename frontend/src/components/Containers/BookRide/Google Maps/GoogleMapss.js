@@ -35,24 +35,26 @@ const GoogleMaps = (props) => {
 
     return (
         <Aux>
-            <GoogleMap
-                center={currPos}
-                mapContainerStyle={{ width: "100%", height: "100%" }}
-                zoom={12}
-                onLoad={(map) => {
-                    props.setMap(map);
-                }}
-            >
-                {pickupLocation && (
-                    <GoogleMapMarker pos={pickupPosition}></GoogleMapMarker>
-                )}
-                {dropLocation && (
-                    <GoogleMapMarker pos={dropPosition}></GoogleMapMarker>
-                )}
-                {directionsResponse && (
-                    <DirectionsRenderer directions={directionsResponse} />
-                )}
-            </GoogleMap>
+            {isLoaded && (
+                <GoogleMap
+                    center={currPos}
+                    mapContainerStyle={{ width: "100%", height: "100%" }}
+                    zoom={12}
+                    onLoad={(map) => {
+                        props.setMap(map);
+                    }}
+                >
+                    {pickupLocation && (
+                        <GoogleMapMarker pos={pickupPosition}></GoogleMapMarker>
+                    )}
+                    {dropLocation && (
+                        <GoogleMapMarker pos={dropPosition}></GoogleMapMarker>
+                    )}
+                    {directionsResponse && (
+                        <DirectionsRenderer directions={directionsResponse} />
+                    )}
+                </GoogleMap>
+            )}
         </Aux>
     );
 };

@@ -31,46 +31,54 @@ const VehicleDetails = () => {
 
     return (
         <div className="VehicleDetails">
-            <h1>Vehicle Details</h1>
+            {!error && (
+                <>
+                    <h1>Vehicle Details</h1>
 
-            <TableContainer>
-                <Table variant="simple">
-                    <Thead>
-                        <Tr>
-                            <Th>Company</Th>
-                            <Th>Vehicle Type</Th>
-                            <Th>Number</Th>
-                            <Th>RC number</Th>
-                            <Th>Colour</Th>
-                            <Th>Delete</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {!isLoading &&
-                            vehicle.map((veh) => (
-                                <VehicleDetailRowComponent
-                                    key={veh._id}
-                                    vehicle={veh}
-                                    deleteVehiclehandler={deleteVehiclehandler}
-                                ></VehicleDetailRowComponent>
-                            ))}
-                    </Tbody>
-                </Table>
-            </TableContainer>
+                    <TableContainer>
+                        <Table variant="simple">
+                            <Thead>
+                                <Tr>
+                                    <Th>Company</Th>
+                                    <Th>Vehicle Type</Th>
+                                    <Th>Number</Th>
+                                    <Th>RC number</Th>
+                                    <Th>Colour</Th>
+                                    <Th>Delete</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {!isLoading &&
+                                    vehicle.map((veh) => (
+                                        <VehicleDetailRowComponent
+                                            key={veh._id}
+                                            vehicle={veh}
+                                            deleteVehiclehandler={
+                                                deleteVehiclehandler
+                                            }
+                                        ></VehicleDetailRowComponent>
+                                    ))}
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
 
-            <Flex pb={10}>
-                <Button
-                    size="md"
-                    mt={2}
-                    mx={2}
-                    backgroundColor="orange.700"
-                    color="white"
-                    as={Link}
-                    to="/driver/vehicle/new"
-                >
-                    Add New
-                </Button>
-            </Flex>
+                    <Flex pb={10}>
+                        <Button
+                            size="md"
+                            mt={2}
+                            mx={2}
+                            backgroundColor="orange.700"
+                            color="white"
+                            as={Link}
+                            to="/driver/vehicle/new"
+                        >
+                            Add New
+                        </Button>
+                    </Flex>
+                </>
+            )}
+
+            {error && <h2>{error}</h2>}
         </div>
     );
 };
