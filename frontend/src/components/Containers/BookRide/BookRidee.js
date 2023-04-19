@@ -148,12 +148,18 @@ const BookRide = (props) => {
     const handleBookRide = async () => {
         console.log("Book ride button clicked");
         console.log(pickupLocation, dropLocation, rideType);
+
+        if (!custUser) {
+            console.log("Customer user not logged in");
+            return navigate("/customer/login");
+        }
+
         if (!pickupLocation.value === "" || dropLocation.value === "") {
             console.log("I am returning from here");
             return;
         }
 
-        //This ensures user is logged in in order to book a ride
+        //This ensures customer user are allowed to book a ride
         if (!custUser) {
             console.log("Customer user not logged in");
             return navigate("/customer/login");

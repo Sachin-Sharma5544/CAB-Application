@@ -71,7 +71,13 @@ function App() {
                         />
                         <Route
                             path="/driver/signup"
-                            element={<DriverSignupPage />}
+                            element={
+                                !drivUser ? (
+                                    <DriverSignupPage />
+                                ) : (
+                                    <Navigate to="/booking/details" />
+                                )
+                            }
                         ></Route>
                         <Route
                             path="/customer/signup"

@@ -1,4 +1,4 @@
-const Booking = require("../models/bookingsModel");
+const Booking = require("../models/rideModel");
 
 exports.getRentalRide = async (req, res) => {
     const { pickup, drop } = req.body;

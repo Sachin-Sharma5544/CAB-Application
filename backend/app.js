@@ -9,12 +9,15 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
 //Routes import
-const customerAuthRoute = require("./routes/customerAuthRoute");
+
 const rentalRideRoute = require("./routes/rentalRideRoute");
 const carRideRoute = require("./routes/carRideRoute");
 const bikeRideRoute = require("./routes/bikeRideRoute");
+
+const customerAuthRoute = require("./routes/customerAuthRoute");
 const driverAuthRoute = require("./routes/driverAuthRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
+const rideRoute = require("./routes/rideRoute");
 
 app.use((req, res, next) => {
     console.log(req.method, req.path);
@@ -35,6 +38,7 @@ app.use("/bike-ride", bikeRideRoute);
 app.use("/vehicle", vehicleRoute);
 app.use("/customer", customerAuthRoute);
 app.use("/driver", driverAuthRoute);
+app.use("/ride", rideRoute);
 
 mongoose.connect(process.env.MONGO_DB_URL).then(() => {
     console.log("Database connected successfully");

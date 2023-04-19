@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const bookingSchema = new Schema(
+const rideSchema = new Schema(
     {
         pickupLocation: {
             type: String,
@@ -20,11 +20,11 @@ const bookingSchema = new Schema(
         rideCategory: {
             type: String,
         },
-        driver: {
+        driverId: {
             type: String,
         },
     },
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Booking", bookingSchema);
+module.exports = mongoose.model("Ride", rideSchema);

@@ -8,6 +8,8 @@ const driverSchema = new Schema(
     {
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
+        status: { type: String },
+        phoneNumber: { type: String },
     },
     { timestamps: true }
 );
@@ -50,7 +52,12 @@ driverSchema.statics.signup = async function (email, password) {
 
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(password, salt);
-    const user = await this.create({ email: email, password: hashPass });
+    const user = await this.create({
+        email: email,
+        password: hashPass,
+        status: "available",
+        phoneNumber: "",
+    });
 
     return user;
 };
