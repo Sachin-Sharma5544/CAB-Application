@@ -1,8 +1,8 @@
 import InputFieldGroups from "../../../Utility/Input Groups/InputFieldGroups";
-import Aux from "../../../Hoc/Aux";
+import Aux from "../../../HOC/AuxComponent";
 import DropdownElement from "../../../Utility/Dropdowns/DropdownElement";
 import ButtonElement from "../../../Utility/Buttons/ButtonElement";
-import BoxContainer from "../../../Hoc/BoxContainer";
+import BoxContainer from "../../../HOC/BoxContainerComp";
 
 /* 
 This component to be refactored or changed to call input fields seperately because when

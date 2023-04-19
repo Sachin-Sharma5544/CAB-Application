@@ -1,6 +1,6 @@
 import { CircularProgress } from "@chakra-ui/react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
-import Aux from "../../../Hoc/Aux";
+import Aux from "../../../HOC/AuxComponent";
 import useLoadGoogleMaps from "../../../../hooks/utility hooks/Google Map/useLoadGoogleMaps";
 import useCurrentLocation from "../../../../hooks/utility hooks/Location/useCurrentLocation";
 import GoogleMapMarker from "./map marker/GoogleMapMarker";

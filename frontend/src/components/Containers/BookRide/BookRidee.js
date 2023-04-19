@@ -1,5 +1,5 @@
 import "./BookRide.css";
-import BoxContainer from "../../Hoc/BoxContainer";
+import BoxContainer from "../../HOC/BoxContainerComp";
 import { Heading } from "@chakra-ui/react";
 import RideForm from "./Ride Form/RideForm";
 import GoogleMaps from "./Google Maps/GoogleMapss";
