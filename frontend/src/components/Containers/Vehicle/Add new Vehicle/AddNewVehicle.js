@@ -12,13 +12,15 @@ const AddNewVehicle = () => {
     const [rcNumber, setRcNumber] = useState("");
     const [colour, setColour] = useState("");
 
-    const { addVehicle } = useAddVehicle();
+    const { addVehicle, error, isLoading } = useAddVehicle();
 
     const navigate = useNavigate();
 
     const addVehicleHandler = async () => {
         console.log(company, vehicleType, number, rcNumber, colour);
         await addVehicle(company, vehicleType, number, rcNumber, colour);
+        console.log(error, "weytu");
+
         navigate("/driver/vehicle/details");
     };
 
@@ -37,6 +39,7 @@ const AddNewVehicle = () => {
                 setRcNumber={setRcNumber}
                 setColour={setColour}
             />
+
             <Flex pb={10}>
                 <Button
                     size="md"
@@ -47,6 +50,7 @@ const AddNewVehicle = () => {
                     as={Link}
                     to="/driver/vehicle/new"
                     onClick={addVehicleHandler}
+                    disabled={isLoading}
                 >
                     Add Vehicle
                 </Button>
