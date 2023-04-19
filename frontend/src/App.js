@@ -16,6 +16,10 @@ import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
 import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPage";
 import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetailsPage";
 
+import io from "socket.io-client";
+
+const socket = io("http://localhost:3501");
+
 function App() {
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
@@ -72,6 +76,14 @@ function App() {
                     </Routes>
                     <FooterPage></FooterPage>
                 </BrowserRouter>
+
+                <button
+                    onClick={() => {
+                        socket.emit("Join_Room", 123);
+                    }}
+                >
+                    Emit Button
+                </button>
             </div>
         </ChakraProvider>
     );
