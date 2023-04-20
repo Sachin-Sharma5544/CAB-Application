@@ -44,6 +44,8 @@ const CustomerRideDetails = () => {
     //     fetchRideDetails();
     // }, [setCustomerRides]);
 
+    console.log(customerRides);
+
     return (
         <div className="CustomerRideDetails__Page">
             <h1>Customer ride details</h1>

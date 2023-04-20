@@ -24,8 +24,11 @@ const rideSchema = new Schema(
             type: String,
         },
         driverId: {
-            type: String,
+            type: mongoose.Types.ObjectId,
+            required: true,
+            ref: "Driver",
         },
+
         rideStatus: { type: String },
     },
     { timestamps: true }

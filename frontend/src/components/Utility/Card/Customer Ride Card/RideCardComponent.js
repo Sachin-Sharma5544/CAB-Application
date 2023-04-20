@@ -24,7 +24,10 @@ const RideCardComponent = (props) => {
                     <Text>Drop Location: {ride.dropLocation}</Text>
                 </Box>
                 <Box>
-                    <Text>Driver Name:{ride.driverId}</Text>
+                    <Text>
+                        Driver Name: {ride.driverId.firstName}{" "}
+                        {ride.driverId.lastName}
+                    </Text>
                 </Box>
                 <Box>
                     <Text>Status: {ride.rideStatus}</Text>

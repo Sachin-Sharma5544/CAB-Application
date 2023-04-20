@@ -37,7 +37,10 @@ exports.postRide = async (req, res, next) => {
 
 exports.getRides = async (req, res, next) => {
     try {
-        const rides = await Ride.find({ customer: req.user._id });
+        const rides = await Ride.find({ customer: req.user._id }).populate({
+            path: "driverId",
+            select: "firstName lastName",
+        });
         console.log(rides);
 
         res.status(200).send(rides);
