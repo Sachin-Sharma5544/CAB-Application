@@ -203,6 +203,7 @@ const BookRide = (props) => {
         if (response.ok) {
             sendCustomerWhatsappMessage();
             sendDriverWhatsappMessage();
+            navigate("/ride/details");
         }
         console.log(json);
     };

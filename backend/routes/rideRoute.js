@@ -8,7 +8,7 @@ const authMiddleware = require("../middlewares/requireAuth");
 router.use(authMiddleware.requireCustomerAuth);
 
 router.post("/", rideController.postRide);
-router.get("/", rideController.getRide);
+router.get("/", rideController.getRides);
 router.get("/available", rideController.getAvailableRides);
 
 module.exports = router;

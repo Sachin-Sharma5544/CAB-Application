@@ -1,25 +1,69 @@
 import "./CustomerRideDetails.css";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, CircularProgress } from "@chakra-ui/react";
 import RideCardComponent from "../../Utility/Card/Customer Ride Card/RideCardComponent";
+import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
 
 const CustomerRideDetails = () => {
+    const [customerRides, setCustomerRides] = useState(null);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const { user: custUser } = useCustomerAuthContext();
+
+    useEffect(() => {
+        const fetchRideDetails = async () => {
+            const response = await fetch("http://localhost:3501/ride", {
+                headers: {
+                    Authorization: `Bearer ${custUser.token}`,
+                },
+            });
+
+            const json = await response.json();
+
+            console.log(json);
+
+            if (!response.ok) {
+                setIsLoading(false);
+                setError(json.error);
+            }
+
+            if (response.ok) {
+                setIsLoading(false);
+                setError(null);
+                setCustomerRides(json);
+            }
+        };
+        fetchRideDetails();
+    }, [setCustomerRides]);
+
     return (
         <div className="CustomerRideDetails__Page">
             <h1>Customer ride details</h1>
 
-            <SimpleGrid
-                spacing={4}
-                templateColumns="repeat(auto-fill, minmax(310px, 1fr))"
-            >
-                <RideCardComponent></RideCardComponent>
-                <RideCardComponent></RideCardComponent>
-                <RideCardComponent></RideCardComponent>
-                <RideCardComponent></RideCardComponent>
-                <RideCardComponent></RideCardComponent>
-            </SimpleGrid>
+            {customerRides && (
+                <SimpleGrid
+                    spacing={4}
+                    templateColumns="repeat(auto-fill, minmax(310px, 1fr))"
+                >
+                    {customerRides.map((ride) => (
+                        <RideCardComponent
+                            key={ride._id}
+                            ride={ride}
+                        ></RideCardComponent>
+                    ))}
+                    {/* <RideCardComponent></RideCardComponent>
+                    <RideCardComponent></RideCardComponent>
+                    <RideCardComponent></RideCardComponent>
+                    <RideCardComponent></RideCardComponent>
+                    <RideCardComponent></RideCardComponent> */}
+                </SimpleGrid>
+            )}
+            {isLoading && (
+                <CircularProgress isIndeterminate color="green.300" />
+            )}
         </div>
     );
 };

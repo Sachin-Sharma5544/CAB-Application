@@ -9,7 +9,8 @@ import {
     Button,
     Box,
 } from "@chakra-ui/react";
-const RideCardComponent = () => {
+const RideCardComponent = (props) => {
+    const { ride } = props;
     return (
         <Card border="1px solid black">
             <CardHeader>
@@ -17,19 +18,19 @@ const RideCardComponent = () => {
             </CardHeader>
             <CardBody>
                 <Box>
-                    <Text>Pickup Location: Karampura</Text>
+                    <Text>Pickup Location: {ride.pickupLocation}</Text>
                 </Box>
                 <Box>
-                    <Text>Drop Location: Terminal 3, Delhi Airport </Text>
+                    <Text>Drop Location: {ride.dropLocation}</Text>
                 </Box>
                 <Box>
-                    <Text>Driver: Samar Gupta</Text>
+                    <Text>Driver Name:{ride.driverId}</Text>
                 </Box>
                 <Box>
-                    <Text>Status: Completed</Text>
+                    <Text>Status: {ride.rideStatus}</Text>
                 </Box>
                 <Box>
-                    <Text>Date: 13 Jan 2020</Text>
+                    <Text>Date: {ride.createdAt}</Text>
                 </Box>
             </CardBody>
             <CardFooter>

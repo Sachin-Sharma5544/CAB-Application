@@ -35,9 +35,15 @@ exports.postRide = async (req, res, next) => {
     }
 };
 
-exports.getRide = async (req, res, next) => {
-    const drivers = await Driver.find({ status: "available" });
-    res.send(drivers);
+exports.getRides = async (req, res, next) => {
+    try {
+        const rides = await Ride.find({ customer: req.user._id });
+        console.log(rides);
+
+        res.status(200).send(rides);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
 };
 
 exports.getAvailableRides = async (req, res, next) => {
