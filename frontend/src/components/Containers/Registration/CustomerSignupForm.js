@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "./Registration.css";
 import SignupFormComponent from "../../Utility/Forms/Signup Form/SignupFormComponent";
 import useCustomerSignup from "../../../hooks/utility hooks/Signup/useCustomerSignup";
+import { useToast } from "@chakra-ui/react";
 
 const CustomerSignupForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { signup, isLoading, error } = useCustomerSignup();
+    const toast = useToast();
 
     const emailChangeHandler = (e) => {
         setEmail(e.target.value);
@@ -18,9 +20,14 @@ const CustomerSignupForm = () => {
 
     // this part is working now
     const signupBtnClickHandler = async () => {
-        console.log("Signup button clicked");
-        console.log(email, password);
         await signup(email, password);
+        toast({
+            title: "Your registration is completed",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+        });
     };
 
     return (

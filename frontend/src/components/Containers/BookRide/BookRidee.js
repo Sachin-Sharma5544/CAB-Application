@@ -163,6 +163,13 @@ const BookRide = (props) => {
     const handleBookRide = async () => {
         //This ensures customer user are allowed to book a ride
         if (!custUser) {
+            toast({
+                title: "Please login to continue booking",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            });
             return navigate("/customer/login");
         }
 
