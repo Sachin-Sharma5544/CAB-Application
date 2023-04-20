@@ -8,6 +8,7 @@ import { CustomerAuthContextProvider } from "./context/CustomerAuthContext";
 import { DriverAuthContextProvider } from "./context/DriverAuthContext";
 import { VehicleContextProvider } from "./context/VehicleContext";
 import { CustomerRideContextProvider } from "./context/CustomerRideContext";
+import { DriverBookingContextProvider } from "./context/DriverBookingContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,9 +18,11 @@ root.render(
                 <VehicleContextProvider>
                     <PickuoLocationContextProvider>
                         <DropLocationContextProvider>
-                            <CustomerRideContextProvider>
-                                <App />
-                            </CustomerRideContextProvider>
+                            <DriverBookingContextProvider>
+                                <CustomerRideContextProvider>
+                                    <App />
+                                </CustomerRideContextProvider>
+                            </DriverBookingContextProvider>
                         </DropLocationContextProvider>
                     </PickuoLocationContextProvider>
                 </VehicleContextProvider>
