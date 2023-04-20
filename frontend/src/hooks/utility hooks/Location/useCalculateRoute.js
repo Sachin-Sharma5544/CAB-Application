@@ -33,7 +33,6 @@ const useCalculateRoute = (pickupLocation, dropLocation) => {
             setDuration("");
         }
     }, [pickupLocation, dropLocation]);
-    console.log(distance, duration, directionsResponse);
 
     return { distance, duration, directionsResponse };
 };

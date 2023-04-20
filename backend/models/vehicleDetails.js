@@ -23,6 +23,9 @@ const vehicleSchema = new Schema(
             type: String,
             required: true,
         },
+        user_id: {
+            type: String,
+        },
     },
     { timestamps: true }
 );
@@ -32,7 +35,8 @@ vehicleSchema.statics.addVehicle = async function (
     type,
     number,
     regCerNum,
-    color
+    color,
+    userId
 ) {
     if (!company || !type || !number || !regCerNum || !color) {
         console.log(company, type, number, regCerNum, color);
@@ -50,6 +54,7 @@ vehicleSchema.statics.addVehicle = async function (
         vehicleNum: number,
         regCertNum: regCerNum,
         vehicleColor: color,
+        user_id: userId,
     });
 
     return addedVeh;

@@ -12,13 +12,15 @@ exports.getVehicles = async (req, res, next) => {
 
 exports.postVehicle = async (req, res, next) => {
     const { company, vehType, number, rcNumber, color } = req.body;
+
     try {
         const addedVeh = await Vehicle.addVehicle(
             company,
             vehType,
             number,
             rcNumber,
-            color
+            color,
+            req.user._id
         );
         res.status(200).send({ addedVeh });
     } catch (error) {

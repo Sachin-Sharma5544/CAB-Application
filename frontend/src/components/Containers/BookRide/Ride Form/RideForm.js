@@ -3,6 +3,7 @@ import Aux from "../../../HOC/AuxComponent";
 import DropdownElement from "../../../Utility/Dropdowns/DropdownElement";
 import ButtonElement from "../../../Utility/Buttons/ButtonElement";
 import BoxContainer from "../../../HOC/BoxContainerComp";
+import { Text } from "@chakra-ui/react";
 
 /* 
 This component to be refactored or changed to call input fields seperately because when
@@ -24,6 +25,7 @@ const RideForm = (props) => {
         dropPlaceChangedHandler,
         pickupPlaceChangedHandler,
         selectRidetypeHandler,
+        rideBookErr,
     } = props;
 
     return (
@@ -58,6 +60,13 @@ const RideForm = (props) => {
                     Book Ride
                 </ButtonElement>
             </BoxContainer>
+
+            {rideBookErr && (
+                <Text mt={5}>
+                    We are sorry!! Your ride booking is not confirmed, Please
+                    retry.
+                </Text>
+            )}
         </Aux>
     );
 };

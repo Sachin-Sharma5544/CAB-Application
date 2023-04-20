@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+// const server = require("http").createServer(app);
+// const io = require("socket.io")(server);
 
 //Routes import
 
@@ -42,17 +42,7 @@ app.use("/ride", rideRoute);
 
 mongoose.connect(process.env.MONGO_DB_URL).then(() => {
     console.log("Database connected successfully");
-    server.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT, () => {
         console.log(`Backend server running on port ${process.env.PORT}`);
     });
 });
-
-//Socket Setup
-io.on("connection", (socket) => {
-    console.log("A client connected");
-    socket.on("disconnect", () => {
-        console.log("Client disconnected");
-    });
-});
-
-module.exports = server;

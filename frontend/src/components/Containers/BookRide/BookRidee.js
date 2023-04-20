@@ -10,6 +10,8 @@ import { usePickupContext } from "../../../hooks/context hooks/Location/usePicku
 import { useNavigate } from "react-router-dom";
 import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
 import useWhatsApp from "../../../hooks/utility hooks/Whatsapp/useWhatsApp";
+import useSearchCabs from "../../../hooks/utility hooks/Search Cabs/useSearchCabs";
+import useCalculateRoute from "../../../hooks/utility hooks/Location/useCalculateRoute";
 
 const pickupState = {
     name: "Pickup",
@@ -32,7 +34,9 @@ const dropState = {
 const BookRide = (props) => {
     //Hooks import
     const { currPos } = useCurrentLocation();
-    const { sendWhatsappMessage } = useWhatsApp();
+    const { sendCustomerWhatsappMessage, sendDriverWhatsappMessage } =
+        useWhatsApp();
+    const { searchCabs } = useSearchCabs();
 
     //Context
     const { dispatch: dropDispatch } = useDropContext();
@@ -46,6 +50,14 @@ const BookRide = (props) => {
     const [pickupLocationAuto, setPickupLocationAuto] = useState("");
     const [dropLocationAuto, setDropLocationAuto] = useState("");
     const [rideType, setRideType] = useState("");
+
+    const [rideBookCnf, setRideBookCnf] = useState(null);
+    const [rideBookErr, setRideBookErr] = useState(null);
+
+    // const { distance, duration } = useCalculateRoute(
+    //     pickupLocation,
+    //     dropLocation
+    // );
 
     // Navigate
     const navigate = useNavigate();
@@ -64,6 +76,7 @@ const BookRide = (props) => {
     //select rideType Handler
     const selectRidetypeHandler = (e) => {
         setRideType(e.target.value);
+        setRideBookErr(null);
     };
 
     // Pickup  change handler
@@ -76,6 +89,7 @@ const BookRide = (props) => {
         const updatedPickupLocation = { ...pickupLocation };
         updatedPickupLocation.value = e.target.value;
         setPickupLocation(updatedPickupLocation);
+        setRideBookErr(null);
     };
 
     // Destination change handler
@@ -88,6 +102,7 @@ const BookRide = (props) => {
         const updatedDropLocation = { ...dropLocation };
         updatedDropLocation.value = e.target.value;
         setDropLocation(updatedDropLocation);
+        setRideBookErr(null);
     };
 
     const dropPlaceChangedHandler = () => {
@@ -109,6 +124,7 @@ const BookRide = (props) => {
                     lng: updatedDropLocation.lng,
                 },
             });
+            setRideBookErr(null);
         } catch (error) {
             console.log(error.message);
         }
@@ -133,22 +149,26 @@ const BookRide = (props) => {
                     lng: updatedPickupLocation.lng,
                 },
             });
+            setRideBookErr(null);
         } catch (error) {
             console.log(error.message);
         }
     };
 
-    const handleSearchClick = () => {
-        // const source = bookRideFields[0].value;
-        // const destination = bookRideFields[1].value;
-        // console.log(source, destination);
-        sendWhatsappMessage();
+    const handleSearchClick = async () => {
+        if (!pickupLocation.value === "" || dropLocation.value === "") {
+            console.log("I am returning from here");
+            return;
+        }
+
+        await searchCabs();
     };
 
     const handleBookRide = async () => {
         console.log("Book ride button clicked");
         console.log(pickupLocation, dropLocation, rideType);
 
+        //This ensures customer user are allowed to book a ride
         if (!custUser) {
             console.log("Customer user not logged in");
             return navigate("/customer/login");
@@ -159,24 +179,31 @@ const BookRide = (props) => {
             return;
         }
 
-        //This ensures customer user are allowed to book a ride
-        if (!custUser) {
-            console.log("Customer user not logged in");
-            return navigate("/customer/login");
-        }
-
-        const response = await fetch("http://localhost:3501/rental-ride/", {
+        const response = await fetch("http://localhost:3501/ride/", {
             method: "POST",
             body: JSON.stringify({
                 pickup: pickupLocation.value,
                 drop: dropLocation.value,
+                // distance: distance,
+                rideType: rideType,
             }),
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${custUser.token}`,
             },
         });
 
         const json = await response.json();
+
+        if (!response.ok) {
+            setRideBookErr(json.error);
+            sendCustomerWhatsappMessage();
+        }
+
+        if (response.ok) {
+            sendCustomerWhatsappMessage();
+            sendDriverWhatsappMessage();
+        }
         console.log(json);
     };
 
@@ -202,9 +229,11 @@ const BookRide = (props) => {
                         dropPlaceChangedHandler={dropPlaceChangedHandler}
                         pickupPlaceChangedHandler={pickupPlaceChangedHandler}
                         selectRidetypeHandler={selectRidetypeHandler}
+                        rideBookErr={rideBookErr}
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>
+
             {(pickupLocation.value || dropLocation.value) && (
                 <BoxContainer className="RideInfo__Map">
                     <GoogleMaps setMap={setMap}></GoogleMaps>
