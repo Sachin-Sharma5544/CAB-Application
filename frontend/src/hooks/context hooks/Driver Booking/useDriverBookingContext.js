@@ -8,6 +8,8 @@ const useDriverBookingContext = () => {
             "useDriverBookingContext must me used inside DriverBookingContextProvider"
         );
     }
+
+    return context;
 };
 
 export default useDriverBookingContext;
