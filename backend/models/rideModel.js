@@ -40,12 +40,20 @@ rideSchema.statics.addRide = async function (
     driver_id,
     rideDuration = ""
 ) {
-    if (!pickup || !drop || !rideType) {
-        throw Error("Please fill in all the fields");
+    if (!pickup) {
+        throw Error("Please enter pickup location");
+    }
+
+    if (!drop) {
+        throw Error("Please enter drop location");
+    }
+
+    if (!rideType) {
+        throw Error("Please select Ride Type ");
     }
 
     if (!customer_id) {
-        throw Error("Unauthorised to book a ride");
+        throw Error("Customer is not authorised to book a ride");
     }
 
     if (!driver_id) {

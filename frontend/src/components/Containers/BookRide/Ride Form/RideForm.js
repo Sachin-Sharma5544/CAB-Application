@@ -25,7 +25,6 @@ const RideForm = (props) => {
         dropPlaceChangedHandler,
         pickupPlaceChangedHandler,
         selectRidetypeHandler,
-        rideBookErr,
     } = props;
 
     return (
@@ -60,13 +59,6 @@ const RideForm = (props) => {
                     Book Ride
                 </ButtonElement>
             </BoxContainer>
-
-            {rideBookErr && (
-                <Text mt={5}>
-                    We are sorry!! Your ride booking is not confirmed, Please
-                    retry.
-                </Text>
-            )}
         </Aux>
     );
 };

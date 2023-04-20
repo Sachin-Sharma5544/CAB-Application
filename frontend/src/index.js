@@ -7,6 +7,7 @@ import { PickuoLocationContextProvider } from "./context/PickupLocationContext";
 import { CustomerAuthContextProvider } from "./context/CustomerAuthContext";
 import { DriverAuthContextProvider } from "./context/DriverAuthContext";
 import { VehicleContextProvider } from "./context/VehicleContext";
+import { CustomerRideContextProvider } from "./context/CustomerRideContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,9 +17,9 @@ root.render(
                 <VehicleContextProvider>
                     <PickuoLocationContextProvider>
                         <DropLocationContextProvider>
-                            {/* <App /> */}
-
-                            <App />
+                            <CustomerRideContextProvider>
+                                <App />
+                            </CustomerRideContextProvider>
                         </DropLocationContextProvider>
                     </PickuoLocationContextProvider>
                 </VehicleContextProvider>

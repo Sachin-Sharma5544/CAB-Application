@@ -5,39 +5,44 @@ import React, { useEffect, useState } from "react";
 import { SimpleGrid, CircularProgress } from "@chakra-ui/react";
 import RideCardComponent from "../../Utility/Card/Customer Ride Card/RideCardComponent";
 import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
+import useCustomerRideContext from "../../../hooks/context hooks/Customer Ride/useCustomerRideContext";
+import useFetchRides from "../../../hooks/utility hooks/Customer Ride/useFetchRides";
 
 const CustomerRideDetails = () => {
-    const [customerRides, setCustomerRides] = useState(null);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const { ride: customerRides, dispatch } = useCustomerRideContext();
+    const { error, isLoading } = useFetchRides(dispatch);
 
-    const { user: custUser } = useCustomerAuthContext();
+    // const [customerRides, setCustomerRides] = useState(null);
+    // const [error, setError] = useState(null);
+    // const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchRideDetails = async () => {
-            const response = await fetch("http://localhost:3501/ride", {
-                headers: {
-                    Authorization: `Bearer ${custUser.token}`,
-                },
-            });
+    // const { user: custUser } = useCustomerAuthContext();
 
-            const json = await response.json();
+    // useEffect(() => {
+    //     const fetchRideDetails = async () => {
+    //         const response = await fetch("http://localhost:3501/ride", {
+    //             headers: {
+    //                 Authorization: `Bearer ${custUser.token}`,
+    //             },
+    //         });
 
-            console.log(json);
+    //         const json = await response.json();
 
-            if (!response.ok) {
-                setIsLoading(false);
-                setError(json.error);
-            }
+    //         console.log(json);
 
-            if (response.ok) {
-                setIsLoading(false);
-                setError(null);
-                setCustomerRides(json);
-            }
-        };
-        fetchRideDetails();
-    }, [setCustomerRides]);
+    //         if (!response.ok) {
+    //             setIsLoading(false);
+    //             setError(json.error);
+    //         }
+
+    //         if (response.ok) {
+    //             setIsLoading(false);
+    //             setError(null);
+    //             setCustomerRides(json);
+    //         }
+    //     };
+    //     fetchRideDetails();
+    // }, [setCustomerRides]);
 
     return (
         <div className="CustomerRideDetails__Page">
