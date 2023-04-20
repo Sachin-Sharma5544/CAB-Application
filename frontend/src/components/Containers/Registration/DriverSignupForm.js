@@ -5,6 +5,8 @@ import useDriverSignup from "../../../hooks/utility hooks/Signup/useDriverSignup
 import { useToast } from "@chakra-ui/react";
 
 const DriverSignupForm = () => {
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { signup, isLoading, error } = useDriverSignup();
@@ -18,9 +20,17 @@ const DriverSignupForm = () => {
         setPassword(e.target.value);
     };
 
+    const fnameChangeHandler = (e) => {
+        setFname(e.target.value);
+    };
+
+    const lnameChangeHandler = (e) => {
+        setLname(e.target.value);
+    };
+
     // this part is working now
     const signupBtnClickHandler = async () => {
-        await signup(email, password);
+        await signup(fname, lname, email, password);
         toast({
             title: "Your registration is completed",
             status: "success",
@@ -39,6 +49,12 @@ const DriverSignupForm = () => {
                     passwordValue={password}
                     mailChanhged={emailChangeHandler}
                     passwordChanged={passwordChangeHandler}
+                    fnameChanged={fnameChangeHandler}
+                    lnameChanged={lnameChangeHandler}
+                    fnameValue={fname}
+                    lnameValue={lname}
+                    idFname="firstname"
+                    idLname="lastname"
                     emailType="email"
                     idEmail="email"
                     idPassword="password"

@@ -6,6 +6,14 @@ const Schema = mongoose.Schema;
 
 const driverSchema = new Schema(
     {
+        firstName: {
+            type: String,
+            required: true,
+        },
+        lastName: {
+            type: String,
+            required: true,
+        },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         status: { type: String },
@@ -32,8 +40,8 @@ driverSchema.statics.login = async function (email, password) {
     return user;
 };
 
-driverSchema.statics.signup = async function (email, password) {
-    if (!email || !password) {
+driverSchema.statics.signup = async function (fname, lname, email, password) {
+    if (!fname || !lname || !email || !password) {
         throw Error("Please fill in all the fields");
     }
 
@@ -53,6 +61,8 @@ driverSchema.statics.signup = async function (email, password) {
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(password, salt);
     const user = await this.create({
+        firstName: fname,
+        lastName: lname,
         email: email,
         password: hashPass,
         status: "available",

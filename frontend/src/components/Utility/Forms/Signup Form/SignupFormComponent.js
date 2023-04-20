@@ -12,6 +12,22 @@ const SignupFormComponent = (props) => {
     return (
         <>
             <FormControl>
+                <FormLabel>First Name</FormLabel>
+                <Input
+                    type="text"
+                    id={props.idFname}
+                    value={props.fnameValue}
+                    onChange={props.fnameChanged}
+                />
+                <p></p>
+                <FormLabel>Last Name</FormLabel>
+                <Input
+                    type="text"
+                    id={props.idLname}
+                    value={props.lnameValue}
+                    onChange={props.lnameChanged}
+                />
+                <p></p>
                 <FormLabel>Email address</FormLabel>
                 <Input
                     type={props.emailType}

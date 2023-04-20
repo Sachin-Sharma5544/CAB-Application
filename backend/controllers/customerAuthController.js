@@ -20,12 +20,18 @@ exports.postCustomerLogin = async (req, res) => {
 };
 
 exports.postCustomerSignup = async (req, res) => {
-    const { email, password } = req.body;
+    const { fname, lname, email, password } = req.body;
 
     try {
-        const user = await Customer.signup(email, password);
+        const user = await Customer.signup(fname, lname, email, password);
         const token = createToken(user._id);
-        res.status(200).send({ email, token, userType: "customer" });
+        res.status(200).send({
+            fname,
+            lname,
+            email,
+            token,
+            userType: "customer",
+        });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }

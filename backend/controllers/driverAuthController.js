@@ -22,12 +22,18 @@ exports.postDriverLogin = async (req, res) => {
 };
 
 exports.postDriverSignup = async (req, res) => {
-    const { email, password } = req.body;
+    const { fname, lname, email, password } = req.body;
 
     try {
-        const user = await Driver.signup(email, password);
+        const user = await Driver.signup(fname, lname, email, password);
         const token = createToken(user._id);
-        res.status(200).send({ email, token, userType: "driver" });
+        res.status(200).send({
+            fname,
+            lname,
+            email,
+            token,
+            userType: "driver",
+        });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }

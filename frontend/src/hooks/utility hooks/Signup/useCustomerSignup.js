@@ -7,13 +7,13 @@ const useCustomerSignup = () => {
     const [error, setError] = useState(null);
     const { dispatch } = useCustomerAuthContext();
 
-    const signup = async (email, password) => {
+    const signup = async (fname, lname, email, password) => {
         setIsLoading(true);
         setError(false);
 
         const response = await fetch("http://localhost:3501/customer/signup", {
             method: "POST",
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ fname, lname, email, password }),
             headers: {
                 "Content-Type": "application/json",
             },

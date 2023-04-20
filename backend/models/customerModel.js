@@ -6,6 +6,14 @@ const Schema = mongoose.Schema;
 
 const customerSchema = new Schema(
     {
+        firstName: {
+            type: String,
+            required: true,
+        },
+        lastName: {
+            type: String,
+            required: true,
+        },
         email: {
             type: String,
             required: true,
@@ -15,12 +23,13 @@ const customerSchema = new Schema(
             type: String,
             required: true,
         },
+        phoneNumber: { type: String },
     },
     { timestamps: true }
 );
 
-customerSchema.statics.signup = async function (email, password) {
-    if (!email || !password) {
+customerSchema.statics.signup = async function (fname, lname, email, password) {
+    if (!fname || !lname || !email || !password) {
         throw Error("Please fill in all the fields");
     }
 
@@ -39,7 +48,12 @@ customerSchema.statics.signup = async function (email, password) {
 
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(password, salt);
-    const user = await this.create({ email: email, password: hashPass });
+    const user = await this.create({
+        firstName: fname,
+        lastName: lname,
+        email: email,
+        password: hashPass,
+    });
     return user;
 };
 
