@@ -10,14 +10,14 @@ const app = express();
 
 //Routes import
 
-const rentalRideRoute = require("./routes/rentalRideRoute");
+const driverBookingRoute = require("./routes/driverBookingRoute");
 const carRideRoute = require("./routes/carRideRoute");
 const bikeRideRoute = require("./routes/bikeRideRoute");
 
 const customerAuthRoute = require("./routes/customerAuthRoute");
 const driverAuthRoute = require("./routes/driverAuthRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
-const rideRoute = require("./routes/rideRoute");
+const customerRideRoute = require("./routes/customerRideRoute");
 
 app.use((req, res, next) => {
     console.log(req.method, req.path);
@@ -29,7 +29,6 @@ app.use(express.json());
 app.use(cors());
 
 //This is used for testing booking model
-app.use("/rental-ride", rentalRideRoute);
 
 app.use("/car-ride", carRideRoute);
 app.use("/bike-ride", bikeRideRoute);
@@ -38,7 +37,8 @@ app.use("/bike-ride", bikeRideRoute);
 app.use("/vehicle", vehicleRoute);
 app.use("/customer", customerAuthRoute);
 app.use("/driver", driverAuthRoute);
-app.use("/ride", rideRoute);
+app.use("/ride", customerRideRoute);
+app.use("/bookings", driverBookingRoute);
 
 mongoose.connect(process.env.MONGO_DB_URL).then(() => {
     console.log("Database connected successfully");

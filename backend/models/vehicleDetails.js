@@ -23,7 +23,7 @@ const vehicleSchema = new Schema(
             type: String,
             required: true,
         },
-        user_id: {
+        driverId: {
             type: String,
         },
     },
@@ -54,7 +54,7 @@ vehicleSchema.statics.addVehicle = async function (
         vehicleNum: number,
         regCertNum: regCerNum,
         vehicleColor: color,
-        user_id: userId,
+        driverId: userId,
     });
 
     return addedVeh;
