@@ -224,17 +224,10 @@ const BookRide = (props) => {
 
     const autosetPickupLocation = () => {
         const updatedPickupLocation = { ...pickupLocation };
-        console.log("clicked to set pickup location");
-
-        console.log(" Before update");
-        console.log(pickupLocation);
-        console.log(currentAddress);
-        console.log(updatedPickupLocation);
         updatedPickupLocation.value = currentAddress.address;
         updatedPickupLocation.lat = currentAddress.latitude;
         updatedPickupLocation.lng = currentAddress.longitude;
         setPickupLocation(updatedPickupLocation);
-
         pickDispatch({
             type: "SET_PICKUP",
             payload: {
@@ -243,10 +236,6 @@ const BookRide = (props) => {
                 lng: updatedPickupLocation.lng,
             },
         });
-        console.log(" After update");
-        console.log(pickupLocation);
-        console.log(currentAddress);
-        console.log(updatedPickupLocation);
     };
 
     return (
