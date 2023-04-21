@@ -25,6 +25,7 @@ const RideForm = (props) => {
         dropPlaceChangedHandler,
         pickupPlaceChangedHandler,
         selectRidetypeHandler,
+        autosetPickupLocation,
     } = props;
 
     return (
@@ -52,6 +53,7 @@ const RideForm = (props) => {
                 variant="outline"
                 className="RideForm__GPS"
                 position="absolute"
+                onClick={autosetPickupLocation}
             />
             <DropdownElement
                 placeholder="Ride Type"

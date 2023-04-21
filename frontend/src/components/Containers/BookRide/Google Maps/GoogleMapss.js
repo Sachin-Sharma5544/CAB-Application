@@ -7,10 +7,13 @@ import GoogleMapMarker from "./map marker/GoogleMapMarker";
 import usePickupLocation from "../../../../hooks/utility hooks/Location/usePickupLocation";
 import useDropLocation from "../../../../hooks/utility hooks/Location/useDropLocation";
 import useCalculateRoute from "../../../../hooks/utility hooks/Location/useCalculateRoute";
+import useCurrentAddress from "../../../../hooks/utility hooks/Location/useCurrentAddress";
 
 const GoogleMaps = (props) => {
     const { currPos } = useCurrentLocation();
     const isLoaded = useLoadGoogleMaps();
+
+    const { currentAddress, error } = useCurrentAddress();
 
     const { pickupLocation, pickupPosition } = usePickupLocation();
     const { dropLocation, dropPosition } = useDropLocation();
@@ -39,7 +42,7 @@ const GoogleMaps = (props) => {
                 <GoogleMap
                     center={currPos}
                     mapContainerStyle={{ width: "100%", height: "100%" }}
-                    zoom={12}
+                    zoom={15}
                     onLoad={(map) => {
                         props.setMap(map);
                     }}

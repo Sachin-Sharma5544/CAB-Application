@@ -34,8 +34,6 @@ const useCurrentAddress = () => {
         );
     }, [isMapLoaded]);
 
-    console.log(currentAddress, "use current address");
-
     return { currentAddress, error };
 };
 

@@ -40,6 +40,7 @@ const BookRide = (props) => {
     const { sendCustomerWhatsappMessage, sendDriverWhatsappMessage } =
         useWhatsApp();
     const { searchCabs } = useSearchCabs();
+    const { currentAddress, error } = useCurrentAddress();
 
     //Context
     const { dispatch: dropDispatch } = useDropContext();
@@ -61,10 +62,6 @@ const BookRide = (props) => {
     );
 
     console.log(distance, duration);
-
-    const { currentAddress, error } = useCurrentAddress();
-
-    console.log(currentAddress);
 
     //Toast
     const toast = useToast();
@@ -225,6 +222,33 @@ const BookRide = (props) => {
         console.log(json);
     };
 
+    const autosetPickupLocation = () => {
+        const updatedPickupLocation = { ...pickupLocation };
+        console.log("clicked to set pickup location");
+
+        console.log(" Before update");
+        console.log(pickupLocation);
+        console.log(currentAddress);
+        console.log(updatedPickupLocation);
+        updatedPickupLocation.value = currentAddress.address;
+        updatedPickupLocation.lat = currentAddress.latitude;
+        updatedPickupLocation.lng = currentAddress.longitude;
+        setPickupLocation(updatedPickupLocation);
+
+        pickDispatch({
+            type: "SET_PICKUP",
+            payload: {
+                value: updatedPickupLocation.value,
+                lat: updatedPickupLocation.lat,
+                lng: updatedPickupLocation.lng,
+            },
+        });
+        console.log(" After update");
+        console.log(pickupLocation);
+        console.log(currentAddress);
+        console.log(updatedPickupLocation);
+    };
+
     return (
         <BoxContainer className="RideInfo__Wrapper">
             <BoxContainer className="RideInfo__Card">
@@ -247,6 +271,7 @@ const BookRide = (props) => {
                         dropPlaceChangedHandler={dropPlaceChangedHandler}
                         pickupPlaceChangedHandler={pickupPlaceChangedHandler}
                         selectRidetypeHandler={selectRidetypeHandler}
+                        autosetPickupLocation={autosetPickupLocation}
                     ></RideForm>
                 </BoxContainer>
             </BoxContainer>
