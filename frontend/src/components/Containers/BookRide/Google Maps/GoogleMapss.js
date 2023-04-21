@@ -26,6 +26,10 @@ const GoogleMaps = (props) => {
         directionsResponse = null;
     }
 
+    if (!currentAddress) {
+        return;
+    }
+
     if (!isLoaded) {
         return (
             <CircularProgress
@@ -40,7 +44,10 @@ const GoogleMaps = (props) => {
         <Aux>
             {isLoaded && (
                 <GoogleMap
-                    center={currPos}
+                    center={{
+                        lat: currentAddress.latitude,
+                        lng: currentAddress.longitude,
+                    }}
                     mapContainerStyle={{ width: "100%", height: "100%" }}
                     zoom={15}
                     onLoad={(map) => {
