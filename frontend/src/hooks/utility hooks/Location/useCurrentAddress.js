@@ -1,34 +1,42 @@
-import React, { useState, useEffect } from "react";
-import useCurrentLocation from "./useCurrentLocation";
+import React, { useEffect, useState } from "react";
+import useLoadGoogleMaps from "../Google Map/useLoadGoogleMaps";
 
-const useCurrentAddress = (lat, lng) => {
-    const { currPos } = useCurrentLocation();
-    const [currAddress, setCurrAddress] = useState();
+const useCurrentAddress = () => {
+    const [currentAddress, setCurrentAddress] = useState(null);
+    const [error, setError] = useState(null);
+
+    const isMapLoaded = useLoadGoogleMaps();
 
     useEffect(() => {
-        if (typeof google === "undefined") {
+        if (!isMapLoaded) {
+            setError("Map couldn't be loaded");
             return;
         }
-        // eslint-disable-next-line no-undef
-        const geocoder = new google.maps.Geocoder();
 
-        geocoder.geocode(
-            { location: { lat: currPos.lat, lng: currPos.lng } },
-            (results, status) => {
-                if (status === "OK") {
-                    if (results[0]) {
-                        setCurrAddress(results[0].formatted_address);
-                    } else {
-                        setCurrAddress("Address not found");
+        const geocoder = new window.google.maps.Geocoder();
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                geocoder.geocode(
+                    { location: { lat: latitude, lng: longitude } },
+                    (results, status) => {
+                        if (status === "OK") {
+                            const address = results[0].formatted_address;
+                            setCurrentAddress({ latitude, longitude, address });
+                        } else {
+                            setError(status);
+                        }
                     }
-                } else {
-                    setCurrAddress("Geocoder failed due to: " + status);
-                }
-            }
+                );
+            },
+            (error) => setError(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
         );
-    }, []);
+    }, [isMapLoaded]);
 
-    console.log(currAddress);
+    console.log(currentAddress, "use current address");
+
+    return { currentAddress, error };
 };
 
 export default useCurrentAddress;

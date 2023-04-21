@@ -62,7 +62,9 @@ const BookRide = (props) => {
 
     console.log(distance, duration);
 
-    // useCurrentAddress(20, 49);
+    const { currentAddress, error } = useCurrentAddress();
+
+    console.log(currentAddress);
 
     //Toast
     const toast = useToast();

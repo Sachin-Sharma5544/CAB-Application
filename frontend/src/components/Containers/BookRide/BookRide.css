@@ -54,6 +54,7 @@
 
 .RideInfo__Input {
     width: 100%;
+    
 }
 
 .RideInfo__InputGroup > div:nth-child(2) {
@@ -68,4 +69,13 @@
     position: absolute;
     top: 45%;
     left: 50%;
+}
+
+
+.RideForm__GPS {
+    position: absolute;
+    right:10px;
+    top: 234px;
+    border: none;
+    padding: 4px;
 }

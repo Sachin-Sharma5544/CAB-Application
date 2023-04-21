@@ -8,6 +8,10 @@ import {
     Text,
     Button,
     Box,
+    Flex,
+    Spacer,
+    Grid,
+    GridItem,
 } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
 
@@ -44,7 +48,14 @@ const BookingCardComponent = (props) => {
                 </Box>
             </CardBody>
             <CardFooter>
-                <Button>View here</Button>
+                <Grid templateColumns="repeat(2, 1fr)" gap={10}>
+                    <GridItem>
+                        <Button>View here</Button>
+                    </GridItem>
+                    <GridItem>
+                        <Button>View here</Button>
+                    </GridItem>
+                </Grid>
             </CardFooter>
         </Card>
     );

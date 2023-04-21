@@ -3,8 +3,8 @@ import Aux from "../../../HOC/AuxComponent";
 import DropdownElement from "../../../Utility/Dropdowns/DropdownElement";
 import ButtonElement from "../../../Utility/Buttons/ButtonElement";
 import BoxContainer from "../../../HOC/BoxContainerComp";
-import { Text } from "@chakra-ui/react";
-
+import { Text, IconButton } from "@chakra-ui/react";
+import { FaMapMarkerAlt } from "react-icons/fa";
 /* 
 This component to be refactored or changed to call input fields seperately because when
 we are using map method to create input form, autocomplete considers second field for
@@ -43,6 +43,15 @@ const RideForm = (props) => {
                 Changed={pickupLocationChangeHandler}
                 setAutocomplete={setPickupLocationAuto}
                 placeChangedHandler={pickupPlaceChangedHandler}
+                className="RideForm__pickup"
+            />
+            <IconButton
+                aria-label="Get Location"
+                icon={<FaMapMarkerAlt />}
+                size="md"
+                variant="outline"
+                className="RideForm__GPS"
+                position="absolute"
             />
             <DropdownElement
                 placeholder="Ride Type"
