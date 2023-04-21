@@ -8,6 +8,9 @@ const useCalculateRoute = (pickupLocation, dropLocation) => {
     const [duration, setDuration] = useState("");
 
     useEffect(() => {
+        if (typeof google === "undefined") {
+            return;
+        }
         // eslint-disable-next-line no-undef
         const directionsService = new google.maps.DirectionsService();
 

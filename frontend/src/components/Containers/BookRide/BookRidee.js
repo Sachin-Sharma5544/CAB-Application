@@ -13,6 +13,7 @@ import useWhatsApp from "../../../hooks/utility hooks/Whatsapp/useWhatsApp";
 import useSearchCabs from "../../../hooks/utility hooks/Search Cabs/useSearchCabs";
 import useCalculateRoute from "../../../hooks/utility hooks/Location/useCalculateRoute";
 import { useToast } from "@chakra-ui/react";
+import useLoadGoogleMaps from "../../../hooks/utility hooks/Google Map/useLoadGoogleMaps";
 
 const pickupState = {
     name: "Pickup",
@@ -45,6 +46,7 @@ const BookRide = (props) => {
     const { user: custUser } = useCustomerAuthContext();
 
     //State
+    // const isLoaded = useLoadGoogleMaps();
     const [map, setMap] = useState(null);
     const [pickupLocation, setPickupLocation] = useState(pickupState);
     const [dropLocation, setDropLocation] = useState(dropState);
@@ -52,10 +54,10 @@ const BookRide = (props) => {
     const [dropLocationAuto, setDropLocationAuto] = useState("");
     const [rideType, setRideType] = useState("");
 
-    // const { distance, duration } = useCalculateRoute(
-    //     pickupLocation,
-    //     dropLocation
-    // );
+    const { distance, duration } = useCalculateRoute(
+        pickupLocation,
+        dropLocation
+    );
 
     //Toast
     const toast = useToast();
@@ -164,7 +166,7 @@ const BookRide = (props) => {
         //This ensures customer user are allowed to book a ride
         if (!custUser) {
             toast({
-                title: "Please login to continue booking",
+                title: "Please login as customer to continue booking",
                 status: "error",
                 duration: 5000,
                 isClosable: true,

@@ -1,7 +1,16 @@
-import { InputGroup, InputLeftAddon, Input, VStack } from "@chakra-ui/react";
+import {
+    InputGroup,
+    InputLeftAddon,
+    Input,
+    VStack,
+    InputRightElement,
+    Button,
+} from "@chakra-ui/react";
 import "./inputFieldGroup.css";
 import useLoadGoogleMaps from "../../../hooks/utility hooks/Google Map/useLoadGoogleMaps";
 import { Autocomplete } from "@react-google-maps/api";
+
+import Aux from "../../HOC/AuxComponent";
 
 const InputFieldGroups = (props) => {
     const { setAutocomplete, placeChangedHandler, field } = props;
@@ -21,13 +30,15 @@ const InputFieldGroups = (props) => {
                         }}
                         onPlaceChanged={placeChangedHandler}
                     >
-                        <Input
-                            className="RideInfo__Input"
-                            type={field.type}
-                            placeholder={field.placeholder}
-                            onChange={props.Changed}
-                            value={field.value}
-                        />
+                        <Aux>
+                            <Input
+                                className="RideInfo__Input"
+                                type={field.type}
+                                placeholder={field.placeholder}
+                                onChange={props.Changed}
+                                value={field.value}
+                            />
+                        </Aux>
                     </Autocomplete>
                 </InputGroup>
             )}
