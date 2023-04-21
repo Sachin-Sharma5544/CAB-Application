@@ -9,27 +9,31 @@ import {
     Button,
     Box,
 } from "@chakra-ui/react";
-const BookingCardComponent = () => {
+const BookingCardComponent = (props) => {
+    const { booking } = props;
     return (
         <Card border="1px solid black">
             <CardHeader>
-                <Heading size="md"> Ride Details </Heading>
+                <Heading size="md"> Booking Details </Heading>
             </CardHeader>
             <CardBody>
                 <Box>
-                    <Text>Pickup Location: Karampura</Text>
+                    <Text>Pickup Location: {booking.pickupLocation}</Text>
                 </Box>
                 <Box>
-                    <Text>Drop Location: Terminal 3, Delhi Airport </Text>
+                    <Text>Drop Location: {booking.dropLocation}</Text>
                 </Box>
                 <Box>
-                    <Text>Customer Name: Aman Saxena</Text>
+                    <Text>
+                        Customer Name: {booking.customer.firstName}{" "}
+                        {booking.customer.lastName}
+                    </Text>
                 </Box>
                 <Box>
-                    <Text>Status: Completed</Text>
+                    <Text>Status: {booking.rideStatus}</Text>
                 </Box>
                 <Box>
-                    <Text>Date: 13 Jan 2020</Text>
+                    <Text>Date: {booking.updatedAt}</Text>
                 </Box>
             </CardBody>
             <CardFooter>

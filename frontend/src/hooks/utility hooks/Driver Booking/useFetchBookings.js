@@ -31,7 +31,7 @@ const useFetchBookings = (dispatch) => {
         };
 
         fetchBookingDetails();
-    });
+    }, []);
 
     return { error, isLoading };
 };

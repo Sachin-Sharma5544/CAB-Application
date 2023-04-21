@@ -12,40 +12,6 @@ const CustomerRideDetails = () => {
     const { ride: customerRides, dispatch } = useCustomerRideContext();
     const { error, isLoading } = useFetchRides(dispatch);
 
-    // const [customerRides, setCustomerRides] = useState(null);
-    // const [error, setError] = useState(null);
-    // const [isLoading, setIsLoading] = useState(true);
-
-    // const { user: custUser } = useCustomerAuthContext();
-
-    // useEffect(() => {
-    //     const fetchRideDetails = async () => {
-    //         const response = await fetch("http://localhost:3501/ride", {
-    //             headers: {
-    //                 Authorization: `Bearer ${custUser.token}`,
-    //             },
-    //         });
-
-    //         const json = await response.json();
-
-    //         console.log(json);
-
-    //         if (!response.ok) {
-    //             setIsLoading(false);
-    //             setError(json.error);
-    //         }
-
-    //         if (response.ok) {
-    //             setIsLoading(false);
-    //             setError(null);
-    //             setCustomerRides(json);
-    //         }
-    //     };
-    //     fetchRideDetails();
-    // }, [setCustomerRides]);
-
-    console.log(customerRides);
-
     return (
         <div className="CustomerRideDetails__Page">
             <h1>Customer ride details</h1>

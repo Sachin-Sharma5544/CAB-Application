@@ -8,16 +8,24 @@ import useFetchBookings from "../../../hooks/utility hooks/Driver Booking/useFet
 const DriverBookingDetails = () => {
     const { bookings, dispatch } = useDriverBookingContext();
     const { error, isLoading } = useFetchBookings(dispatch);
+    console.log(bookings);
 
     return (
         <div className="DriverBookingDetails__Page">
             <h1>Driver booking details</h1>
-            <SimpleGrid
-                spacing={4}
-                templateColumns="repeat(auto-fill, minmax(310px, 1fr))"
-            >
-                <BookingCardComponent></BookingCardComponent>
-            </SimpleGrid>
+            {bookings && (
+                <SimpleGrid
+                    spacing={4}
+                    templateColumns="repeat(auto-fill, minmax(310px, 1fr))"
+                >
+                    {bookings.map((booking) => (
+                        <BookingCardComponent
+                            key={booking._id}
+                            booking={booking}
+                        ></BookingCardComponent>
+                    ))}
+                </SimpleGrid>
+            )}
         </div>
     );
 };
