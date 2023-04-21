@@ -14,6 +14,7 @@ import useSearchCabs from "../../../hooks/utility hooks/Search Cabs/useSearchCab
 import useCalculateRoute from "../../../hooks/utility hooks/Location/useCalculateRoute";
 import { useToast } from "@chakra-ui/react";
 import useLoadGoogleMaps from "../../../hooks/utility hooks/Google Map/useLoadGoogleMaps";
+import useCurrentAddress from "../../../hooks/utility hooks/Location/useCurrentAddress";
 
 const pickupState = {
     name: "Pickup",
@@ -58,6 +59,10 @@ const BookRide = (props) => {
         pickupLocation,
         dropLocation
     );
+
+    console.log(distance, duration);
+
+    // useCurrentAddress(20, 49);
 
     //Toast
     const toast = useToast();

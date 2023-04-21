@@ -9,6 +9,8 @@ import {
     Button,
     Box,
 } from "@chakra-ui/react";
+import { formatDistanceToNow } from "date-fns";
+
 const RideCardComponent = (props) => {
     const { ride } = props;
     return (
@@ -33,7 +35,12 @@ const RideCardComponent = (props) => {
                     <Text>Status: {ride.rideStatus}</Text>
                 </Box>
                 <Box>
-                    <Text>Date: {ride.createdAt}</Text>
+                    <Text>
+                        Date:{" "}
+                        {formatDistanceToNow(new Date(ride.createdAt), {
+                            addSuffix: true,
+                        })}
+                    </Text>
                 </Box>
             </CardBody>
             <CardFooter>
