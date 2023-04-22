@@ -6,6 +6,11 @@ const sockethandler = (io) => {
             console.log("User disconnected");
         });
 
+        socket.on("Book_ride", (data) => {
+            console.log(data);
+            socket.emit("Book_rides", data);
+        });
+
         socket.on("test", (data) => {
             socket.emit("test", data);
         });

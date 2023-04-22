@@ -3,6 +3,7 @@ const Driver = require("../models/driverModel");
 const Vehicle = require("../models/vehicleDetails");
 
 exports.postRide = async (req, res, next) => {
+    const io = req.io;
     const { pickup, drop, rideType } = req.body;
     const driver = await Driver.find({ status: "available" });
 
@@ -28,6 +29,11 @@ exports.postRide = async (req, res, next) => {
             { status: "Booked" },
             { new: true }
         );
+
+        io.on("Book_ride", (data) => {
+            console.log(data);
+            io.emit("Book_rides", data);
+        });
 
         res.status(200).send({ ...ride, driverEmail: updatedDriver.email });
     } catch (error) {

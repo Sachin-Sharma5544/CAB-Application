@@ -15,6 +15,9 @@ import useCalculateRoute from "../../../hooks/utility hooks/Location/useCalculat
 import { useToast } from "@chakra-ui/react";
 import useLoadGoogleMaps from "../../../hooks/utility hooks/Google Map/useLoadGoogleMaps";
 import useCurrentAddress from "../../../hooks/utility hooks/Location/useCurrentAddress";
+import useScoket from "../../../hooks/utility hooks/Socket/useScoket";
+
+import useSocketContext from "../../../hooks/context hooks/Socket/useSocketContext";
 
 const pickupState = {
     name: "Pickup",
@@ -56,10 +59,15 @@ const BookRide = (props) => {
     const [dropLocationAuto, setDropLocationAuto] = useState("");
     const [rideType, setRideType] = useState("");
 
+    const [sk, setSk] = useState();
+
     const { distance, duration } = useCalculateRoute(
         pickupLocation,
         dropLocation
     );
+
+    useScoket();
+    const { socket } = useSocketContext();
 
     console.log(distance, duration);
 
@@ -167,6 +175,7 @@ const BookRide = (props) => {
     };
 
     const handleBookRide = async () => {
+        socket.emit("Book_ride", "This is a bakwass booking a ride");
         //This ensures customer user are allowed to book a ride
         if (!custUser) {
             toast({
@@ -222,6 +231,10 @@ const BookRide = (props) => {
         console.log(json);
     };
 
+    socket.on("Book_rides", (data) => {
+        setSk(data);
+    });
+
     const autosetPickupLocation = () => {
         const updatedPickupLocation = { ...pickupLocation };
         updatedPickupLocation.value = currentAddress.address;
@@ -270,6 +283,8 @@ const BookRide = (props) => {
                     <GoogleMaps setMap={setMap}></GoogleMaps>
                 </BoxContainer>
             )}
+
+            <h1>{sk}</h1>
         </BoxContainer>
     );
 };

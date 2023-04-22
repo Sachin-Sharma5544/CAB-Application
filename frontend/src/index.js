@@ -10,23 +10,27 @@ import { VehicleContextProvider } from "./context/VehicleContext";
 import { CustomerRideContextProvider } from "./context/CustomerRideContext";
 import { DriverBookingContextProvider } from "./context/DriverBookingContext";
 
+import { SocketContextProvider } from "./context/SocketContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <CustomerAuthContextProvider>
-            <DriverAuthContextProvider>
-                <VehicleContextProvider>
-                    <PickuoLocationContextProvider>
-                        <DropLocationContextProvider>
-                            <DriverBookingContextProvider>
-                                <CustomerRideContextProvider>
-                                    <App />
-                                </CustomerRideContextProvider>
-                            </DriverBookingContextProvider>
-                        </DropLocationContextProvider>
-                    </PickuoLocationContextProvider>
-                </VehicleContextProvider>
-            </DriverAuthContextProvider>
-        </CustomerAuthContextProvider>
+        <SocketContextProvider>
+            <CustomerAuthContextProvider>
+                <DriverAuthContextProvider>
+                    <VehicleContextProvider>
+                        <PickuoLocationContextProvider>
+                            <DropLocationContextProvider>
+                                <DriverBookingContextProvider>
+                                    <CustomerRideContextProvider>
+                                        <App />
+                                    </CustomerRideContextProvider>
+                                </DriverBookingContextProvider>
+                            </DropLocationContextProvider>
+                        </PickuoLocationContextProvider>
+                    </VehicleContextProvider>
+                </DriverAuthContextProvider>
+            </CustomerAuthContextProvider>
+        </SocketContextProvider>
     </React.StrictMode>
 );

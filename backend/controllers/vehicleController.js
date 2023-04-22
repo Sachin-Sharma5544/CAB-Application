@@ -5,7 +5,7 @@ exports.getVehicles = async (req, res, next) => {
     const io = req.io;
     try {
         const vehicles = await Vehicle.find({}).sort({ createdAt: -1 });
-        io.emit("Vehicle", "Vehicle fetching request");
+        io.emit("Vehicle", "Updated messgae");
         res.status(200).send(vehicles);
     } catch (error) {
         res.status(400).send({ error: error.message });
