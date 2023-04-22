@@ -5,11 +5,13 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 
-// const server = require("http").createServer(app);
-// const io = require("socket.io")(server);
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+//Modules Import
+const sockethandler = require("./socket handler/socketHandler");
 
 //Routes import
-
 const driverBookingRoute = require("./routes/driverBookingRoute");
 const carRideRoute = require("./routes/carRideRoute");
 const bikeRideRoute = require("./routes/bikeRideRoute");
@@ -40,9 +42,12 @@ app.use("/driver", driverAuthRoute);
 app.use("/ride", customerRideRoute);
 app.use("/bookings", driverBookingRoute);
 
+//Calling Socket handler
+sockethandler(io);
+
 mongoose.connect(process.env.MONGO_DB_URL).then(() => {
     console.log("Database connected successfully");
-    app.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
         console.log(`Backend server running on port ${process.env.PORT}`);
     });
 });

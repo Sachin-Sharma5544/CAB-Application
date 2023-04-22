@@ -16,9 +16,11 @@ import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
 import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPage";
 import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetailsPage";
 
-// import io from "socket.io-client";
+import io from "socket.io-client";
 
-// const socket = io("http://localhost:3501");
+const socket = io("http://localhost:3501", {
+    transports: ["websocket"],
+});
 
 function App() {
     const { user: custUser } = useCustomerAuthContext();
