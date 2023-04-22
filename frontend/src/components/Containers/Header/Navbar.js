@@ -4,7 +4,6 @@ import {
     Flex,
     Link as ChakraLink,
     Center,
-    Text,
 } from "@chakra-ui/react";
 import "./Navbar.css";
 import { Link as RouterLink } from "react-router-dom";
@@ -13,15 +12,31 @@ import useDriverAuthContext from "../../../hooks/context hooks/Authentication/us
 import useLogout from "../../../hooks/utility hooks/Logout/useLogout";
 import UserProfileIcon from "../../Utility/User Profile Icon/UserProfileIcon";
 import NotificationIcon from "../../Utility/Notification Icon/NotificationIcon";
+import { useState } from "react";
+import useScoket from "../../../hooks/utility hooks/Socket/useScoket";
+import useSocketContext from "../../../hooks/context hooks/Socket/useSocketContext";
 
 const Navbar = (props) => {
+    const [driverNotification, setDriverNotification] = useState("");
+    const [driverNotificationCount, setDriverNotificationCount] = useState(0);
+
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
     const { logout } = useLogout();
+    useScoket();
+    const { socket } = useSocketContext();
+
+    if (!socket) return;
 
     const handleLogout = () => {
         logout();
     };
+
+    // socket.on("RideConfirmed", () => {
+    //     setDriverNotificationCount((num) => {
+    //         num = num + 1;
+    //     });
+    // });
 
     return (
         <>
@@ -109,13 +124,15 @@ const Navbar = (props) => {
                     <Center>
                         {custUser && (
                             <Box>
-                                <NotificationIcon count={1}></NotificationIcon>
+                                <NotificationIcon count={0}></NotificationIcon>
                             </Box>
                         )}
 
                         {drivUser && (
                             <Box>
-                                <NotificationIcon count={1}></NotificationIcon>
+                                <NotificationIcon
+                                    count={driverNotificationCount}
+                                ></NotificationIcon>
                             </Box>
                         )}
 

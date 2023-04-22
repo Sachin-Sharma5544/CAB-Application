@@ -23,15 +23,6 @@ import useScoket from "./hooks/utility hooks/Socket/useScoket";
 function App() {
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
-    const [socketData, setScoketData] = useState();
-    useScoket();
-    const { socket } = useSocketContext();
-
-    if (!socket) return;
-
-    socket.on("Vehicle", (data) => {
-        setScoketData(data);
-    });
 
     return (
         <ChakraProvider>
@@ -107,7 +98,6 @@ function App() {
                             }
                         ></Route>
                     </Routes>
-                    <h1>{socketData}</h1>
                     <FooterPage></FooterPage>
                 </BrowserRouter>
             </div>

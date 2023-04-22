@@ -231,10 +231,6 @@ const BookRide = (props) => {
         console.log(json);
     };
 
-    socket.on("Book_rides", (data) => {
-        setSk(data);
-    });
-
     const autosetPickupLocation = () => {
         const updatedPickupLocation = { ...pickupLocation };
         updatedPickupLocation.value = currentAddress.address;
@@ -283,8 +279,6 @@ const BookRide = (props) => {
                     <GoogleMaps setMap={setMap}></GoogleMaps>
                 </BoxContainer>
             )}
-
-            <h1>{sk}</h1>
         </BoxContainer>
     );
 };
