@@ -98,7 +98,7 @@ function App() {
                             }
                         ></Route>
                     </Routes>
-                    {/* <FooterPage></FooterPage> */}
+                    <FooterPage></FooterPage>
                 </BrowserRouter>
 
                 {/* <button
