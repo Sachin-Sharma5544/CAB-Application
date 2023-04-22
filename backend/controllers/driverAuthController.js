@@ -15,7 +15,12 @@ exports.postDriverLogin = async (req, res) => {
         const user = await Driver.login(email, password);
 
         const token = createToken(user._id);
-        res.status(200).send({ email, token, userType: "driver" });
+        res.status(200).send({
+            email,
+            name: `${user.firstName} ${user.lastName}`,
+            token,
+            userType: "driver",
+        });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }

@@ -11,6 +11,7 @@ import { Link as RouterLink } from "react-router-dom";
 import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
 import useDriverAuthContext from "../../../hooks/context hooks/Authentication/useDriverAuthContext";
 import useLogout from "../../../hooks/utility hooks/Logout/useLogout";
+import UserProfileIcon from "../../Utility/User Profile Icon/UserProfileIcon";
 
 const Navbar = (props) => {
     const { user: custUser } = useCustomerAuthContext();
@@ -18,9 +19,10 @@ const Navbar = (props) => {
     const { logout } = useLogout();
 
     const handleLogout = () => {
-        console.log("Logout button clicked");
         logout();
     };
+
+    console.log(custUser);
 
     return (
         <>
@@ -83,7 +85,6 @@ const Navbar = (props) => {
                         {drivUser && drivUser.userType === "driver" && (
                             <Box p="4">
                                 <ChakraLink
-                                    onClick={() => console.log("Book a ride")}
                                     fontSize={"xl"}
                                     as={RouterLink}
                                     to="/driver/vehicle/details"
@@ -109,27 +110,18 @@ const Navbar = (props) => {
                     <Center>
                         {custUser && (
                             <Box p="4">
-                                <Text fontSize={"xl"} as={RouterLink}>
-                                    {custUser.email}
-                                </Text>
+                                <UserProfileIcon
+                                    name={custUser.name}
+                                    handleLogout={handleLogout}
+                                ></UserProfileIcon>
                             </Box>
                         )}
                         {drivUser && (
                             <Box p="4">
-                                <Text fontSize={"xl"} as={RouterLink}>
-                                    {drivUser.email}
-                                </Text>
-                            </Box>
-                        )}
-                        {(custUser || drivUser) && (
-                            <Box p="4">
-                                <ChakraLink
-                                    onClick={handleLogout}
-                                    fontSize={"xl"}
-                                    as={RouterLink}
-                                >
-                                    Logout
-                                </ChakraLink>
+                                <UserProfileIcon
+                                    name={drivUser.name}
+                                    handleLogout={handleLogout}
+                                ></UserProfileIcon>
                             </Box>
                         )}
                         {!custUser && !drivUser && (
