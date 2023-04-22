@@ -5,6 +5,10 @@ const sockethandler = (io) => {
         socket.on("disconnect", () => {
             console.log("User disconnected");
         });
+
+        socket.on("test", (data) => {
+            socket.emit("test", data);
+        });
     });
 };
 

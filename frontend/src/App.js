@@ -17,6 +17,7 @@ import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPag
 import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetailsPage";
 
 import io from "socket.io-client";
+import { useState } from "react";
 
 const socket = io("http://localhost:3501", {
     transports: ["websocket"],
@@ -25,6 +26,11 @@ const socket = io("http://localhost:3501", {
 function App() {
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
+    const [socketData, setScoketData] = useState();
+
+    socket.on("Vehicle", (data) => {
+        setScoketData(data);
+    });
 
     return (
         <ChakraProvider>
@@ -100,6 +106,7 @@ function App() {
                             }
                         ></Route>
                     </Routes>
+                    <h1>{socketData}</h1>
                     <FooterPage></FooterPage>
                 </BrowserRouter>
 

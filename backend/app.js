@@ -30,6 +30,12 @@ app.use(express.json());
 
 app.use(cors());
 
+//attaching io to request object
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+});
+
 //This is used for testing booking model
 
 app.use("/car-ride", carRideRoute);
