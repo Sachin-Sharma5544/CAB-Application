@@ -193,7 +193,7 @@ const BookRide = (props) => {
             body: JSON.stringify({
                 pickup: pickupLocation.value,
                 drop: dropLocation.value,
-                // distance: distance,
+                distance: distance,
                 rideType: rideType,
             }),
             headers: {

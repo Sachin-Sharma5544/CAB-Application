@@ -1,10 +1,10 @@
-const CustomerRide = require("../models/customerRideModel");
+const Ride = require("../models/RideModel");
 const Driver = require("../models/driverModel");
 const Vehicle = require("../models/vehicleDetails");
 
 exports.postRide = async (req, res, next) => {
     const io = req.io;
-    const { pickup, drop, rideType } = req.body;
+    const { pickup, drop, rideType, distance } = req.body;
     const driver = await Driver.find({ status: "available" });
 
     if (!driver.length > 0) {
@@ -15,10 +15,10 @@ exports.postRide = async (req, res, next) => {
 
     const driverId = driver[0]._id;
     try {
-        const ride = await CustomerRide.addRide(
+        const ride = await Ride.addRide(
             pickup,
             drop,
-            "",
+            distance,
             req.user._id,
             rideType,
             driverId,
@@ -43,7 +43,7 @@ exports.postRide = async (req, res, next) => {
 
 exports.getRides = async (req, res, next) => {
     try {
-        const rides = await CustomerRide.find({
+        const rides = await Ride.find({
             customer: req.user._id,
         })
             .populate({

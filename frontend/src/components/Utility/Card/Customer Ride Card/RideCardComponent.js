@@ -13,6 +13,7 @@ import { formatDistanceToNow } from "date-fns";
 
 const RideCardComponent = (props) => {
     const { ride } = props;
+
     return (
         <Card border="1px solid black">
             <CardHeader>
@@ -44,7 +45,9 @@ const RideCardComponent = (props) => {
                 </Box>
             </CardBody>
             <CardFooter>
-                <Button>View here</Button>
+                <Button onClick={() => props.cancelRide(ride._id)}>
+                    Cancel Ride
+                </Button>
             </CardFooter>
         </Card>
     );

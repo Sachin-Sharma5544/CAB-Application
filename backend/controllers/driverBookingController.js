@@ -1,4 +1,4 @@
-const Ride = require("../models/customerRideModel");
+const Ride = require("../models/RideModel");
 
 exports.getDriverBookings = async (req, res, next) => {
     console.log(req.user._id);

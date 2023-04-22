@@ -12,9 +12,14 @@ const CustomerRideDetails = () => {
     const { ride: customerRides, dispatch } = useCustomerRideContext();
     const { error, isLoading } = useFetchRides(dispatch);
 
+    const cancelRide = (id) => {
+        console.log(id, "customer ride details");
+    };
+
     return (
         <div className="CustomerRideDetails__Page">
             <h1>Customer ride details</h1>
+            {!customerRides && <p>You don't have any rides to show</p>}
 
             {customerRides && (
                 <SimpleGrid
@@ -25,6 +30,7 @@ const CustomerRideDetails = () => {
                         <RideCardComponent
                             key={ride._id}
                             ride={ride}
+                            cancelRide={cancelRide}
                         ></RideCardComponent>
                     ))}
                     {/* <RideCardComponent></RideCardComponent>

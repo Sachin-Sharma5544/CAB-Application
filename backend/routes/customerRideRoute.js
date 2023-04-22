@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 //Controller import
-const customerRideController = require("../controllers/customerRideController");
+const rideController = require("../controllers/RideController");
 const authMiddleware = require("../middlewares/requireAuth");
 
 router.use(authMiddleware.requireCustomerAuth);
 
-router.post("/", customerRideController.postRide);
-router.get("/", customerRideController.getRides);
+router.post("/", rideController.postRide);
+router.get("/", rideController.getRides);
 
-router.get("/available", customerRideController.getAvailableRides);
+router.get("/available", rideController.getAvailableRides);
 
 module.exports = router;
