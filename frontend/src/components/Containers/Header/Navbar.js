@@ -12,6 +12,7 @@ import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/
 import useDriverAuthContext from "../../../hooks/context hooks/Authentication/useDriverAuthContext";
 import useLogout from "../../../hooks/utility hooks/Logout/useLogout";
 import UserProfileIcon from "../../Utility/User Profile Icon/UserProfileIcon";
+import NotificationIcon from "../../Utility/Notification Icon/NotificationIcon";
 
 const Navbar = (props) => {
     const { user: custUser } = useCustomerAuthContext();
@@ -21,8 +22,6 @@ const Navbar = (props) => {
     const handleLogout = () => {
         logout();
     };
-
-    console.log(custUser);
 
     return (
         <>
@@ -108,6 +107,18 @@ const Navbar = (props) => {
                 <Spacer></Spacer>
                 <Flex>
                     <Center>
+                        {custUser && (
+                            <Box>
+                                <NotificationIcon count={1}></NotificationIcon>
+                            </Box>
+                        )}
+
+                        {drivUser && (
+                            <Box>
+                                <NotificationIcon count={1}></NotificationIcon>
+                            </Box>
+                        )}
+
                         {custUser && (
                             <Box p="4">
                                 <UserProfileIcon
