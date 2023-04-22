@@ -19,7 +19,7 @@ const bikeRideRoute = require("./routes/bikeRideRoute");
 const customerAuthRoute = require("./routes/customerAuthRoute");
 const driverAuthRoute = require("./routes/driverAuthRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
-const customerRideRoute = require("./routes/customerRideRoute");
+const rideRoute = require("./routes/rideRoute");
 
 app.use((req, res, next) => {
     console.log(req.method, req.path);
@@ -45,7 +45,7 @@ app.use("/bike-ride", bikeRideRoute);
 app.use("/vehicle", vehicleRoute);
 app.use("/customer", customerAuthRoute);
 app.use("/driver", driverAuthRoute);
-app.use("/ride", customerRideRoute);
+app.use("/ride", rideRoute);
 app.use("/bookings", driverBookingRoute);
 
 //Calling Socket handler

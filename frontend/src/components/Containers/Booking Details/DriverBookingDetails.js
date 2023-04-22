@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DriverBookingDetails.css";
 import { SimpleGrid } from "@chakra-ui/react";
 import BookingCardComponent from "../../Utility/Card/Driver Booking Card/BookingCardComponent";
@@ -8,11 +8,16 @@ import useFetchBookings from "../../../hooks/utility hooks/Driver Booking/useFet
 const DriverBookingDetails = () => {
     const { bookings, dispatch } = useDriverBookingContext();
     const { error, isLoading } = useFetchBookings(dispatch);
-    console.log(bookings);
+    const [dispMsg, setDispMsg] = useState(true);
+
+    if (bookings && bookings.length > 0) {
+        setDispMsg(false);
+    }
 
     return (
         <div className="DriverBookingDetails__Page">
             <h1>Driver booking details</h1>
+            {dispMsg && <h5>You don't have any bookings to show. </h5>}
             {bookings && (
                 <SimpleGrid
                     spacing={4}

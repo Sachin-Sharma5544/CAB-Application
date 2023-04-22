@@ -11,15 +11,20 @@ import useFetchRides from "../../../hooks/utility hooks/Customer Ride/useFetchRi
 const CustomerRideDetails = () => {
     const { ride: customerRides, dispatch } = useCustomerRideContext();
     const { error, isLoading } = useFetchRides(dispatch);
+    const [dispMsg, setDispMsg] = useState(true);
 
     const cancelRide = (id) => {
         console.log(id, "customer ride details");
     };
 
+    if (customerRides && customerRides.length > 0) {
+        setDispMsg(false);
+    }
+
     return (
         <div className="CustomerRideDetails__Page">
             <h1>Customer ride details</h1>
-            {!customerRides && <p>You don't have any rides to show</p>}
+            {dispMsg && <h5>You don't have any rides to show</h5>}
 
             {customerRides && (
                 <SimpleGrid
