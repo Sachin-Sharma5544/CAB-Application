@@ -30,7 +30,9 @@ exports.postRide = async (req, res, next) => {
             { new: true }
         );
 
-        io.to(driverId).emit("RideConfirmed", "data");
+        console.log(driverId);
+
+        io.on("Ride_Confirmed", (socket) => {});
 
         res.status(200).send({ ...ride, driverEmail: updatedDriver.email });
     } catch (error) {

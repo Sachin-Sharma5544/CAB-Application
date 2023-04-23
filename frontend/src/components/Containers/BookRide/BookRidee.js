@@ -67,7 +67,7 @@ const BookRide = (props) => {
     );
 
     useScoket();
-    const { socket } = useSocketContext();
+    const { socket, userType } = useSocketContext();
 
     console.log(distance, duration);
 
@@ -229,6 +229,11 @@ const BookRide = (props) => {
             navigate("/ride/details");
         }
         console.log(json);
+
+        socket.emit("BookARide", {
+            data: " This is for booking data",
+            userType,
+        });
     };
 
     const autosetPickupLocation = () => {

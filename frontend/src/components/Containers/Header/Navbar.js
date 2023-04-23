@@ -26,16 +26,15 @@ const Navbar = (props) => {
     useScoket();
     const { socket } = useSocketContext();
 
-    if (!socket) return;
+    // if (!socket) return;
 
     const handleLogout = () => {
         logout();
     };
 
-    // socket.on("RideConfirmed", () => {
-    //     setDriverNotificationCount((num) => {
-    //         num = num + 1;
-    //     });
+    // socket.on("RideConfirmed", (data) => {
+    //     console.log(data);
+    //     setDriverNotificationCount(driverNotificationCount + 1);
     // });
 
     return (

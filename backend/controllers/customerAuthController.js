@@ -12,6 +12,7 @@ exports.postCustomerLogin = async (req, res) => {
 
     try {
         const user = await Customer.login(email, password);
+        console.log(user);
         const token = createToken(user._id);
         res.status(200).send({
             email,
