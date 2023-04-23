@@ -5,7 +5,7 @@ import useCustomerAuthContext from "../../context hooks/Authentication/useCustom
 import useDriverAuthContext from "../../context hooks/Authentication/useDriverAuthContext";
 
 const useScoket = () => {
-    // const [socket, setScoket] = useState(null);
+    const [socket, setScoket] = useState(null);
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
 
@@ -26,15 +26,15 @@ const useScoket = () => {
             if (drivUser) {
                 userType = drivUser.userType;
             }
-
+            setScoket(socketConnect);
             dispatch({
                 type: "CONNECT_SOCKET",
-                payload: { socketConnect, userType },
+                payload: { socket: socketConnect, userType },
             });
         };
 
         connectSocket();
-    }, [dispatch, custUser, drivUser]);
+    }, [custUser, drivUser, setScoket, dispatch]);
 };
 
 export default useScoket;

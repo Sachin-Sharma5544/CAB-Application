@@ -229,11 +229,6 @@ const BookRide = (props) => {
             navigate("/ride/details");
         }
         console.log(json);
-
-        socket.emit("BookARide", {
-            data: " This is for booking data",
-            userType,
-        });
     };
 
     const autosetPickupLocation = () => {
