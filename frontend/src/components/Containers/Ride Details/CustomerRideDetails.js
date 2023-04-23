@@ -11,22 +11,16 @@ import useFetchRides from "../../../hooks/utility hooks/Customer Ride/useFetchRi
 const CustomerRideDetails = () => {
     const { ride: customerRides, dispatch } = useCustomerRideContext();
     const { error, isLoading } = useFetchRides(dispatch);
-    const [dispMsg, setDispMsg] = useState(true);
 
     const cancelRide = (id) => {
         console.log(id, "customer ride details");
     };
 
-    if (customerRides && customerRides.length > 0) {
-        setDispMsg(false);
-    }
-
     return (
         <div className="CustomerRideDetails__Page">
             <h1>Customer ride details</h1>
-            {dispMsg && <h5>You don't have any rides to show</h5>}
 
-            {customerRides && (
+            {customerRides && customerRides.length > 0 ? (
                 <SimpleGrid
                     spacing={4}
                     templateColumns="repeat(auto-fill, minmax(310px, 1fr))"
@@ -38,12 +32,9 @@ const CustomerRideDetails = () => {
                             cancelRide={cancelRide}
                         ></RideCardComponent>
                     ))}
-                    {/* <RideCardComponent></RideCardComponent>
-                    <RideCardComponent></RideCardComponent>
-                    <RideCardComponent></RideCardComponent>
-                    <RideCardComponent></RideCardComponent>
-                    <RideCardComponent></RideCardComponent> */}
                 </SimpleGrid>
+            ) : (
+                <h5>You don't have any rides to show</h5>
             )}
             {isLoading && (
                 <CircularProgress isIndeterminate color="green.300" />
