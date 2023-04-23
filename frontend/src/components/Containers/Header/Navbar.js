@@ -17,7 +17,6 @@ import useScoket from "../../../hooks/utility hooks/Socket/useScoket";
 import useSocketContext from "../../../hooks/context hooks/Socket/useSocketContext";
 
 const Navbar = (props) => {
-    // const [driverNotification, setDriverNotification] = useState("");
     const [driverNotificationCount, setDriverNotificationCount] = useState(0);
 
     const { user: custUser } = useCustomerAuthContext();
@@ -33,8 +32,9 @@ const Navbar = (props) => {
     };
 
     socket.on("RideConfirmed", (data) => {
-        console.log(data);
-        setDriverNotificationCount(driverNotificationCount + 1);
+        if (drivUser.email === data) {
+            setDriverNotificationCount(driverNotificationCount + 1);
+        }
     });
 
     return (
