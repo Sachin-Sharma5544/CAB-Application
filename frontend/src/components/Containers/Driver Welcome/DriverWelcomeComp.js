@@ -26,7 +26,7 @@ const DriverWelcomeComp = () => {
                         <Box className="DriverWelcome__Links">
                             <span>Have SmartCab Bookings? </span>
                             <Link as={LinkRouter} to="/booking/details">
-                                check Here
+                                Check Here
                             </Link>
                         </Box>
                     </GridItem>
