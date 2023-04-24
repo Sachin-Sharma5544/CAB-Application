@@ -41,17 +41,17 @@ const CustomerRideDetails = () => {
                 />
             )}
 
-            {completedRide.length > 0 && (
-                <CustomerCompletedRides
-                    customerCompletedRides={completedRide}
+            {confirmedRides.length > 0 && (
+                <CustomerConfirmedRides
+                    customerConfirmedRides={confirmedRides}
                     cancelRide={cancelRide}
                     isLoading={isLoading}
                 />
             )}
 
-            {confirmedRides.length > 0 && (
-                <CustomerConfirmedRides
-                    customerConfirmedRides={confirmedRides}
+            {completedRide.length > 0 && (
+                <CustomerCompletedRides
+                    customerCompletedRides={completedRide}
                     cancelRide={cancelRide}
                     isLoading={isLoading}
                 />
