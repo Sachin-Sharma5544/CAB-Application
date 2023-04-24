@@ -6,8 +6,8 @@ const useFilteredBooking = (bookings) => {
     const driverCancelled = "Driver Cancelled";
     const customerCancelled = "Customer Cancelled";
     const bookingConfirmed = "Booking Confirmed";
-    const currentBooking = "Ongoing Booking";
-    const doneBooking = "Completed Booking";
+    const currentBooking = "Ongoing Ride";
+    const doneBooking = "Ride Completed";
     const driverCancelledBookings = bookings.filter(
         (booking) => booking.rideStatus === driverCancelled
     );

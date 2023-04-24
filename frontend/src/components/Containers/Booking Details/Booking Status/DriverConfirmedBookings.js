@@ -3,10 +3,15 @@ import { SimpleGrid, CircularProgress } from "@chakra-ui/react";
 import BookingCardComponent from "../../../Utility/Card/Driver Booking Card/BookingCardComponent";
 
 const DriverConfirmedBookings = (props) => {
-    const { driverConfirmedBookings, cancelBooking, isLoading } = props;
+    const {
+        driverConfirmedBookings,
+        cancelBooking,
+        isLoading,
+        startRideForBooking,
+    } = props;
     return (
         <>
-            <h4> Your confirmed rides </h4>
+            <h4> Your confirmed bookings </h4>
             {driverConfirmedBookings && driverConfirmedBookings.length > 0 ? (
                 <SimpleGrid
                     spacing={4}
@@ -17,6 +22,7 @@ const DriverConfirmedBookings = (props) => {
                             key={booking._id}
                             booking={booking}
                             cancelBooking={cancelBooking}
+                            startRideForBooking={startRideForBooking}
                         ></BookingCardComponent>
                     ))}
                 </SimpleGrid>

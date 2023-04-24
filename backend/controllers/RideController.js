@@ -72,10 +72,34 @@ exports.postCancelRide = async (req, res, next) => {
 
     try {
         const ride = await Ride.cancelRide(id, cancelledBy);
-        console.log(ride);
         res.status(200).send(ride);
     } catch (error) {
-        console.log(error.message);
+        res.status(400).send({ error: error.message });
+    }
+};
+
+exports.postStartRide = async (req, res, next) => {
+    const { id } = req.params;
+    const { rideStart } = req.body;
+
+    try {
+        const ride = await Ride.startRide(id, rideStart);
+        res.status(200).send(ride);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+};
+
+exports.postEndRide = async (req, res, next) => {
+    const { id } = req.params;
+    const { rideComplete } = req.body;
+
+    console.log(id, rideComplete);
+
+    try {
+        const ride = await Ride.endRide(id, rideComplete);
+        res.status(200).send(ride);
+    } catch (error) {
         res.status(400).send({ error: error.message });
     }
 };

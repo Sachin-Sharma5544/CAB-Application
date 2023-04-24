@@ -6,7 +6,7 @@ const DriverCompletedBookings = (props) => {
     const { driverCompletedBookings, cancelBooking, isLoading } = props;
     return (
         <>
-            <h4> Your completed rides </h4>
+            <h4> Your completed bookings </h4>
             {driverCompletedBookings && driverCompletedBookings.length > 0 ? (
                 <SimpleGrid
                     spacing={4}

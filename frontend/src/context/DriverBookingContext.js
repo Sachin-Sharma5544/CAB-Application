@@ -8,6 +8,10 @@ export const driverBookingReducer = (state, action) => {
             return { bookings: action.payload };
         case "CANCEL_BOOKING":
             return { bookings: action.payload };
+        case "START_BOOKING":
+            return { bookings: action.payload };
+        case "END_BOOKING":
+            return { bookings: action.payload };
         default:
             return state;
     }

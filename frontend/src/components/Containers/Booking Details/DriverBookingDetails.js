@@ -11,12 +11,18 @@ import DriverCancelledBookings from "./Booking Status/DriverCancelledBookings";
 import DriverCompletedBookings from "./Booking Status/DriverCompletedBookings";
 import DriverConfirmedBookings from "./Booking Status/DriverConfirmedBookings";
 import DriverCurrentBooking from "./Booking Status/DriverCurrentBookings";
+import useStartRide from "../../../hooks/utility hooks/Driver Booking/useStartRide";
+import useCompleteRide from "../../../hooks/utility hooks/Driver Booking/useCompleteRide";
 
 const DriverBookingDetails = () => {
     const { bookings, dispatch } = useDriverBookingContext();
     const { error, isLoading } = useFetchBookings(dispatch);
 
     const { cancelDriverBooking } = useDriverCancelBooking(bookings);
+    const { startRideForBooking: startRide } = useStartRide(bookings);
+
+    const { endBooking } = useCompleteRide(bookings);
+
     const {
         driverCancelledBookings,
         customerCancelledBookings,
@@ -30,6 +36,15 @@ const DriverBookingDetails = () => {
         await cancelDriverBooking(id);
     };
 
+    const startRideForBooking = async (id) => {
+        console.log(id);
+        await startRide(id);
+    };
+
+    const stopRide = async (id) => {
+        await endBooking(id);
+    };
+
     return (
         <div className="DriverBookingDetails__Page">
             <h1>Driver booking details</h1>
@@ -39,6 +54,7 @@ const DriverBookingDetails = () => {
                     driverCurrentBookings={ongoingBooking}
                     cancelBooking={cancelBooking}
                     isLoading={isLoading}
+                    stopRide={stopRide}
                 />
             )}
 
@@ -47,6 +63,7 @@ const DriverBookingDetails = () => {
                     driverConfirmedBookings={confirmedBookings}
                     cancelBooking={cancelBooking}
                     isLoading={isLoading}
+                    startRideForBooking={startRideForBooking}
                 />
             )}
 

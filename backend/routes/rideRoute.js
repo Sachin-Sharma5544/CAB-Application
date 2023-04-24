@@ -11,6 +11,8 @@ router.post("/", rideController.postRide);
 router.get("/", rideController.getRides);
 
 router.post("/cancel/:id", rideController.postCancelRide);
+router.post("/start/:id", rideController.postStartRide);
+router.post("/end/:id", rideController.postEndRide);
 
 router.get("/available", rideController.getAvailableRides);
 

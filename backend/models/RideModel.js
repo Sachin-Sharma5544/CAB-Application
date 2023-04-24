@@ -87,7 +87,6 @@ rideSchema.statics.cancelRide = async function (id, cancelledBy) {
     }
 
     const updatedRide = await this.findOne({ _id: id });
-    // const updatedRide = await updatedRideQuery.exec();
 
     if (!updatedRide) {
         throw Error("Ride cancellation failed in DB");
@@ -98,8 +97,6 @@ rideSchema.statics.cancelRide = async function (id, cancelledBy) {
     }
 
     updatedRide.rideStatus = cancelledBy;
-
-    const savedRide = await updatedRide.save();
 
     const updatedDriver = await Driver.findByIdAndUpdate(
         updatedRide.driverId,
@@ -112,6 +109,76 @@ rideSchema.statics.cancelRide = async function (id, cancelledBy) {
             "Ride cancelled in DB, assigned driver status updation failed"
         );
     }
+
+    const savedRide = await updatedRide.save();
+
+    return savedRide;
+};
+
+rideSchema.statics.startRide = async function (id, rideStart) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw Error("No such ride exists");
+    }
+
+    const updatedRide = await this.findOne({ _id: id });
+
+    if (!updatedRide) {
+        throw Error("Ride cancellation failed in DB");
+    }
+
+    if (updatedRide.rideStatus === rideStart) {
+        throw Error("Ride is already cancelled.");
+    }
+
+    updatedRide.rideStatus = rideStart;
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+        updatedRide.driverId,
+        { status: rideStart },
+        { new: true }
+    );
+
+    if (!updatedDriver) {
+        throw Error(
+            "Ride Started in DB, assigned driver status updation failed"
+        );
+    }
+
+    const savedRide = await updatedRide.save();
+
+    return savedRide;
+};
+
+rideSchema.statics.endRide = async function (id, rideComplete) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw Error("No such ride exists");
+    }
+
+    const updatedRide = await this.findOne({ _id: id });
+
+    if (!updatedRide) {
+        throw Error("Ride cancellation failed in DB");
+    }
+
+    if (updatedRide.rideStatus === rideComplete) {
+        throw Error("Ride is already completed.");
+    }
+
+    updatedRide.rideStatus = rideComplete;
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+        updatedRide.driverId,
+        { status: "Available" },
+        { new: true }
+    );
+
+    if (!updatedDriver) {
+        throw Error(
+            "Ride Started in DB, assigned driver status updation failed"
+        );
+    }
+
+    const savedRide = await updatedRide.save();
 
     return savedRide;
 };

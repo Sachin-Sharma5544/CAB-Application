@@ -46,11 +46,31 @@ const BookingCardComponent = (props) => {
                 </Box>
             </CardBody>
             {booking.rideStatus !== "Customer Cancelled" &&
-                booking.rideStatus !== "Driver Cancelled" && (
+                booking.rideStatus !== "Driver Cancelled" &&
+                booking.rideStatus !== "Ride Completed" && (
                     <CardFooter>
                         <Grid templateColumns="repeat(2, 1fr)" gap={10}>
                             <GridItem>
-                                <Button>Start Ride</Button>
+                                {booking.rideStatus === "Booking Confirmed" && (
+                                    <Button
+                                        onClick={() =>
+                                            props.startRideForBooking(
+                                                booking._id
+                                            )
+                                        }
+                                    >
+                                        Start Ride
+                                    </Button>
+                                )}
+                                {booking.rideStatus === "Ongoing Ride" && (
+                                    <Button
+                                        onClick={() =>
+                                            props.stopRide(booking._id)
+                                        }
+                                    >
+                                        End Ride
+                                    </Button>
+                                )}
                             </GridItem>
                             <GridItem>
                                 <Button
@@ -58,7 +78,7 @@ const BookingCardComponent = (props) => {
                                         props.cancelBooking(booking._id)
                                     }
                                 >
-                                    Cancel Ride
+                                    Cancel Booking
                                 </Button>
                             </GridItem>
                         </Grid>
