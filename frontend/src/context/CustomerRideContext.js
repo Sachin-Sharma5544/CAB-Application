@@ -6,6 +6,8 @@ export const custRideReducer = (state, action) => {
     switch (action.type) {
         case "SET_RIDE":
             return { ride: action.payload };
+        case "CANCEL_RIDE":
+            return { ride: action.payload };
         default:
             return state;
     }

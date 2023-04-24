@@ -65,7 +65,7 @@ driverSchema.statics.signup = async function (fname, lname, email, password) {
         lastName: lname,
         email: email,
         password: hashPass,
-        status: "available",
+        status: "Available",
         phoneNumber: "",
     });
 

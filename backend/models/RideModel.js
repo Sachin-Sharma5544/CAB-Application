@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Driver = require("./driverModel");
 
 const rideSchema = new Schema(
     {
@@ -77,6 +78,42 @@ rideSchema.statics.addRide = async function (
     });
 
     return ride;
+};
+
+rideSchema.statics.cancelRide = async function (id, cancelledBy) {
+    console.log(this);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw Error("No such ride exists");
+    }
+
+    const updatedRide = await this.findOne({ _id: id });
+    // const updatedRide = await updatedRideQuery.exec();
+
+    if (!updatedRide) {
+        throw Error("Ride cancellation failed in DB");
+    }
+
+    if (updatedRide.rideStatus === cancelledBy) {
+        throw Error("Ride is already cancelled.");
+    }
+
+    updatedRide.rideStatus = cancelledBy;
+
+    const savedRide = await updatedRide.save();
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+        updatedRide.driverId,
+        { status: "Available" },
+        { new: true }
+    );
+
+    if (!updatedDriver) {
+        throw Error(
+            "Ride cancelled in DB, assigned driver status updation failed"
+        );
+    }
+
+    return savedRide;
 };
 
 module.exports = mongoose.model("Ride", rideSchema);

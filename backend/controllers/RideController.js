@@ -5,7 +5,7 @@ const Vehicle = require("../models/vehicleDetails");
 exports.postRide = async (req, res, next) => {
     const io = req.io;
     const { pickup, drop, rideType, distance } = req.body;
-    const driver = await Driver.find({ status: "available" });
+    const driver = await Driver.find({ status: "Available" });
 
     if (!driver.length > 0) {
         return res
@@ -48,7 +48,7 @@ exports.getRides = async (req, res, next) => {
         })
             .populate({
                 path: "driverId",
-                select: "firstName lastName",
+                select: "firstName lastName email",
             })
             .sort({ createdAt: -1 });
         console.log(rides);
@@ -64,4 +64,18 @@ exports.getAvailableRides = async (req, res, next) => {
     const vehicles = await Vehicle.find({ user_id: req.user_id });
     console.log(vehicles);
     res.send(drivers);
+};
+
+exports.postCancelRide = async (req, res, next) => {
+    const { id } = req.params;
+    const { cancelledBy } = req.body;
+
+    try {
+        const ride = await Ride.cancelRide(id, cancelledBy);
+        console.log(ride);
+        res.status(200).send(ride);
+    } catch (error) {
+        console.log(error.message);
+        res.status(400).send({ error: error.message });
+    }
 };

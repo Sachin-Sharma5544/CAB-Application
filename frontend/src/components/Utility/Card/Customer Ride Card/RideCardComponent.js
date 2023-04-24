@@ -45,9 +45,11 @@ const RideCardComponent = (props) => {
                 </Box>
             </CardBody>
             <CardFooter>
-                <Button onClick={() => props.cancelRide(ride._id)}>
-                    Cancel Ride
-                </Button>
+                {ride.rideStatus !== "Customer Cancelled" && (
+                    <Button onClick={() => props.cancelRide(ride._id)}>
+                        Cancel Ride
+                    </Button>
+                )}
             </CardFooter>
         </Card>
     );

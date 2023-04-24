@@ -7,13 +7,17 @@ import RideCardComponent from "../../Utility/Card/Customer Ride Card/RideCardCom
 import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
 import useCustomerRideContext from "../../../hooks/context hooks/Customer Ride/useCustomerRideContext";
 import useFetchRides from "../../../hooks/utility hooks/Customer Ride/useFetchRides";
+import useCustomerCancelRide from "../../../hooks/utility hooks/Customer Ride/useCustomerCancelRide";
 
 const CustomerRideDetails = () => {
     const { ride: customerRides, dispatch } = useCustomerRideContext();
     const { error, isLoading } = useFetchRides(dispatch);
 
-    const cancelRide = (id) => {
+    const { cancelCustRide } = useCustomerCancelRide(customerRides);
+
+    const cancelRide = async (id) => {
         console.log(id, "customer ride details");
+        await cancelCustRide(id);
     };
 
     return (
