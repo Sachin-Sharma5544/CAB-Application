@@ -6,6 +6,8 @@ export const driverBookingReducer = (state, action) => {
     switch (action.type) {
         case "SET_BOOKING":
             return { bookings: action.payload };
+        case "CANCEL_BOOKING":
+            return { bookings: action.payload };
         default:
             return state;
     }

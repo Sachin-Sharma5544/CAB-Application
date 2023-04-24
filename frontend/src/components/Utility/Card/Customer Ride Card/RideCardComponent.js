@@ -44,13 +44,14 @@ const RideCardComponent = (props) => {
                     </Text>
                 </Box>
             </CardBody>
-            <CardFooter>
-                {ride.rideStatus !== "Customer Cancelled" && (
-                    <Button onClick={() => props.cancelRide(ride._id)}>
-                        Cancel Ride
-                    </Button>
+            {ride.rideStatus !== "Customer Cancelled" &&
+                ride.rideStatus !== "Driver Cancelled" && (
+                    <CardFooter>
+                        <Button onClick={() => props.cancelRide(ride._id)}>
+                            Cancel Ride
+                        </Button>
+                    </CardFooter>
                 )}
-            </CardFooter>
         </Card>
     );
 };

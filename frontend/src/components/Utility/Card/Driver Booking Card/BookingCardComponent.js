@@ -8,8 +8,6 @@ import {
     Text,
     Button,
     Box,
-    Flex,
-    Spacer,
     Grid,
     GridItem,
 } from "@chakra-ui/react";
@@ -47,16 +45,25 @@ const BookingCardComponent = (props) => {
                     </Text>
                 </Box>
             </CardBody>
-            <CardFooter>
-                <Grid templateColumns="repeat(2, 1fr)" gap={10}>
-                    <GridItem>
-                        <Button>View here</Button>
-                    </GridItem>
-                    <GridItem>
-                        <Button>View here</Button>
-                    </GridItem>
-                </Grid>
-            </CardFooter>
+            {booking.rideStatus !== "Customer Cancelled" &&
+                booking.rideStatus !== "Driver Cancelled" && (
+                    <CardFooter>
+                        <Grid templateColumns="repeat(2, 1fr)" gap={10}>
+                            <GridItem>
+                                <Button>Start Ride</Button>
+                            </GridItem>
+                            <GridItem>
+                                <Button
+                                    onClick={() =>
+                                        props.cancelBooking(booking._id)
+                                    }
+                                >
+                                    Cancel Ride
+                                </Button>
+                            </GridItem>
+                        </Grid>
+                    </CardFooter>
+                )}
         </Card>
     );
 };

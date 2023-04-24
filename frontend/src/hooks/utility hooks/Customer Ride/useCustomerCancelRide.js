@@ -6,13 +6,15 @@ const useCustomerCancelRide = (custRides) => {
     const [error, setError] = useState();
     const { dispatch } = useCustomerRideContext();
     const { user: custUser } = useCustomerAuthContext();
+    const cancelledBy = "Customer Cancelled";
+    const alreadyCancelled = "Driver Cancelled";
 
     const cancelCustRide = async (id) => {
         const response = await fetch(
             "http://localhost:3501/ride/cancel/" + id,
             {
                 method: "POST",
-                body: JSON.stringify({ cancelledBy: "Customer Cancelled" }),
+                body: JSON.stringify({ cancelledBy: cancelledBy }),
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${custUser.token}`,
@@ -39,13 +41,13 @@ const useCustomerCancelRide = (custRides) => {
             const cancelRide = updateCancelRide[cancelRideIndex];
 
             if (
-                cancelRide.rideStatus === "Customer Cancelled" ||
-                cancelRide.rideStatus === "Driver Cancelled"
+                cancelRide.rideStatus === cancelledBy ||
+                cancelRide.rideStatus === alreadyCancelled
             ) {
                 return setError(" Ride is already cancelled. ");
             }
 
-            cancelRide.rideStatus = "Customer Cancelled";
+            cancelRide.rideStatus = cancelledBy;
             updateCancelRide[cancelRideIndex] = cancelRide;
 
             dispatch({ type: "CANCEL_RIDE", payload: updateCancelRide });

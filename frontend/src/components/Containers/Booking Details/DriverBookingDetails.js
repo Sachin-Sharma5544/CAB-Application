@@ -4,10 +4,18 @@ import { SimpleGrid } from "@chakra-ui/react";
 import BookingCardComponent from "../../Utility/Card/Driver Booking Card/BookingCardComponent";
 import useDriverBookingContext from "../../../hooks/context hooks/Driver Booking/useDriverBookingContext";
 import useFetchBookings from "../../../hooks/utility hooks/Driver Booking/useFetchBookings";
+import useDriverCancelBooking from "../../../hooks/utility hooks/Driver Booking/useDriverCancelBooking";
 
 const DriverBookingDetails = () => {
     const { bookings, dispatch } = useDriverBookingContext();
     const { error, isLoading } = useFetchBookings(dispatch);
+
+    const { cancelDriverBooking } = useDriverCancelBooking(bookings);
+
+    const cancelBooking = async (id) => {
+        console.log(id);
+        await cancelDriverBooking(id);
+    };
 
     return (
         <div className="DriverBookingDetails__Page">
@@ -22,6 +30,7 @@ const DriverBookingDetails = () => {
                         <BookingCardComponent
                             key={booking._id}
                             booking={booking}
+                            cancelBooking={cancelBooking}
                         ></BookingCardComponent>
                     ))}
                 </SimpleGrid>
