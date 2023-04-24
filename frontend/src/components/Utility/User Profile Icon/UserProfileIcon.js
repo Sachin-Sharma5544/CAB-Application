@@ -9,12 +9,22 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import Aux from "../../HOC/AuxComponent";
+import { useNavigate } from "react-router-dom";
 
 const UserProfileIcon = (props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const homeClickHandler = () => {
+        navigate("/customer/welcome");
+    };
+
+    const profileClickHandler = () => {
+        console.log("Profile link clicked");
     };
 
     return (
@@ -39,8 +49,12 @@ const UserProfileIcon = (props) => {
                     border="none"
                     borderTopRadius="none"
                 >
-                    <MenuItem bg="black">Profile</MenuItem>
-                    <MenuItem bg="black">Settings</MenuItem>
+                    <MenuItem bg="black" onClick={homeClickHandler}>
+                        Home
+                    </MenuItem>
+                    <MenuItem bg="black" onClick={profileClickHandler}>
+                        Profile
+                    </MenuItem>
                     <MenuItem bg="black" onClick={props.handleLogout}>
                         Logout
                     </MenuItem>

@@ -1,0 +1,52 @@
+.CustomerWelcome__Wrapper {
+    padding: 82px 0;
+    background-color: rgba(0, 0, 0,0.1);
+}
+
+.CustomerWelcome__Container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.CustomerWelcome__Item {
+    height: 100vh;
+}
+
+.CustomerWelcome__Image {
+    height: 100%;
+    background-image: url('../../../assets/images/Customer-Welcome-Page.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: rgba(126, 188, 2, 0.3);
+    background-blend-mode: lighten;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.CustomerWelcome__Header h1{
+    padding-top: 40px;
+    padding-left: 20px;
+    color: rgb(10, 10, 10);
+    font-size: 6rem;
+}
+
+
+.CustomerWelcome__WcTxt {
+    font-size: 2.5rem;
+    padding-left: 20px;
+    padding-top: 150px;
+}
+
+.CustomerWelcome__Links span  {
+    padding-left: 20px;
+}
+
+.CustomerWelcome__Links a:hover  {
+    color: black;
+}
+
+
+.CustomerWelcome__Links  {
+    font-size: 1.2rem;
+}

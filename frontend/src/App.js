@@ -15,6 +15,7 @@ import FooterPage from "./pages/Footer/FooterPage";
 import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
 import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPage";
 import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetailsPage";
+import CustomerWelcomePage from "./pages/Customer Welcome/CustomerWelcomePage";
 
 import { useState } from "react";
 import useSocketContext from "./hooks/context hooks/Socket/useSocketContext";
@@ -34,12 +35,22 @@ function App() {
                         <Route path="/drive" element={<DriveWithUsPage />} />
                         <Route path="/bookride" element={<BookRidePage />} />
                         <Route
+                            path="/customer/welcome"
+                            element={
+                                custUser ? (
+                                    <CustomerWelcomePage />
+                                ) : (
+                                    <Navigate to="/customer/login" />
+                                )
+                            }
+                        />
+                        <Route
                             path="/customer/login"
                             element={
                                 !custUser ? (
                                     <CustomerLoginPage />
                                 ) : (
-                                    <Navigate to="/bookride" />
+                                    <Navigate to="/customer/welcome" />
                                 )
                             }
                         />
