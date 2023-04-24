@@ -1,6 +1,6 @@
 import React from "react";
 import "./CustomerWelcomeComp.css";
-import { Box, Grid, GridItem, Image, Text, Link } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Text, Link } from "@chakra-ui/react";
 import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
 
 import { Link as LinkRouter } from "react-router-dom";
@@ -20,7 +20,7 @@ const CustomerWelcomeComp = () => {
                             <h1>Hello {custUser.name.split(" ")[0]},</h1>
                         </Box>
                         <Box className="CustomerWelcome__WcTxt">
-                            <Text>Wish you a Great Day Ahead!</Text>
+                            <Text>Wish you a have pleasent ride with us!</Text>
                         </Box>
                         <Box className="CustomerWelcome__Links">
                             <span>Like to book a SmartCab? </span>

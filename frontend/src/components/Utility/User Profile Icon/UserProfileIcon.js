@@ -10,17 +10,27 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import Aux from "../../HOC/AuxComponent";
 import { useNavigate } from "react-router-dom";
+import useCustomerAuthContext from "../../../hooks/context hooks/Authentication/useCustomerAuthContext";
+import useDriverAuthContext from "../../../hooks/context hooks/Authentication/useDriverAuthContext";
 
 const UserProfileIcon = (props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const { user: custUser } = useCustomerAuthContext();
+    const { user: drivUser } = useDriverAuthContext();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
     const homeClickHandler = () => {
-        navigate("/customer/welcome");
+        console.log(custUser);
+        console.log(drivUser);
+        if (custUser) {
+            navigate("/customer/welcome");
+        } else if (drivUser) {
+            navigate("/driver/welcome");
+        }
     };
 
     const profileClickHandler = () => {

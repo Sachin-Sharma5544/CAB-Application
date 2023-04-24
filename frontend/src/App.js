@@ -16,6 +16,7 @@ import DriveWithUsPage from "./pages/Drive With Us/DriveWithUsPage";
 import CustomerRideDetailsPage from "./pages/Ride Details/CustomerRideDetailsPage";
 import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetailsPage";
 import CustomerWelcomePage from "./pages/Customer Welcome/CustomerWelcomePage";
+import DriverWelcomePage from "./pages/Driver Welcome/DriverWelcomePage";
 
 import { useState } from "react";
 import useSocketContext from "./hooks/context hooks/Socket/useSocketContext";
@@ -24,6 +25,8 @@ import useScoket from "./hooks/utility hooks/Socket/useScoket";
 function App() {
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
+
+    console.log(drivUser);
 
     return (
         <ChakraProvider>
@@ -41,6 +44,17 @@ function App() {
                                     <CustomerWelcomePage />
                                 ) : (
                                     <Navigate to="/customer/login" />
+                                )
+                            }
+                        />
+
+                        <Route
+                            path="/driver/welcome"
+                            element={
+                                drivUser ? (
+                                    <DriverWelcomePage />
+                                ) : (
+                                    <Navigate to="/driver/login" />
                                 )
                             }
                         />
@@ -76,7 +90,7 @@ function App() {
                                 !drivUser ? (
                                     <DriverLoginPage />
                                 ) : (
-                                    <Navigate to="/booking/details" />
+                                    <Navigate to="/driver/welcome" />
                                 )
                             }
                         />

@@ -1,0 +1,52 @@
+.DriverWelcome__Wrapper {
+    padding: 82px 0;
+    background-color: rgba(0, 0, 0,0.1);
+}
+
+.DriverWelcome__Container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.DriverWelcome__Item {
+    height: 100vh;
+}
+
+.DriverWelcome__Image {
+    height: 100%;
+    background-image: url('../../../assets/images/Driver\ welcome\ page.jpg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    background-color: rgba(126, 188, 2, 0.3);
+    background-blend-mode: lighten;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.DriverWelcome__Header h1{
+    padding-top: 40px;
+    padding-left: 20px;
+    color: rgb(10, 10, 10);
+    font-size: 6rem;
+}
+
+
+.DriverWelcome__WcTxt {
+    font-size: 2.5rem;
+    padding-left: 20px;
+    padding-top: 150px;
+}
+
+.DriverWelcome__Links span  {
+    padding-left: 20px;
+}
+
+.DriverWelcome__Links a:hover  {
+    color: black;
+}
+
+
+.DriverWelcome__Links  {
+    font-size: 1.2rem;
+}
