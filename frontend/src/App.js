@@ -18,15 +18,9 @@ import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetai
 import CustomerWelcomePage from "./pages/Customer Welcome/CustomerWelcomePage";
 import DriverWelcomePage from "./pages/Driver Welcome/DriverWelcomePage";
 
-import { useState } from "react";
-import useSocketContext from "./hooks/context hooks/Socket/useSocketContext";
-import useScoket from "./hooks/utility hooks/Socket/useScoket";
-
 function App() {
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
-
-    console.log(drivUser);
 
     return (
         <ChakraProvider>
