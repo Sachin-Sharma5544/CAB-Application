@@ -82,7 +82,13 @@ function App() {
 
                         <Route
                             path="/driver/vehicle/new"
-                            element={<AddVehiclePage />}
+                            element={
+                                drivUser ? (
+                                    <AddVehiclePage />
+                                ) : (
+                                    <Navigate to="/driver/login" />
+                                )
+                            }
                         />
                         <Route
                             path="/driver/login"
@@ -100,17 +106,29 @@ function App() {
                                 !drivUser ? (
                                     <DriverSignupPage />
                                 ) : (
-                                    <Navigate to="/booking/details" />
+                                    <Navigate to="/driver/welcome" />
                                 )
                             }
                         ></Route>
                         <Route
                             path="/customer/signup"
-                            element={<CustomerSignupPage />}
+                            element={
+                                !custUser ? (
+                                    <CustomerSignupPage />
+                                ) : (
+                                    <Navigate to="/customer/welcome" />
+                                )
+                            }
                         ></Route>
                         <Route
                             path="/ride/details"
-                            element={<CustomerRideDetailsPage />}
+                            element={
+                                custUser ? (
+                                    <CustomerRideDetailsPage />
+                                ) : (
+                                    <Navigate to="/customer/login" />
+                                )
+                            }
                         ></Route>
                         <Route
                             path="/booking/details"
