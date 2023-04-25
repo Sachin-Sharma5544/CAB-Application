@@ -15,6 +15,8 @@ const GoogleMapMarker = (props) => {
             options={{
                 clickable: true,
             }}
+            // eslint-disable-next-line no-undef
+            animation={google.maps.Animation.DROP}
             label={props.markerLabel}
         ></Marker>
     );
