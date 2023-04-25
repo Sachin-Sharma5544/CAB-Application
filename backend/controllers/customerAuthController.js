@@ -33,8 +33,7 @@ exports.postCustomerSignup = async (req, res) => {
         const token = createToken(user._id);
 
         res.status(200).send({
-            fname,
-            lname,
+            name: `${user.firstName} ${user.lastName}`,
             email,
             token,
             userType: "customer",
