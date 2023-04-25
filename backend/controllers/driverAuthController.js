@@ -33,9 +33,8 @@ exports.postDriverSignup = async (req, res) => {
         const user = await Driver.signup(fname, lname, email, password);
         const token = createToken(user._id);
         res.status(200).send({
-            fname,
-            lname,
             email,
+            name: `${user.firstName} ${user.lastName}`,
             token,
             userType: "driver",
         });

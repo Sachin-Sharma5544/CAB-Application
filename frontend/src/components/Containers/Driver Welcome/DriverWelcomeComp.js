@@ -8,6 +8,8 @@ import { Link as LinkRouter } from "react-router-dom";
 const DriverWelcomeComp = () => {
     const { user: drivUser } = useDriverAuthContext();
 
+    console.log(drivUser);
+
     return (
         <div className="DriverWelcome__Wrapper">
             <Box className="DriverWelcome__Item">

@@ -1,3 +1,5 @@
+const Driver = require("./driverModel");
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -22,9 +24,6 @@ const vehicleSchema = new Schema(
         vehicleColor: {
             type: String,
             required: true,
-        },
-        driverId: {
-            type: String,
         },
     },
     { timestamps: true }
@@ -54,8 +53,13 @@ vehicleSchema.statics.addVehicle = async function (
         vehicleNum: number,
         regCertNum: regCerNum,
         vehicleColor: color,
-        driverId: userId,
     });
+
+    const driverOne = await Driver.findOne({ _id: userId });
+
+    console.log(driverOne);
+
+    console.log(addedVeh);
 
     return addedVeh;
 };

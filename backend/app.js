@@ -13,9 +13,6 @@ const sockethandler = require("./socket handler/socketHandler");
 
 //Routes import
 const driverBookingRoute = require("./routes/driverBookingRoute");
-const carRideRoute = require("./routes/carRideRoute");
-const bikeRideRoute = require("./routes/bikeRideRoute");
-
 const customerAuthRoute = require("./routes/customerAuthRoute");
 const driverAuthRoute = require("./routes/driverAuthRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
@@ -38,8 +35,8 @@ app.use((req, res, next) => {
 
 //This is used for testing booking model
 
-app.use("/car-ride", carRideRoute);
-app.use("/bike-ride", bikeRideRoute);
+// app.use("/car-ride", carRideRoute);
+// app.use("/bike-ride", bikeRideRoute);
 
 //These are working routes added as per the feature
 app.use("/vehicle", vehicleRoute);
