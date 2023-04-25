@@ -3,8 +3,12 @@ const mongoose = require("mongoose");
 
 exports.getVehicles = async (req, res, next) => {
     const io = req.io;
+
+    console.log(req.user._id);
     try {
-        const vehicles = await Vehicle.find({}).sort({ createdAt: -1 });
+        const vehicles = await Vehicle.find({ driverId: req.user._id }).sort({
+            createdAt: -1,
+        });
         io.emit("Vehicle", "Updated messgae");
         res.status(200).send(vehicles);
     } catch (error) {

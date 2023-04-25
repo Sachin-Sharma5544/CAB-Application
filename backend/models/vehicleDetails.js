@@ -25,6 +25,7 @@ const vehicleSchema = new Schema(
             type: String,
             required: true,
         },
+        driverId: { type: String },
     },
     { timestamps: true }
 );
@@ -53,13 +54,14 @@ vehicleSchema.statics.addVehicle = async function (
         vehicleNum: number,
         regCertNum: regCerNum,
         vehicleColor: color,
+        driverId: userId,
     });
 
-    const driverOne = await Driver.findOne({ _id: userId });
-
-    console.log(driverOne);
-
-    console.log(addedVeh);
+    const driverOne = await Driver.findOneAndUpdate(
+        userId,
+        { vehicleId: addedVeh._id },
+        { new: true }
+    );
 
     return addedVeh;
 };
