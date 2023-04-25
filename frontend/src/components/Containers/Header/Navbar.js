@@ -43,7 +43,8 @@ const Navbar = (props) => {
     };
 
     socket.on("RideConfirmed", (data) => {
-        if (drivUser.email === data) {
+        console.log(data);
+        if (drivUser.email === data.driverEmail) {
             setDriverNotificationCount(driverNotificationCount + 1);
         }
     });

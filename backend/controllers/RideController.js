@@ -30,10 +30,33 @@ exports.postRide = async (req, res, next) => {
             { new: true }
         );
 
-        console.log(driverId);
-        console.log("Updated Driver", updatedDriver);
+        const bookings = await Ride.find({ driverId: driverId })
+            .populate({
+                path: "customer",
+                model: "Customer",
+                select: "firstName lastName",
+            })
+            .populate({
+                path: "driverId",
+                model: "Driver",
+                select: "firstName lastName email -_id",
+                populate: {
+                    path: "vehicleId",
+                    model: "Vehicle",
+                    select: "vehicleCompany vehicleNum vehicleColor -_id",
+                },
+            })
+            .sort({ createdAt: -1 });
 
-        io.emit("RideConfirmed", updatedDriver.email);
+        io.emit("RideConfirmed", { driverEmail: updatedDriver.email });
+
+        /* To update driver Booking details page */
+
+        console.log(bookings);
+
+        io.emit("UpdateDriverBookings", bookings);
+
+        /*  */
 
         res.status(200).send({ ...ride, driverEmail: updatedDriver.email });
     } catch (error) {
@@ -62,7 +85,6 @@ exports.getRides = async (req, res, next) => {
                 },
             })
             .sort({ createdAt: -1 });
-        console.log(rides);
 
         res.status(200).send(rides);
     } catch (error) {

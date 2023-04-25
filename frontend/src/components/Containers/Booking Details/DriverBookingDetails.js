@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "./DriverBookingDetails.css";
-import { SimpleGrid } from "@chakra-ui/react";
-import BookingCardComponent from "../../Utility/Card/Driver Booking Card/BookingCardComponent";
 import useDriverBookingContext from "../../../hooks/context hooks/Driver Booking/useDriverBookingContext";
 import useFetchBookings from "../../../hooks/utility hooks/Driver Booking/useFetchBookings";
 import useDriverCancelBooking from "../../../hooks/utility hooks/Driver Booking/useDriverCancelBooking";
@@ -13,7 +11,9 @@ import DriverConfirmedBookings from "./Booking Status/DriverConfirmedBookings";
 import DriverCurrentBooking from "./Booking Status/DriverCurrentBookings";
 import useStartRide from "../../../hooks/utility hooks/Driver Booking/useStartRide";
 import useCompleteRide from "../../../hooks/utility hooks/Driver Booking/useCompleteRide";
+import useSocketContext from "../../../hooks/context hooks/Socket/useSocketContext";
 
+import useScoket from "../../../hooks/utility hooks/Socket/useScoket";
 const DriverBookingDetails = () => {
     const { bookings, dispatch } = useDriverBookingContext();
     const { error, isLoading } = useFetchBookings(dispatch);
@@ -23,7 +23,12 @@ const DriverBookingDetails = () => {
 
     const { endBooking } = useCompleteRide(bookings);
 
-    console.log(bookings);
+    useScoket();
+    const { socket } = useSocketContext();
+
+    socket.on("UpdateDriverBookings", (data) => {
+        dispatch({ type: "SET_BOOKING", payload: data });
+    });
 
     const {
         driverCancelledBookings,
@@ -34,12 +39,10 @@ const DriverBookingDetails = () => {
     } = useFilteredBooking(bookings || []);
 
     const cancelBooking = async (id) => {
-        console.log(id);
         await cancelDriverBooking(id);
     };
 
     const startRideForBooking = async (id) => {
-        console.log(id);
         await startRide(id);
     };
 

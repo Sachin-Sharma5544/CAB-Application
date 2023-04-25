@@ -59,8 +59,6 @@ const BookRide = (props) => {
     const [dropLocationAuto, setDropLocationAuto] = useState("");
     const [rideType, setRideType] = useState("");
 
-    const [sk, setSk] = useState();
-
     const { distance, duration } = useCalculateRoute(
         pickupLocation,
         dropLocation
@@ -175,7 +173,6 @@ const BookRide = (props) => {
     };
 
     const handleBookRide = async () => {
-        socket.emit("Book_ride", "This is a bakwass booking a ride");
         //This ensures customer user are allowed to book a ride
         if (!custUser) {
             toast({
@@ -247,6 +244,10 @@ const BookRide = (props) => {
             },
         });
     };
+
+    socket.on("UpdateDriverBookings", (data) => {
+        console.log(data);
+    });
 
     return (
         <BoxContainer className="RideInfo__Wrapper">
