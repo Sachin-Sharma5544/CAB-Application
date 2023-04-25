@@ -15,6 +15,7 @@ import NotificationIcon from "../../Utility/Notification Icon/NotificationIcon";
 import { useState } from "react";
 import useScoket from "../../../hooks/utility hooks/Socket/useScoket";
 import useSocketContext from "../../../hooks/context hooks/Socket/useSocketContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = (props) => {
     const [driverNotificationCount, setDriverNotificationCount] = useState(0);
@@ -25,10 +26,20 @@ const Navbar = (props) => {
     useScoket();
     const { socket } = useSocketContext();
 
+    const navigate = useNavigate();
+
     if (!socket) return;
 
     const handleLogout = () => {
         logout();
+    };
+
+    const handleNotificationClick = () => {
+        if (driverNotificationCount > 0) {
+            setDriverNotificationCount(0);
+            navigate("/booking/details");
+            console.log("Notification clicked");
+        }
     };
 
     socket.on("RideConfirmed", (data) => {
@@ -128,7 +139,7 @@ const Navbar = (props) => {
                         )}
 
                         {drivUser && (
-                            <Box>
+                            <Box onClick={handleNotificationClick}>
                                 <NotificationIcon
                                     count={driverNotificationCount}
                                 ></NotificationIcon>
