@@ -33,6 +33,15 @@ const BookingCardComponent = (props) => {
                         {booking.customer.lastName}
                     </Text>
                 </Box>
+
+                <Box>
+                    <Text>
+                        Vehicle Info:{" "}
+                        {booking.driverId.vehicleId.vehicleCompany},{" "}
+                        {booking.driverId.vehicleId.vehicleColor},{" "}
+                        {booking.driverId.vehicleId.vehicleNum}
+                    </Text>
+                </Box>
                 <Box>
                     <Text>Status: {booking.rideStatus}</Text>
                 </Box>

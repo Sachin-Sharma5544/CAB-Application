@@ -47,8 +47,19 @@ exports.getRides = async (req, res, next) => {
             customer: req.user._id,
         })
             .populate({
+                path: "customer",
+                model: "Customer",
+                select: "firstName lastName",
+            })
+            .populate({
                 path: "driverId",
-                select: "firstName lastName email",
+                model: "Driver",
+                select: "firstName lastName email -_id",
+                populate: {
+                    path: "vehicleId",
+                    model: "Vehicle",
+                    select: "vehicleCompany vehicleNum vehicleColor -_id",
+                },
             })
             .sort({ createdAt: -1 });
         console.log(rides);

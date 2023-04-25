@@ -33,6 +33,14 @@ const RideCardComponent = (props) => {
                     </Text>
                 </Box>
                 <Box>
+                    <Text>
+                        Vehicle Info: {ride.driverId.vehicleId.vehicleCompany},{" "}
+                        {ride.driverId.vehicleId.vehicleColor},{" "}
+                        {ride.driverId.vehicleId.vehicleNum}
+                    </Text>
+                </Box>
+
+                <Box>
                     <Text>Status: {ride.rideStatus}</Text>
                 </Box>
                 <Box>
@@ -45,7 +53,8 @@ const RideCardComponent = (props) => {
                 </Box>
             </CardBody>
             {ride.rideStatus !== "Customer Cancelled" &&
-                ride.rideStatus !== "Driver Cancelled" && (
+                ride.rideStatus !== "Driver Cancelled" &&
+                ride.rideStatus !== "Ride Completed" && (
                     <CardFooter>
                         <Button onClick={() => props.cancelRide(ride._id)}>
                             Cancel Ride

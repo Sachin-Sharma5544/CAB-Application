@@ -9,6 +9,16 @@ exports.getDriverBookings = async (req, res, next) => {
                 model: "Customer",
                 select: "firstName lastName",
             })
+            .populate({
+                path: "driverId",
+                model: "Driver",
+                select: "firstName lastName email -_id",
+                populate: {
+                    path: "vehicleId",
+                    model: "Vehicle",
+                    select: "vehicleCompany vehicleNum vehicleColor -_id",
+                },
+            })
             .sort({ createdAt: -1 });
         console.log(bookings);
         res.status(200).send(bookings);

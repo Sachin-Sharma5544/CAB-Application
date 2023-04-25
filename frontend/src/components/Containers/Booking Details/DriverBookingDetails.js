@@ -23,6 +23,8 @@ const DriverBookingDetails = () => {
 
     const { endBooking } = useCompleteRide(bookings);
 
+    console.log(bookings);
+
     const {
         driverCancelledBookings,
         customerCancelledBookings,
@@ -91,13 +93,13 @@ const DriverBookingDetails = () => {
                 />
             )}
 
-            {/* {!ongoingRide.length > 0 &&
-                !driverCancelledRides.length > 0 &&
-                !customerCancelledRides.length > 0 &&
-                !confirmedRides.length > 0 &&
-                !completedRide.length > 0 && (
+            {!ongoingBooking.length > 0 &&
+                !driverCancelledBookings.length > 0 &&
+                !customerCancelledBookings.length > 0 &&
+                !confirmedBookings.length > 0 &&
+                !completedBookings.length > 0 && (
                     <h5>You don't have any bookings to show. </h5>
-                )} */}
+                )}
         </div>
     );
 };
