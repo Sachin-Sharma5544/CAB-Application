@@ -4,7 +4,7 @@ const Vehicle = require("../models/vehicleDetails");
 
 exports.postRide = async (req, res, next) => {
     const io = req.io;
-    const { pickup, drop, rideType, distance } = req.body;
+    const { pickup, drop, rideType, distance, duration } = req.body;
     const driver = await Driver.find({ status: "Available" });
 
     if (!driver.length > 0) {
@@ -22,7 +22,7 @@ exports.postRide = async (req, res, next) => {
             req.user._id,
             rideType,
             driverId,
-            ""
+            duration
         );
         const updatedDriver = await Driver.findByIdAndUpdate(
             driverId,

@@ -194,6 +194,7 @@ const BookRide = (props) => {
                 pickup: pickupLocation.value,
                 drop: dropLocation.value,
                 distance: distance,
+                duration: duration,
                 rideType: rideType,
             }),
             headers: {
