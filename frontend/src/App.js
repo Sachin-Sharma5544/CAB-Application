@@ -18,6 +18,7 @@ import DriverBookingDetailsPage from "./pages/Booking Details/DriverBookingDetai
 import CustomerWelcomePage from "./pages/Customer Welcome/CustomerWelcomePage";
 import DriverWelcomePage from "./pages/Driver Welcome/DriverWelcomePage";
 
+import NotFound from "./pages/Page Not Found/NotFound";
 function App() {
     const { user: custUser } = useCustomerAuthContext();
     const { user: drivUser } = useDriverAuthContext();
@@ -134,7 +135,9 @@ function App() {
                                 )
                             }
                         ></Route>
+                        <Route path="*" element={<NotFound />}></Route>
                     </Routes>
+
                     <FooterPage></FooterPage>
                 </BrowserRouter>
             </div>
