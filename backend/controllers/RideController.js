@@ -102,8 +102,6 @@ exports.postCancelRide = async (req, res, next) => {
     const { id } = req.params;
     const { cancelledBy } = req.body;
 
-    console.log(req.user._id, cancelledBy);
-
     try {
         const ride = await Ride.cancelRide(id, cancelledBy);
 
