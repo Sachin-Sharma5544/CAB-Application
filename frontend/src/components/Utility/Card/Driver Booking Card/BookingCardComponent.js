@@ -16,7 +16,7 @@ import { formatDistanceToNow } from "date-fns";
 const BookingCardComponent = (props) => {
     const { booking } = props;
     return (
-        <Card border="1px solid black">
+        <Card border="1px solid black" boxShadow="2px 4px 7px rgba(0,0,0,0.5)">
             <CardHeader>
                 <Heading size="md"> Booking Details </Heading>
             </CardHeader>

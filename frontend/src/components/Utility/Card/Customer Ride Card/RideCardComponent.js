@@ -15,7 +15,7 @@ const RideCardComponent = (props) => {
     const { ride } = props;
 
     return (
-        <Card border="1px solid black">
+        <Card border="1px solid black" boxShadow="2px 4px 7px rgba(0,0,0,0.5)">
             <CardHeader>
                 <Heading size="md"> Ride Details </Heading>
             </CardHeader>

@@ -67,13 +67,15 @@ const BookRide = (props) => {
     useScoket();
     const { socket, userType } = useSocketContext();
 
-    console.log(distance, duration);
-
     //Toast
     const toast = useToast();
 
     // Navigate
     const navigate = useNavigate();
+
+    if (!socket) {
+        return;
+    }
 
     /* Handler Methods */
 
