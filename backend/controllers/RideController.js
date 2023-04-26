@@ -52,8 +52,6 @@ exports.postRide = async (req, res, next) => {
 
         /* To update driver Booking details page */
 
-        console.log(bookings);
-
         io.emit("UpdateDriverBookings", bookings);
 
         /*  */
@@ -100,13 +98,65 @@ exports.getAvailableRides = async (req, res, next) => {
 };
 
 exports.postCancelRide = async (req, res, next) => {
+    const io = req.io;
     const { id } = req.params;
     const { cancelledBy } = req.body;
 
+    console.log(req.user._id, cancelledBy);
+
     try {
         const ride = await Ride.cancelRide(id, cancelledBy);
+
+        if (cancelledBy === "Customer Cancelled") {
+            const bookings = await Ride.find({
+                driverId: ride.driverId,
+            })
+                .populate({
+                    path: "customer",
+                    model: "Customer",
+                    select: "firstName lastName",
+                })
+                .populate({
+                    path: "driverId",
+                    model: "Driver",
+                    select: "firstName lastName email -_id",
+                    populate: {
+                        path: "vehicleId",
+                        model: "Vehicle",
+                        select: "vehicleCompany vehicleNum vehicleColor -_id",
+                    },
+                })
+                .sort({ createdAt: -1 });
+
+            io.emit("CancelledBookingForDriver", bookings);
+        }
+
+        if (cancelledBy === "Driver Cancelled") {
+            const rides = await Ride.find({
+                customer: ride.customer,
+            })
+                .populate({
+                    path: "customer",
+                    model: "Customer",
+                    select: "firstName lastName",
+                })
+                .populate({
+                    path: "driverId",
+                    model: "Driver",
+                    select: "firstName lastName email -_id",
+                    populate: {
+                        path: "vehicleId",
+                        model: "Vehicle",
+                        select: "vehicleCompany vehicleNum vehicleColor -_id",
+                    },
+                })
+                .sort({ createdAt: -1 });
+
+            io.emit("CancelledBookingForCustomer", rides);
+        }
         res.status(200).send(ride);
     } catch (error) {
+        console.log("i am exception");
         res.status(400).send({ error: error.message });
     }
 };

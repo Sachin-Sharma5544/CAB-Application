@@ -8,6 +8,8 @@ import CustomerCancelledRides from "./Ride Status /CustomerCancelledRides";
 import CustomerConfirmedRides from "./Ride Status /CustomerConfirmedRides";
 import CustomerCompletedRides from "./Ride Status /CustomerCompletedRide";
 import CustomerCurrentRides from "./Ride Status /CustomerCurrentRide";
+import useScoket from "../../../hooks/utility hooks/Socket/useScoket";
+import useSocketContext from "../../../hooks/context hooks/Socket/useSocketContext";
 
 const CustomerRideDetails = () => {
     const { ride: customerRides, dispatch } = useCustomerRideContext();
@@ -22,12 +24,17 @@ const CustomerRideDetails = () => {
         completedRide,
     } = useFilteredRides(customerRides || []);
 
-    console.log(customerRides);
+    useScoket();
+    const { socket } = useSocketContext();
 
     const cancelRide = async (id) => {
         console.log(id, "customer ride details");
         await cancelCustRide(id);
     };
+
+    socket.on("CancelledBookingForCustomer", (data) => {
+        dispatch({ type: "SET_RIDE", payload: data });
+    });
 
     return (
         <div className="CustomerRideDetails__Page">

@@ -26,10 +26,6 @@ const DriverBookingDetails = () => {
     useScoket();
     const { socket } = useSocketContext();
 
-    socket.on("UpdateDriverBookings", (data) => {
-        dispatch({ type: "SET_BOOKING", payload: data });
-    });
-
     const {
         driverCancelledBookings,
         customerCancelledBookings,
@@ -49,6 +45,14 @@ const DriverBookingDetails = () => {
     const stopRide = async (id) => {
         await endBooking(id);
     };
+
+    socket.on("UpdateDriverBookings", (data) => {
+        dispatch({ type: "SET_BOOKING", payload: data });
+    });
+
+    socket.on("CancelledBookingForDriver", (data) => {
+        dispatch({ type: "SET_BOOKING", payload: data });
+    });
 
     return (
         <div className="DriverBookingDetails__Page">
