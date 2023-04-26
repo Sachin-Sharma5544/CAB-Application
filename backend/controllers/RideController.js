@@ -52,7 +52,7 @@ exports.postRide = async (req, res, next) => {
 
         /* To update driver Booking details page */
 
-        io.emit("UpdateDriverBookings", bookings);
+        io.emit("NewDriverBooking", bookings);
 
         /*  */
 
@@ -160,11 +160,33 @@ exports.postCancelRide = async (req, res, next) => {
 };
 
 exports.postStartRide = async (req, res, next) => {
+    const io = req.io;
     const { id } = req.params;
     const { rideStart } = req.body;
 
     try {
         const ride = await Ride.startRide(id, rideStart);
+
+        const rides = await Ride.find({ customer: ride.customer })
+            .populate({
+                path: "customer",
+                model: "Customer",
+                select: "firstName lastName",
+            })
+            .populate({
+                path: "driverId",
+                model: "Driver",
+                select: "firstName lastName email -_id",
+                populate: {
+                    path: "vehicleId",
+                    model: "Vehicle",
+                    select: "vehicleCompany vehicleNum vehicleColor -_id",
+                },
+            })
+            .sort({ createdAt: -1 });
+
+        io.emit("CustomerRideStarted", rides);
+
         res.status(200).send(ride);
     } catch (error) {
         res.status(400).send({ error: error.message });
@@ -172,13 +194,33 @@ exports.postStartRide = async (req, res, next) => {
 };
 
 exports.postEndRide = async (req, res, next) => {
+    const io = req.io;
     const { id } = req.params;
     const { rideComplete } = req.body;
 
-    console.log(id, rideComplete);
-
     try {
         const ride = await Ride.endRide(id, rideComplete);
+
+        const rides = await Ride.find({ customer: ride.customer })
+            .populate({
+                path: "customer",
+                model: "Customer",
+                select: "firstName lastName",
+            })
+            .populate({
+                path: "driverId",
+                model: "Driver",
+                select: "firstName lastName email -_id",
+                populate: {
+                    path: "vehicleId",
+                    model: "Vehicle",
+                    select: "vehicleCompany vehicleNum vehicleColor -_id",
+                },
+            })
+            .sort({ createdAt: -1 });
+
+        io.emit("CustomerRideEnded", rides);
+
         res.status(200).send(ride);
     } catch (error) {
         res.status(400).send({ error: error.message });

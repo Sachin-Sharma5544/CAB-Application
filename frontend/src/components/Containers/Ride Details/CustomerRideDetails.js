@@ -36,6 +36,14 @@ const CustomerRideDetails = () => {
         dispatch({ type: "SET_RIDE", payload: data });
     });
 
+    socket.on("CustomerRideStarted", (data) => {
+        dispatch({ type: "SET_RIDE", payload: data });
+    });
+
+    socket.on("CustomerRideEnded", (data) => {
+        dispatch({ type: "SET_RIDE", payload: data });
+    });
+
     return (
         <div className="CustomerRideDetails__Page">
             <h1>Your ride details</h1>

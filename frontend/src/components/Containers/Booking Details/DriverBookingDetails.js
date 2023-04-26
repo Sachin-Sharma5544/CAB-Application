@@ -1,5 +1,6 @@
 import React from "react";
 import "./DriverBookingDetails.css";
+import { useToast } from "@chakra-ui/react";
 import useDriverBookingContext from "../../../hooks/context hooks/Driver Booking/useDriverBookingContext";
 import useFetchBookings from "../../../hooks/utility hooks/Driver Booking/useFetchBookings";
 import useDriverCancelBooking from "../../../hooks/utility hooks/Driver Booking/useDriverCancelBooking";
@@ -34,6 +35,8 @@ const DriverBookingDetails = () => {
         completedBookings,
     } = useFilteredBooking(bookings || []);
 
+    const toast = useToast();
+
     const cancelBooking = async (id) => {
         await cancelDriverBooking(id);
     };
@@ -46,12 +49,26 @@ const DriverBookingDetails = () => {
         await endBooking(id);
     };
 
-    socket.on("UpdateDriverBookings", (data) => {
+    socket.on("NewDriverBooking", (data) => {
         dispatch({ type: "SET_BOOKING", payload: data });
+        toast({
+            title: "You have new booking! please check your booking details",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+        });
     });
 
     socket.on("CancelledBookingForDriver", (data) => {
         dispatch({ type: "SET_BOOKING", payload: data });
+        toast({
+            title: "Sorry!! Your ride has been cancelled by driver",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+        });
     });
 
     return (
